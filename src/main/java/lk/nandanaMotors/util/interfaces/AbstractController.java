@@ -3,6 +3,7 @@ package lk.nandanaMotors.util.interfaces;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -16,12 +17,12 @@ public interface AbstractController<E, I> {
     /**
      * 2. Find One relevant things belongs provided entity {} id
      */
-    String findById(I id, Model model);
+    String findById(@PathVariable I id, Model model);
 
     /**
      * 3. Find One and send data to frontend to Edit relevant things belongs provided entity {} id
      */
-    String edit(I id, Model model);
+    String edit(@PathVariable I id, Model model);
 
     /**
      * 4. Save and Update {} data using relevant entity belongs to model Attribute
@@ -31,6 +32,10 @@ public interface AbstractController<E, I> {
     /**
      * 5. Remove One relevant things belongs provided entity {} id
      */
-    String delete(I id, Model model);
+
+    String addForm(Model model);
+
+    String delete(@PathVariable I id, Model model);
+
 
 }

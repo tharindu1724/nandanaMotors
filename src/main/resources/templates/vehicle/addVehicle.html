@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<script>
+
+    let amv = {"name": "Asanka", "age": 30, "mobile": "0772350438"}
+</script>
+<body>
+<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="container-fluid bg-dark">
+    <form action="/vehicle/save" method="post">
+        <!--vehicle id need to hide but need to show when update-->
+        <input type="text" hidden>
+        <!--Registration number need to show-->
+        <div class="form-group">
+            <label for="example-input">Registration Number</label>
+            <input type="text" name="registrationNumber" class="form-control" placeholder="Example" id="example-input">
+        </div>
+        <!--vehicle number-->
+        <div class="form-group">
+            <label for="example-input">Vehicle Number</label>
+            <input type="text" name="number" class="form-control" placeholder="Example" id="example-input">
+        </div>
+        <!--engine number-->
+        <div class="form-group">
+            <label for="example-input">Engine Number</label>
+            <input type="text" name="engineNumber" class="form-control" placeholder="Example" id="example-input">
+        </div>
+        <!--chassis number-->
+        <div class="form-group">
+            <label for="example-input">Chassis Number</label>
+            <input type="text" name="chassisNumber" class="form-control" placeholder="Example" id="example-input">
+        </div>
+        <!--manufacture year-->
+        <div class="form-group">
+            <label for="example-input">Manufacture Year</label>
+            <input type="text" name="manufacturedYear" class="form-control" placeholder="Example" id="example-input">
+        </div>
+        <!--gear year-->
+        <div class="form-group">
+            <label for="example-input">Gear Year</label>
+            <input type="text" name="gearNumber" class="form-control" placeholder="Example" id="example-input">
+        </div>
+        <!--vehicle type list-->
+        <div class="form-group">
+            <label for="vehicleType" >Vehicle Type</label>
+            <select class="form-control" name="vehicleType" id="vehicleType">
+                <option selected>Custom select</option>
+                <option value="1">Option one</option>
+            </select>
+        </div>
+        <!--vehicle model list-->
+        <div class="form-group">
+            <label for="vehicleModel" >Vehicle Model</label>
+            <select class="form-control" name="vehicleModel" id="vehicleModel">
+                <option selected>Custom select</option>
+                <option value="1">Option one</option>
+            </select>
+        </div>
+    </form>
+</div>
+
+<!--footer include-->
+<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script include-->
+<script th:replace="~{fragments/script :: scriptFragment}"></script>
+
+</body>
+</html>
