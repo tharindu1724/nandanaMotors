@@ -61,6 +61,15 @@
                 <option value="1">Option one</option>
             </select>
         </div>
+        <div class="form-group ">
+            <div class="offset-sm-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">
+                    <i data-th-class="${addStatus==false?'fa fa-save mr-1':'fa fa-thumbs-up mr-1'}"></i>
+                    <span
+                            data-th-text="${addStatus==false?'Save' : 'Update'}"></span>
+                </button>
+            </div>
+        </div>
     </form>
 </div>
 
