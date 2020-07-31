@@ -2,13 +2,17 @@
 
 Vehicle service Management
 ===========================
+Already done
+=============
 1. employee -> ok
 2. role -> ok
 3. customer -> Ok
 4. service type parameter -> ok
 5. user -> ok
+6. vehicle registration - > ok
+7. service type -> ok
 
-1. vehicle registration - > add todo-> update view listView
-2. service type -> todo->  vehicle {car, van motor cycle}
-3. payment
-4. service history
+To do
+==========
+1. payment
+2. service history
