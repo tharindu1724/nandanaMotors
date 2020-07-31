@@ -20,7 +20,7 @@
         <div class="col">
             <h2 class="text-light text-center">
                 <strong>
-                    <p th:text="${customerDetail.title.title} +${' '} +${customerDetail.name}"></p>
+                    <p th:text="${customerDetail.name}"></p>
                 </strong>
             </h2>
         </div>
@@ -61,17 +61,8 @@
                         <label class="control-label" for="name">Name :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="name" th:text="${customerDetail.title.title} +${' '} +${customerDetail.name}"
+                        <p id="name" th:text="${customerDetail.name}"
                            class="display_detail"></p>
-                    </div>
-                </div>
-                <!--NIC-->
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" for="nic">NIC No :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p id="nic" th:text="${customerDetail.nic}" class="display_detail"></p>
                     </div>
                 </div>
                 <!--Address-->

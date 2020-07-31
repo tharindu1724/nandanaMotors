@@ -71,21 +71,6 @@
                             <input id="code" data-th-field="*{code}" class="form-control" type="text" readonly/>
                         </div>
                     </div>
-                    <!--Tittle -->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="title">Title :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="title" data-th-field="*{title}" class="form-control" tabindex="3" required>
-                                <option value="">Please select</option>
-                                <option data-th-each="titles : ${title}"
-                                        data-th-text="${titles.title}"
-                                        data-th-value="${titles}"
-                                        data-th-selected="${titles==customer.title?'selected':'unselected'}"></option>
-                            </select>
-                        </div>
-                    </div>
                     <!--Name-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
@@ -97,21 +82,6 @@
                                   data-th-if="${#fields.hasErrors('name')}" class="error">Error Name</span>
                         </div>
                     </div>
-                    <!--Nic-->
-                    <div class="form-row text-right">
-                        <div class="col-md-4">
-                            <label class="control-label" for="nic">NIC No :</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input id="nic" data-th-field="*{nic}" class="form-control" tabindex="5" type="text" minlength="10" maxlength="12"/>
-                            <span class="error" id="nicError" data-th-errors="*{nic}"
-                                  data-th-if="${#fields.hasErrors('nic')}">Error
-                                                               NIC Number</span>
-                        </div>
-                    </div>
-                </div>
-                <!--Right Side-->
-                <div class="form-group col-md-6 col-sm-6 text-right flex-column">
                     <!--Mobile Number-->
                     <div class="form-row text-right">
                         <div class="col-md-4">

@@ -51,7 +51,7 @@
                 <tbody>
                 <tr th:each="customer, rowCount : ${customers}">
                     <th th:text="${rowCount.count}"></th>
-                    <th th:text="${customer.title}+${'. '}+${customer.name}"></th>
+                    <th th:text="${customer.name}"></th>
                     <th th:text="${customer.code}"></th>
                     <th th:text="${customer.mobile}"></th>
                     <th th:text="${customer.address}"></th>

@@ -2,7 +2,6 @@ package lk.nandanaMotors.asset.customer.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.nandanaMotors.asset.commonAsset.model.Enum.Title;
 import lk.nandanaMotors.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,10 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.Size;
-import java.lang.reflect.Type;
 
 @Entity
 @Getter
