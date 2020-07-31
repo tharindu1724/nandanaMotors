@@ -3,7 +3,6 @@ package lk.nandanaMotors.asset.vehicle.controller;
 import lk.nandanaMotors.asset.vehicle.entity.Vehicle;
 import lk.nandanaMotors.asset.vehicle.service.VehicleService;
 import lk.nandanaMotors.util.interfaces.AbstractController;
-import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,27 +17,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/vehicle")
 public class VehicleController implements AbstractController<Vehicle, Integer> {
-    //ORDER FOLLOW
-    //================//
-    //1. Entity -> Relevant parameter
-    //2. Dao/Repository -> database managing
-    //3. Service -> controller and repository management
-    //1.findAll
-    //2.findById
-    //3.persist
-    //4.delete
-    //5.search
-    //4. Controller -> view manage (HTML)
-    //1.findAll
-    //2.findById
-    //3.edit
-    //4.persist
-    //5.delete
-    //6.form
-    //5. Html / Views -> data collect from frontend to backend and data display backend to frontend
-    //1. relevant entity name html
-    //2. addForm
-    //3. details show
+
     private final VehicleService vehicleService;
 
     public VehicleController(VehicleService vehicleService) {
@@ -91,5 +70,27 @@ public class VehicleController implements AbstractController<Vehicle, Integer> {
         return "vehicle/vehicle-detail";
     }
 
+
+//ORDER FOLLOW
+    //================//
+    //1. Entity -> Relevant parameter (instance)
+    //2. Dao/Repository -> database managing
+    //3. Service -> controller and repository management
+        //1.findAll
+        //2.findById
+        //3.persist
+        //4.delete
+        //5.search
+    //4. Controller -> view manage (HTML)
+        //1.findAll
+        //2.findById
+        //3.edit
+        //4.persist
+        //5.delete
+        //6.form
+    //5. Html / Views -> data collect from frontend to backend and data display backend to frontend
+        //1. relevant entity name html
+        //2. addForm
+        //3. details show
 
 }
