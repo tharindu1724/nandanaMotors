@@ -2,6 +2,7 @@ package lk.nandanaMotors.asset.serviceType.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.nandanaMotors.asset.serviceTypeParameter.entity.ServiceTypeParameter;
+import lk.nandanaMotors.asset.vehicle.entity.Enum.VehicleModel;
 import lk.nandanaMotors.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,8 @@ public class ServiceType extends AuditEntity {
 
     private BigDecimal price;
 
+    @Enumerated(EnumType.STRING)
+    private VehicleModel vehicleModel;
 
 
     @ManyToMany
