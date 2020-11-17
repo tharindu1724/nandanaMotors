@@ -2,7 +2,6 @@ package lk.nandanaMotors.asset.vehicle.controller;
 
 import lk.nandanaMotors.asset.customer.service.CustomerService;
 import lk.nandanaMotors.asset.vehicle.entity.Enum.VehicleModel;
-import lk.nandanaMotors.asset.vehicle.entity.Enum.VehicleType;
 import lk.nandanaMotors.asset.vehicle.entity.Vehicle;
 import lk.nandanaMotors.asset.vehicle.service.VehicleService;
 import lk.nandanaMotors.util.interfaces.AbstractController;
@@ -45,7 +44,6 @@ public class VehicleController implements AbstractController< Vehicle, Integer >
     @GetMapping( "/edit/{id}" )
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("customers", customerService.findAll());
-        model.addAttribute("vehicleTypes", VehicleType.values());
         model.addAttribute("vehicleModels", VehicleModel.values());
         model.addAttribute("addStatus", true);
         model.addAttribute("vehicle", vehicleService.findById(id));
@@ -57,7 +55,6 @@ public class VehicleController implements AbstractController< Vehicle, Integer >
                           RedirectAttributes redirectAttributes, Model model) {
         if ( bindingResult.hasErrors() ) {
             model.addAttribute("customers", customerService.findAll());
-            model.addAttribute("vehicleTypes", VehicleType.values());
             model.addAttribute("vehicleModels", VehicleModel.values());
             model.addAttribute("addStatus", false);
             model.addAttribute("vehicle", vehicle);
@@ -91,7 +88,6 @@ public class VehicleController implements AbstractController< Vehicle, Integer >
     @GetMapping( "/add" )
     public String addForm(Model model) {
         model.addAttribute("customers", customerService.findAll());
-        model.addAttribute("vehicleTypes", VehicleType.values());
         model.addAttribute("vehicleModels", VehicleModel.values());
         model.addAttribute("addStatus", false);
         model.addAttribute("vehicle", new Vehicle());

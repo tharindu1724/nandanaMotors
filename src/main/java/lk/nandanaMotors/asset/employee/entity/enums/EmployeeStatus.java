@@ -1,4 +1,4 @@
-package lk.nandanaMotors.asset.employee.entity.Enum;
+package lk.nandanaMotors.asset.employee.entity.enums;
 
 public enum EmployeeStatus {
     WORKING("Working"),
