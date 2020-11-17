@@ -3,7 +3,6 @@ package lk.nandanaMotors.asset.vehicle.entity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.nandanaMotors.asset.customer.entity.Customer;
 import lk.nandanaMotors.asset.vehicle.entity.Enum.VehicleModel;
-import lk.nandanaMotors.asset.vehicle.entity.Enum.VehicleType;
 import lk.nandanaMotors.util.audit.AuditEntity;
 import lombok.*;
 
