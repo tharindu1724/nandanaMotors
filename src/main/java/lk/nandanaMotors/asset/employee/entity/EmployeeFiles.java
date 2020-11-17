@@ -1,5 +1,6 @@
 package lk.nandanaMotors.asset.employee.entity;
 
+
 import lk.nandanaMotors.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
