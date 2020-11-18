@@ -1,8 +1,8 @@
 package lk.nandanaMotors.asset.userManagement.controller;
 
 import lk.nandanaMotors.asset.employee.entity.Employee;
-import lk.nandanaMotors.asset.employee.entity.Enum.Designation;
-import lk.nandanaMotors.asset.employee.entity.Enum.EmployeeStatus;
+import lk.nandanaMotors.asset.employee.entity.enums.Designation;
+import lk.nandanaMotors.asset.employee.entity.enums.EmployeeStatus;
 import lk.nandanaMotors.asset.employee.service.EmployeeService;
 import lk.nandanaMotors.asset.userManagement.entity.User;
 import lk.nandanaMotors.asset.userManagement.service.RoleService;

@@ -5,8 +5,8 @@ import lk.nandanaMotors.asset.commonAsset.model.Enum.CivilStatus;
 import lk.nandanaMotors.asset.commonAsset.model.Enum.Gender;
 import lk.nandanaMotors.asset.commonAsset.model.Enum.Title;
 import lk.nandanaMotors.asset.employee.entity.Employee;
-import lk.nandanaMotors.asset.employee.entity.Enum.Designation;
-import lk.nandanaMotors.asset.employee.entity.Enum.EmployeeStatus;
+import lk.nandanaMotors.asset.employee.entity.enums.Designation;
+import lk.nandanaMotors.asset.employee.entity.enums.EmployeeStatus;
 import lk.nandanaMotors.asset.employee.service.EmployeeService;
 import lk.nandanaMotors.asset.userManagement.entity.Role;
 import lk.nandanaMotors.asset.userManagement.entity.User;
@@ -46,15 +46,13 @@ public class ApplicationCreateRestController {
 
 //Employee
         Employee employee = new Employee();
-        employee.setPayRoleNumber("11111111");
         employee.setName("Admin User");
         employee.setCallingName("Admin");
         employee.setName("908670000V");
         employee.setMobileOne("0750000000");
         employee.setTitle(Title.DR);
         employee.setGender(Gender.MALE);
-        employee.setBloodGroup(BloodGroup.AP);
-        employee.setDesignation(Designation.ED);
+        employee.setDesignation(Designation.CA);
         employee.setCivilStatus(CivilStatus.UNMARRIED);
         employee.setEmployeeStatus(EmployeeStatus.WORKING);
         employee.setDateOfBirth(LocalDate.now().minusYears(18));

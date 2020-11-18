@@ -1,9 +1,19 @@
 package lk.nandanaMotors.asset.employee.controller;
 
 
+import lk.nandanaMotors.asset.commonAsset.model.Enum.BloodGroup;
+import lk.nandanaMotors.asset.commonAsset.model.Enum.CivilStatus;
+import lk.nandanaMotors.asset.commonAsset.model.Enum.Gender;
+import lk.nandanaMotors.asset.commonAsset.model.Enum.Title;
 import lk.nandanaMotors.asset.commonAsset.service.CommonService;
+import lk.nandanaMotors.asset.employee.entity.Employee;
+import lk.nandanaMotors.asset.employee.entity.EmployeeFiles;
+import lk.nandanaMotors.asset.employee.entity.enums.Designation;
+import lk.nandanaMotors.asset.employee.entity.enums.EmployeeStatus;
 import lk.nandanaMotors.asset.employee.service.EmployeeFilesService;
 import lk.nandanaMotors.asset.employee.service.EmployeeService;
+import lk.nandanaMotors.asset.userManagement.entity.User;
+import lk.nandanaMotors.asset.userManagement.service.UserService;
 import lk.nandanaMotors.util.service.DateTimeAgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
