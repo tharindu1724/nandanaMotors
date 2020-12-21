@@ -9,9 +9,9 @@
 <!--<nav data-th-replace="~{fragments/sideBar :: sideBarFragment}"></nav>-->
 
 
-<div class="container  form-Border" >
-  <div class="row text-center formManagement border-info" >
-    <div class="col" >
+<div class="container-fluid"  style="margin-top: 10px;"  >
+  <div class="row" >
+    <div class="col-md-10" >
       <a class="btn btn-outline-info" href="/home" >
         Back To Home
       </a >
@@ -34,13 +34,13 @@
   </div >
 </div >
 <!--Form Content - start -->
-<div class="container-fluid bg-light formBorder" >
-  <div class="col-sm-12 flex-column " >
+<div class="container-fluid bg-light formBorder" style="margin-top: 10px;" >
+  <div class="row flex-column " >
     <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/employee/add':'/employee/update'}"
           data-th-object="${employee}" method="POST" enctype="multipart/form-data" >
       <div class="row" >
         <!--Left Side-->
-        <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+        <div class="form-group col-md-6 text-left flex-column" >
           <!--Id-->
           <div id="idStatus" data-th-if="${addStatus==false}" class="form-row text-right" >
             <div class="col-md-4" >
@@ -62,7 +62,7 @@
                     data-th-if="${#fields.hasErrors('code')}" class="error" >Error Employee code
                             </span >
             </div >
-          </div >
+          </div ><br>
           <!--Tittle -->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -77,7 +77,7 @@
                         data-th-selected="${titles==employee.title?'selected':'unselected'}" ></option >
               </select >
             </div >
-          </div >
+          </div ><br>
           <!--Name-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -88,7 +88,7 @@
               <span id="nameError" data-th-errors="*{name}"
                     data-th-if="${#fields.hasErrors('name')}" class="error" >Error Name</span >
             </div >
-          </div >
+          </div ><br>
           <!--Calling Name-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -100,7 +100,7 @@
               <span class="error" data-th-errors="*{callingName}"
                     data-th-if="${#fields.hasErrors('callingName')}" id="callingNameError" >Error Calling Name</span >
             </div >
-          </div >
+          </div ><br>
           <!--Nic-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -113,7 +113,7 @@
               <span class="error" id="nicError" data-th-errors="*{nic}"
                     data-th-if="${#fields.hasErrors('nic')}" >Error NIC Number</span >
             </div >
-          </div >
+          </div ><br>
           <!--Gender-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -128,7 +128,7 @@
                         data-th-selected="${genders==employee.gender?'selected':'unselected'}" ></option >
               </select >
             </div >
-          </div >
+          </div ><br>
           <!--Date of birth-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -141,7 +141,7 @@
               <span id="dateOfBirthError" data-th-errors="*{dateOfBirth}"
                     data-th-if="${#fields.hasErrors('dateOfBirth')}" class="error" >Error Birthday</span >
             </div >
-          </div >
+          </div ><br>
           <!--Blood group-->
           <!--<div class="form-row text-right">
               <div class="col-md-4">
@@ -173,10 +173,10 @@
               </select >
             </div >
           </div >
-        </div >
+        </div ><br>
         <!--Right Side-->
         <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
-          <!--Civil status-->
+          <!--Civil status--><br>
           <div class="form-row text-right" >
             <div class="col-md-4" >
               <label class="control-label" for="civilStatus" >Civil State :</label >
@@ -191,19 +191,19 @@
                         data-th-selected="${civilStatu==employee.civilStatus?'selected':'unselected'}" ></option >
               </select >
             </div >
-          </div >
+          </div ><br>
           <!--Address-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
               <label class="control-label" for="address" >Address :</label >
-            </div >
+            </div ><br>
             <div class="col-md-8" >
                             <textarea id="address" data-th-field="*{address}" class="form-control" tabindex="12"
                                       required ></textarea >
               <span class="error" data-th-errors="*{address}"
                     data-th-if="${#fields.hasErrors('address')}" id="addressError" >Error Address</span >
             </div >
-          </div >
+          </div ><br>
           <!--Mobile Number One-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -218,7 +218,7 @@
                     data-th-if="${#fields.hasErrors('mobileOne')}"
                     id="mobileOneError" >Error Mobile Number</span >
             </div >
-          </div >
+          </div ><br>
           <!--Mobile Number Two-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -232,7 +232,7 @@
                     data-th-if="${#fields.hasErrors('mobileTwo')}"
                     id="mobileTwoError" >Error Mobile  Number</span >
             </div >
-          </div >
+          </div ><br>
           <!--Land Number-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -245,7 +245,7 @@
               <span class="error" data-th-errors="*{land}"
                     data-th-if="${#fields.hasErrors('land')}" id="landError" >Error Land Number</span >
             </div >
-          </div >
+          </div ><br>
           <!--Email-->
           <!--<div class="form-row text-right">
               <div class="col-md-4">
@@ -269,7 +269,7 @@
                     data-th-if="${#fields.hasErrors('officeEmail')}"
                     id="officeEmailError" >Error Office Email</span >
             </div >
-          </div >
+          </div ><br>
           <!--Date of assignment-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -282,7 +282,7 @@
               <span class="error" data-th-errors="*{dateOfAssignment}"
                     data-th-if="${#fields.hasErrors('dateOfAssignment')}" id="dateOfAssignmentError" >Error Date Of Assignment</span >
             </div >
-          </div >
+          </div ><br>
           <!--Employee status-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -298,7 +298,7 @@
                         data-th-selected="${employeeStatuss==employee.employeeStatus?'selected':'unselected'}" ></option >
               </select >
             </div >
-          </div >
+          </div ><br>
           <!--Image-->
           <div class="form-row text-right" >
             <div class="form-row " >
@@ -317,7 +317,7 @@
                      style="height: 100px; width: 100%" >
               </div >
             </div >
-          </div >
+          </div ><br>
           <!--Created by and created at-->
           <div id="updateStatus" data-th-if="${addStatus==false}" >
             <div class="form-row text-right" >

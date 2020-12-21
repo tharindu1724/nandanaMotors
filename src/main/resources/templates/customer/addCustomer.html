@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head data-th-replace="~{fragments/header :: headerFragment}">
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+
     <meta charset="UTF-8">
     <title>addCustomer</title>
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--Heading Area-->
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="card bg-info " >
+    <div class="card-header" id="card">
         <!--ViewList Button-->
-        <div class="col">
+        <div class="col" id="viewlist">
             <a href="/customer" class="btn btn-primary" tabindex="1">
-                <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
+                <i class="fa fa-th-list"aria-hidden="true" style="font-size:15px"></i>&nbsp;&nbsp;View Customers
             </a>
         </div>
         <!--Form Name-->
-        <div class="col">
+        <div class="col" id="cardbody">
             <h2 class="text-light text-center">
                 <strong>
                     <span data-th-text="${addStatus==true?'Add New Customer':'Update Customer Details'}"></span>
@@ -25,19 +26,19 @@
         </div>
         <!--Home Button-->
         <div class="col">
-            <a class="btn btn-primary" href="/home" tabindex="2">
-                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
+            <a class="btn btn-primary" id="hom-btn" href="/home" tabindex="2">
+                <i class="fa fa-home" style="font-size: 15px"></i> &nbsp;&nbsp;Home
             </a>
         </div>
     </div>
 </div>
 <!--Form Content-->
-<div class="container-fluid bg-dark formBorder">
-    <div class="col-sm-12 flex-column ">
-        <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/customer/save':'/customer/update'}"
+<div class="container-fluid" id="frm">
+    <div class="col-12">
+        <form id="form"  data-th-action="${addStatus==true?'/customer/save':'/customer/update'}"
               data-th-object="${customer}" method="POST" >
             <div class="row">
-                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                <div class="form-group">
                     <!--<div class="col-md-3 col-sm-3"></div>
                     <div class="col-md-3 col-sm-3 text-left ">
                         <label class="control-label" >Customer Type :</label>
@@ -81,7 +82,7 @@
                             <span id="nameError" data-th-errors="*{name}"
                                   data-th-if="${#fields.hasErrors('name')}" class="error">Error Name</span>
                         </div>
-                    </div>
+                    </div><br>
                     <!--Mobile Number-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
@@ -92,7 +93,7 @@
                             <span class="error" data-th-errors="*{mobile}"
                                   data-th-if="${#fields.hasErrors('mobile')}" id="mobileError">Error Mobile Number</span>
                         </div>
-                    </div>
+                    </div><br>
                     <!--Email-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
@@ -103,7 +104,7 @@
                             <span class="error" data-th-errors="*{email}"
                                   data-th-if="${#fields.hasErrors('email')}" id="emailError">Error Mobile Number</span>
                         </div>
-                    </div>
+                    </div><br>
                     <!--Address-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
@@ -114,7 +115,7 @@
                             <span class="error" data-th-errors="*{address}"
                                   data-th-if="${#fields.hasErrors('address')}" id="addressError">Error Address</span>
                         </div>
-                    </div>
+                    </div><br>
                     <!--Created by and created at-->
                     <div id="updateStatus" data-th-if="${addStatus==false}">
                         <!--Created By-->
@@ -149,7 +150,7 @@
                     </button>
                     <!--Cancel Button-->
                     <button class="btn btn-warning ml-5" type="reset" tabindex="9">
-                        <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
+                        <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Clear
                     </button>
                 </div>
                 <!--Error-->

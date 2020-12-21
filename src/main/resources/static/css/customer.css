@@ -1,0 +1,67 @@
+#card{
+    background-color: lightslategrey;
+    height: 50px;
+}
+
+
+#cardbody{
+    height: 20px;
+}
+#hom-btn{
+    width: 100px;
+        padding-left: 0px;
+    margin-right: 20px;
+    height: 180px;
+
+}
+#viewlist{
+    right: auto;
+    width: auto;
+    left: 90%;
+    height: auto;
+}
+#CustomerForm{
+
+
+
+
+
+
+
+}
+#frm{
+    width: auto;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    <background-image: url('../img/bgone.jpg');>
+    background-attachment: fixed;
+    border:0px;
+    border-radius:0px;
+    border-bottom:2px solid white;
+    font-size:21px;
+    color:white;
+    margin-top:20px;
+
+    font-family: new time roman;
+
+}
+#tableback{
+
+    background-color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
