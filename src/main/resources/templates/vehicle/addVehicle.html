@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
-<body>
+<body class="img">
 <nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
-<div class="card" id="card" >
+<div class="card bg-info" id="card" >
     <div class="card-body" >
-        <div class="col"id="hom">
+        <div class="row">
+        <div class="col-md-3"id="back-btn">
             <a class="btn btn-primary" href="/home" tabindex="2">
-                <i class="fa fa-home" style="font-size: 15px"></i> &nbsp;&nbsp;Home
+                <i class="fa fa-backspace" style="font-size: 15px"></i> &nbsp;&nbsp;back
             </a>
         </div>
-<div class="col" id="viewlist">
-    <a href="/vehicle" class="btn btn-primary" tabindex="1">
+
+            <div class="col-md-7"></div>
+
+<div class="col-sm-2  " >
+    <a href="/vehicle" class="btn btn-primary " tabindex="1">
         <i class="fa fa-th-list"aria-hidden="true" style="font-size:15px"></i>&nbsp;&nbsp;View vehicles
     </a>
 </div>
-
+        </div>
+    </div>
+</div>
 <div class="container-fluid" id="frm">
     <form data-th-action="${addStatus==false?'/vehicle/save' :'/vehicle/update'}"
           method="post" data-th-object="${vehicle}"
@@ -138,7 +144,7 @@
                                 data-th-text="${addStatus==false?'Save' : 'Update'}"></span>
                     </button>
                     <button class="btn btn-danger" type="reset" tabindex="9">
-                        <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Clear
+                        <i class="far fa-times-circle" style="font-size: 30px"></i>&nbsp;&nbsp;Clear
                     </button>
                 </div>
             </div>

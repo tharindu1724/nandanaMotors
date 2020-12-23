@@ -1,25 +1,22 @@
-#card{
-    background-color: lightslategrey;
-    height: 50px;
+
+
+
+.img{
+    background-color: grey;
+    /*background-image: url('../img/bgone.jpg');*/
+    opacity: 1;
+
 }
 
 
-#cardbody{
-    height: 20px;
-}
-#hom-btn{
-    width: 100px;
-        padding-left: 0px;
-    margin-right: 20px;
-    height: 180px;
+/*!*#back-btn{*!*/
+/*    width: 100px;*/
+/*        padding-left: 0px;*/
+/*    margin-top: 20px;*/
+/*    margin-right: 20px;*/
+/*    !*height: 150px;*!*/
 
-}
-#viewlist{
-    right: auto;
-    width: auto;
-    left: 90%;
-    height: auto;
-}
+/*}*/
 #CustomerForm{
 
 
@@ -34,8 +31,6 @@
     height: 800px;
     display: flex;
     flex-direction: column;
-    background-color: black;
-    <background-image: url('../img/bgone.jpg');>
     background-attachment: fixed;
     border:0px;
     border-radius:0px;
@@ -47,13 +42,6 @@
     font-family: new time roman;
 
 }
-#tableback{
-
-    background-color: red;
-}
-
-
-
 
 
 

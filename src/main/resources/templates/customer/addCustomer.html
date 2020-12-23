@@ -8,30 +8,38 @@
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--Heading Area-->
-<div class="card bg-info " >
-    <div class="card-header" id="card">
+<div class="card bg-info " id="card" >
+    <div class="card-body">
+        <!--Home Button-->
+        <div class="row">
+        <div class="col-md-3"  id="hom">
+            <a href="/home" id="searchShow" class="btn btn-primary" tabindex="2">
+                <!--<i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;-->
+                <i class="fas fa-backspace" style="font-size: 20px"></i>&nbsp;&nbsp;back
+            </a>
+        </div>
+            <div class="col-md-7"></div>
+
         <!--ViewList Button-->
-        <div class="col" id="viewlist">
+        <div class="col-md-2">
             <a href="/customer" class="btn btn-primary" tabindex="1">
                 <i class="fa fa-th-list"aria-hidden="true" style="font-size:15px"></i>&nbsp;&nbsp;View Customers
             </a>
         </div>
+        </div>
+
         <!--Form Name-->
-        <div class="col" id="cardbody">
+        <div class="col" >
             <h2 class="text-light text-center">
                 <strong>
                     <span data-th-text="${addStatus==true?'Add New Customer':'Update Customer Details'}"></span>
                 </strong>
             </h2>
         </div>
-        <!--Home Button-->
-        <div class="col">
-            <a class="btn btn-primary" id="hom-btn" href="/home" tabindex="2">
-                <i class="fa fa-home" style="font-size: 15px"></i> &nbsp;&nbsp;Home
-            </a>
-        </div>
+
     </div>
 </div>
+
 <!--Form Content-->
 <div class="container-fluid" id="frm">
     <div class="col-12">
@@ -94,6 +102,7 @@
                                   data-th-if="${#fields.hasErrors('mobile')}" id="mobileError">Error Mobile Number</span>
                         </div>
                     </div><br>
+
                     <!--Email-->
                     <div class="form-row text-right">
                         <div class="col-md-4">
@@ -153,7 +162,7 @@
                         <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Clear
                     </button>
                 </div>
-                <!--Error-->
+                <!--Error--
                 <div class="form-row">
                     <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '">Errors: </label>
                     <ul>
