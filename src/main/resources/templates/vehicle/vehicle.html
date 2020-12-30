@@ -8,16 +8,17 @@
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <div class="card bg-info">
-    <div class="row text-center formManagement border-info">
+    <div class="card-body">
         <!--Home Button-->
-        <div class="col"  id="home">
+        <div class="row">
+        <div class="col-md-3"  id="home">
             <a href="/home" id="searchShow" class="btn btn-primary" tabindex="2">
                 <!--<i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;-->
-                <i class="fas fa-home" style="font-size: 20px"></i>&nbsp;&nbsp;Home
-            </a>
+                <i class="fas fa-backspace" style="font-size: 20px"></i>&nbsp;&nbsp;Back            </a>
         </div>
 
-        <div class="col " >
+
+            <div class="col-md-6 " >
             <h2 class="text-white text-center" style="font-size: 25px" >
                 <strong><b>
                     Vehicle List
@@ -25,16 +26,17 @@
                 </strong>
             </h2>
         </div>
-        <div class="col">
+
+        <div class="col-md-3">
             <a class="btn btn-success" href="/vehicle/add">
                 <i class="fa fa-plus" style="font-size: 20px;"></i> &nbsp; New Vehicle </a>
 
         </div>
-        <div class="col">
+
         </div>
     </div>
 </div>
-<div class="container-fluid " >
+<div class="container-fluid " id="frm">
     <div class="offset-2 col-8 col-sm-8 col-md-8" id="roleListPresent" data-th-if="${not #lists.isEmpty(vehicles)}">
         <div class="">
             <table class="table table-dark table-striped table-responsive-sm" id="myTable" >
