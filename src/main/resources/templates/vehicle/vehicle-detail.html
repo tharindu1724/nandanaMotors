@@ -1,119 +1,122 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
-</head>
-<body>
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
-        <div class="col">
-            <a class="btn btn-primary" href="/home">
-                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
-            </a>
-        </div>
-        <div class="col">
-            <h4 class="text-light text-center">
-                <strong>
-                    <p data-th-text="${vehicleDetails.number}"></p>
-                </strong>
-            </h4>
-        </div>
-        <div class="col">
-            <a href="/vehicle" class="btn btn-primary">
-                <i class="fa fa-list"></i>&nbsp; View List
-            </a>
-        </div>
-    </div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<div class="container-fluid bg-secondary form-Border" >
+  <div class="row text-center formManagement border-info" >
+    <div class="col" >
+      <a class="btn btn-primary" href="/home" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp; Home
+      </a >
+    </div >
+    <div class="col" >
+      <h4 class="text-light text-center" >
+        <strong >
+          <span data-th-text="${vehicleDetail.number}" ></span >
+        </strong >
+      </h4 >
+    </div >
+    <div class="col" >
+      <a href="/vehicle" class="btn btn-primary" >
+        <i class="fa fa-list" ></i >&nbsp; View List
+      </a >
+    </div >
+  </div >
+</div >
+<!--vehicle details-->
+<div data-th-fragment="vehicleDetailsFragment" class="container-fluid" >
+  <div class="col-sm-12 flex-column " >
+    <div class="row" >
+      <!--Left Side-->
+      <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="id" >ID :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="id" data-th-text="${vehicleDetail.id}" class="display_detail" ></p >
+          </div >
+        </div >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Pay Role No :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.number}" class="display_detail" ></p >
+          </div >
+        </div >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Pay Role No :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.registrationNumber}" class="display_detail" ></p >
+          </div >
+        </div >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Pay Role No :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.engineNumber}" class="display_detail" ></p >
+          </div >
+        </div >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Pay Role No :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.chassisNumber}" class="display_detail" ></p >
+          </div >
+        </div >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Pay Role No :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.manufacturedYear}" class="display_detail" ></p >
+          </div >
+        </div >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Pay Role No :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.gearNumber}" class="display_detail" ></p >
+          </div >
+        </div >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Pay Role No :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.vehicleModel.vehicleModel}" class="display_detail" ></p >
+          </div >
+        </div >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Pay Role No :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.customer.name}" class="display_detail" ></p >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+<!--vehicle service history-->
+<div class="container-fluid">
+
 </div>
-<div data-th-fragment="vehicleDetailsFragment" class="container-fluid bg-dark formBorder">
-    <div class="col-sm-12 flex-column ">
-        <div class="row">
-            <!--Left Side-->
-            <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" for="id">ID :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p id="id" data-th-text="${vehicleDetails.id}" class="display_detail"></p>
-                    </div>
-                </div>
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" >Pay Role No :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p  data-th-text="${vehicleDetails.number}" class="display_detail"></p>
-                    </div>
-                </div>
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" >Pay Role No :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p data-th-text="${vehicleDetails.registrationNumber}" class="display_detail"></p>
-                    </div>
-                </div>
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" >Pay Role No :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p data-th-text="${vehicleDetails.engineNumber}" class="display_detail"></p>
-                    </div>
-                </div>
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" >Pay Role No :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p data-th-text="${vehicleDetails.chassisNumber}" class="display_detail"></p>
-                    </div>
-                </div>
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" >Pay Role No :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p data-th-text="${vehicleDetails.manufacturedYear}" class="display_detail"></p>
-                    </div>
-                </div>
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" >Pay Role No :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p data-th-text="${vehicleDetails.gearNumber}" class="display_detail"></p>
-                    </div>
-                </div>
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" >Pay Role No :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p data-th-text="${vehicleDetails.vehicleModel.vehicleModel}" class="display_detail"></p>
-                    </div>
-                </div>
-                <div class="form-row text-right">
-                    <div class="col-md-4">
-                        <label class="control-label" >Pay Role No :</label>
-                    </div>
-                    <div class="col-md-8">
-                        <p data-th-text="${vehicleDetails.customer.name}" class="display_detail"></p>
-                    </div>
-                </div>
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 
-
-            </div>
-        </div>
-    </div>
-</div>
-    <!--footer include-->
-    <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-    <!--script include-->
-    <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
-
-</body>
-</html>
+</body >
+</html >

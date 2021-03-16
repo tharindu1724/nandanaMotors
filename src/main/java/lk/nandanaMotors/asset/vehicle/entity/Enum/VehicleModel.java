@@ -6,8 +6,13 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum VehicleModel {
-    //todo find sri lanka vehicle model
-    VAN("Van");
+    VAN("Van"),
+    CAR("Car"),
+    BIKE("Bike"),
+    LORRY("Lorry"),
+    DOZOR("Dozor"),
+    TRACTOR("Tractor"),
+    BUS("Bus");
 
     private final String vehicleModel;
 

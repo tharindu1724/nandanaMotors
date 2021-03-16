@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <link data-th-href="@{/css/customerCss.css}" media="all" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8" >
+  <title >payment</title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<!--heading Area-->
+<div class="container-fluid  form-Border" >
+  <div class="row text-center formManagement border-info" >
+    <!--New Customer Button-->
+    <div class="col text-left" >
+      <a href="/home" id="btnHome" class="btn" tabindex="" >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <i class="fas fa-home" style="font-size: 20px" ></i >&nbsp;&nbsp;
+                                                             Home
+      </a >
+    </div >
+    <!--List Name-->
+    <!--<div class="col">
+        <h2 class="text-white text-center">
+            <strong>
+                Customer List
+            </strong>
+        </h2>
+    </div>-->
+    <!--Home Button-->
+    <div class="col text-right" >
+
+      <a class="btn" href="/payment/add" id="btnAdd" tabindex="1" >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <i class="fas fa-plus" style="font-size: 20px" ></i >&nbsp;&nbsp;
+                                                             Add New
+      </a >
+    </div >
+  </div >
+  <div class="row text-center" >
+    <div class="col" >
+
+    </div >
+    <div class="col" id="topic" >
+      <h2 class="text-center" >
+
+        Payment
+
+      </h2 >
+    </div >
+    <div class="col" ></div >
+  </div >
+</div >
+<!--button to payments-->
+<div class="container-fluid" >
+  <div class="form-row" >
+    <div class="col-4" >
+      <a href="/payment" >
+        <button type="button" class="btn btn-success" >All</button >
+      </a >
+    </div >
+    <div class="col-4" >
+      <a href="/payment/notPaid" >
+        <button type="button" class="btn btn-info" >To Paid</button >
+      </a >
+    </div >
+    <div class="col-4" >
+      <a href="/payment/cancel" >
+        <button type="button" class="btn btn-danger" >Cancel</button >
+      </a >
+    </div >
+  </div >
+</div >
+<!--Custom search -->
+<div class="container-fluid" >
+  <div class="row" >
+    <!--Custom job done search-->
+    <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
+            data-target="#dataTargetCollapse"
+            aria-expanded="false" aria-controls="dataTargetCollapse"
+    > Custom Payment Search
+    </button >
+    <div class="collapse mx-auto" id="dataTargetCollapse" >
+      <h4 class="text-info" ><b > Custom Search</b ></h4 >
+      <form class="form-inline" data-th-action="${action}" data-th-method="POST" >
+        <div class="col-4" >
+          <label for="startDate" >FROM :
+            <input class="form-control" id="startDate" name="startDate" type="date" /></label >
+        </div >
+        <div class="col-4" >
+          <label for="endDate" >TO :
+            <input class="form-control" id="endDate" name="endDate" type="date" /></label >
+        </div >
+        <div class="col-4" >
+          <button class="btn btn-success" id="btnSummaryFind" type="submit" ><span
+                class="glyphicon glyphicon-search" ></span >&nbsp;Search
+          </button >
+        </div >
+      </form >
+    </div >
+  </div >
+</div >
+
+<!--payment List-->
+<div class="container-fluid text-center" >
+  <!--Table view-->
+  <div class="col" >
+    <div class="col" id="customerListPresent" data-th-if="${not #lists.isEmpty(payments)}" >
+      <table class="table table-borderless table-hover table-striped" id="myTable" >
+        <thead >
+        <tr >
+          <th > Index</th >
+            <th > Code</th >
+          <th > Customer Name</th >
+          <th > Vehicle Number</th >
+          <th > Amount</th >
+          <th > Payment Status</th >
+        </tr >
+        </thead >
+        <tbody >
+        <tr data-th-each="payment, rowCount : ${payments}" >
+          <td data-th-text="${rowCount.count}" ></td >
+          <td data-th-text="${payment.code}" ></td >
+          <td data-th-text="${payment.customer.name}" ></td >
+          <td data-th-text="${payment.vehicle.number}" ></td >
+          <td data-th-text="${payment.amount}" ></td >
+          <td data-th-text="${payment.paymentStatus.paymentStatus}" ></td >
+          <td >
+            <a id="customerView" data-th-href="${'/payment/' + payment.id}" class="btn btn-primary btn-sm" ><i
+                  class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View</a >
+            <a  data-th-if="${#strings.equals(payment.paymentStatus, 'NOTPAID')}" data-th-href="${'/payment/pay/' + payment.id}"
+               class="btn btn-success btn-sm" ><i class="fa fa-edit"
+                                                  style="font-size: 15px" ></i >&nbsp;Pay</a >
+            <a data-th-if="${#authorization.expression('hasRole(''ROLE_MANAGER'')')}" id="customerRemove"
+               data-th-href="${'/payment/cancel/' + payment.id}"
+               class="btn btn-danger btn-sm" ><i
+                  class="fa fa-trash" style="font-size: 15px" ></i >
+              Delete</a >
+          </td >
+        </tr >
+        </tbody >
+      </table >
+    </div >
+  </div >
+  <!--Error-->
+  <div class="row" data-th-if="${ #lists.isEmpty(payments)}" >
+    <div class="col-sm-12" >
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+          <span aria-hidden="true" >&times;</span >
+        </button >
+        <h3 class="text-center text-danger" >
+          <strong >There is no payment upto now please add payment to the system
+                   using "New" button.
+          </strong >
+        </h3 >
+      </div >
+    </div >
+  </div >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+<script >
+    $(".alert").alert();
+</script >
+</body >
+</html >

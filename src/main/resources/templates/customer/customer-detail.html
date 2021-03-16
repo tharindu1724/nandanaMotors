@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
+<head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>customer-detail</title>
 </head>
 <body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <!--heading Area-->
 <div class="container-fluid bg-dark form-Border">
@@ -20,7 +20,7 @@
         <div class="col">
             <h2 class="text-light text-center">
                 <strong>
-                    <p th:text="${customerDetail.name}"></p>
+                    <p  data-th-text="${customerDetail.name}"></p>
                 </strong>
             </h2>
         </div>
@@ -33,7 +33,7 @@
     </div>
 </div>
 <!--details-->
-<div th:fragment="customerDetailsFragment" class="container-fluid bg-dark formBorder">
+<div  data-th-fragment="customerDetailsFragment" class="container-fluid">
     <div class="col-sm-12 flex-column ">
         <div class="row">
             <!--Left Side-->
@@ -44,7 +44,7 @@
                         <label class="control-label" for="id">ID :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="id" th:text="${customerDetail.id}" class="display_detail"></p>
+                        <p id="id"  data-th-text="${customerDetail.id}" class="display_detail"></p>
                     </div>
                 </div>
                 <!--Code-->
@@ -53,7 +53,7 @@
                         <label class="control-label" for="departmentIdNumber">Customer Code :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="departmentIdNumber" th:text="${customerDetail.code}" class="display_detail"></p></div>
+                        <p id="departmentIdNumber"  data-th-text="${customerDetail.code}" class="display_detail"></p></div>
                 </div>
                 <!--Name-->
                 <div class="form-row text-right">
@@ -61,7 +61,7 @@
                         <label class="control-label" for="name">Name :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="name" th:text="${customerDetail.name}"
+                        <p id="name"  data-th-text="${customerDetail.name}"
                            class="display_detail"></p>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         <label class="control-label" for="mobile">Mobile No :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="mobile" th:text="${customerDetail.mobile}" class="display_detail"></p>
+                        <p id="mobile"  data-th-text="${customerDetail.mobile}" class="display_detail"></p>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                         <label class="control-label" for="email">Email :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="email" th:text="${customerDetail.email}" class="display_detail"></p>
+                        <p id="email"  data-th-text="${customerDetail.email}" class="display_detail"></p>
                     </div>
                 </div>
                 <!--Created By-->
@@ -101,7 +101,7 @@
                         <label class="control-label" for="createdBy">Created By :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="createdBy" th:text="${customerDetail.createdBy}" class="display_detail"></p>
+                        <p id="createdBy"  data-th-text="${customerDetail.createdBy}" class="display_detail"></p>
                     </div>
                 </div>
                 <!--Created at-->
@@ -110,7 +110,7 @@
                         <label class="control-label" for="createdAt">Created At :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="createdAt" th:text="${#temporals.format(customerDetail.createdAt, 'dd-MM-yyyy HH:mm')}"
+                        <p id="createdAt"  data-th-text="${#temporals.format(customerDetail.createdAt, 'dd-MM-yyyy HH:mm')}"
                            class="display_detail"></p>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                         <label class="control-label" for="updatedBy">Updated By :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="updatedBy" th:text="${customerDetail.updatedBy}" class="display_detail"></p>
+                        <p id="updatedBy"  data-th-text="${customerDetail.updatedBy}" class="display_detail"></p>
                     </div>
                 </div>
                 <!--Updated at-->
@@ -145,9 +145,9 @@
     </a>
 </div>
 <!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<div  data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+<div  data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
 </body>
 </html>

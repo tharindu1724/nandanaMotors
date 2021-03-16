@@ -2,6 +2,8 @@ package lk.nandanaMotors.asset.serviceType.service;
 
 
 
+
+import lk.nandanaMotors.asset.common_asset.model.Enum.LiveDead;
 import lk.nandanaMotors.asset.serviceType.dao.ServiceTypeDao;
 import lk.nandanaMotors.asset.serviceType.entity.ServiceType;
 import lk.nandanaMotors.util.interfaces.AbstractService;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ServiceTypeService implements AbstractService<ServiceType, Integer> {
+public class ServiceTypeService implements AbstractService< ServiceType, Integer> {
     private final ServiceTypeDao serviceTypeDao;
 
     public ServiceTypeService(ServiceTypeDao serviceTypeDao) {
@@ -28,12 +30,17 @@ public class ServiceTypeService implements AbstractService<ServiceType, Integer>
     }
 
     public ServiceType persist(ServiceType serviceType) {
+        if ( serviceType.getId() == null ) {
+            serviceType.setLiveDead(LiveDead.ACTIVE);
+        }
         return serviceTypeDao.save(serviceType);
     }
 
     public boolean delete(Integer id) {
-        serviceTypeDao.deleteById(id);
-        return true;
+        ServiceType serviceType = serviceTypeDao.getOne(id);
+        serviceType.setLiveDead(LiveDead.STOP);
+        serviceTypeDao.save(serviceType);
+        return false;
     }
 
     public List<ServiceType> search(ServiceType serviceType) {

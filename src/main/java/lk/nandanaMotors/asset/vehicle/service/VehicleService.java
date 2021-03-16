@@ -1,6 +1,7 @@
 package lk.nandanaMotors.asset.vehicle.service;
 
-import lk.nandanaMotors.asset.employee.entity.Employee;
+
+import lk.nandanaMotors.asset.common_asset.model.Enum.LiveDead;
 import lk.nandanaMotors.asset.vehicle.dao.VehicleDao;
 import lk.nandanaMotors.asset.vehicle.entity.Vehicle;
 import lk.nandanaMotors.util.interfaces.AbstractService;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class VehicleService implements AbstractService<Vehicle, Integer> {
+public class VehicleService implements AbstractService< Vehicle, Integer> {
     private final VehicleDao vehicleDao;
 
     public VehicleService(VehicleDao vehicleDao) {
@@ -27,11 +28,16 @@ public class VehicleService implements AbstractService<Vehicle, Integer> {
     }
 
     public Vehicle persist(Vehicle vehicle) {
+        if ( vehicle.getId() == null ) {
+            vehicle.setLiveDead(LiveDead.ACTIVE);
+        }
         return vehicleDao.save(vehicle);
     }
 
     public boolean delete(Integer id) {
-        vehicleDao.deleteById(id);
+        Vehicle customer = vehicleDao.getOne(id);
+        customer.setLiveDead(LiveDead.STOP);
+        vehicleDao.save(customer);
         return false;
     }
 
@@ -42,5 +48,13 @@ public class VehicleService implements AbstractService<Vehicle, Integer> {
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
         Example<Vehicle> vehicleExample = Example.of(vehicle, matcher);
         return vehicleDao.findAll(vehicleExample);
+    }
+
+  public Vehicle findByNumber(String number) {
+  return vehicleDao.findByNumber(number);
+    }
+
+  public Vehicle lastVehicle() {
+  return vehicleDao.findFirstByOrderByIdDesc();
     }
 }

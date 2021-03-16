@@ -1,11 +1,11 @@
 package lk.nandanaMotors.configuration;
 
 
-import lk.nandanaMotors.asset.userManagement.entity.Enum.UserSessionLogStatus;
-import lk.nandanaMotors.asset.userManagement.entity.User;
-import lk.nandanaMotors.asset.userManagement.entity.UserSessionLog;
-import lk.nandanaMotors.asset.userManagement.service.UserService;
-import lk.nandanaMotors.asset.userManagement.service.UserSessionLogService;
+import lk.nandanaMotors.asset.user.entity.User;
+import lk.nandanaMotors.asset.user.service.UserService;
+import lk.nandanaMotors.asset.user_management.entity.Enum.UserSessionLogStatus;
+import lk.nandanaMotors.asset.user_management.entity.UserSessionLog;
+import lk.nandanaMotors.asset.user_management.service.UserSessionLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;

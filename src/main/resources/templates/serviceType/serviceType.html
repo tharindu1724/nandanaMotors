@@ -1,139 +1,128 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
-</head>
-<body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <link data-th-href="@{/css/serviceTypeCss.css}" media="all" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
-        <div class="col">
-            <a class="btn btn-success" href="/serviceType/add"><i class="fa fa-user-plus"></i>
-                &nbsp; New Lab Test</a>
-        </div>
-        <div class="col">
-            <h4 class="text-info text-center">
-                <strong>
-                    Lab Test Management
-                </strong>
-            </h4>
-        </div>
-        <div class="col">
-            <!--<a href="/employee/workingPlace" id="searchShow" class="btn btn-primary">
-                &nbsp;Add&nbsp;
-                <i class="fas fa-store-alt" style="font-size: 20px"></i>
-                &nbsp;
-            </a>-->
-        </div>
-    </div>
-</div>
-<div class="wrapper"><!-- wrapper start -->
-    <!--<nav th:replace="~{fragments/navbarSection :: navbarSectionFragment}"></nav>&lt;!&ndash; navbar Section &ndash;&gt;
-    <aside th:replace="~{fragments/sidebarSection :: sidebarSectionFragment}"></aside>--><!-- navbar Section -->
-    <div class="content-wrapper"><!-- content-wrapper Start -->
-        <!--<section th:replace="~{fragments/contentHeader :: contentHeaderSectionFragment}"></section>
-        &lt;!&ndash; Form Header  Path &ndash;&gt;
-        <section th:replace="~{fragments/smallBoxSection :: smallBoxSectionFragment}"></section>-->
-        <!-- Small Box Set -->
+<div class="container-fluid form-Border" >
+  <div class="row text-center formManagement border-info" >
+    <div class="col text-left" >
+      <a href="/home" id="btnHome" class="btn" >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        &nbsp;Home&nbsp;
+      </a >
+    </div >
+    <div class="col text-right" >
+      <a class="btn" href="/serviceType/add" id="btnAdd" >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <i class="fa fa-user-plus" ></i >
+        &nbsp; New Lab Test
+      </a >
+      <!--<a href="/employee/workingPlace" id="searchShow" class="btn btn-primary">
+          &nbsp;Add&nbsp;
+          <i class="fas fa-store-alt" style="font-size: 20px"></i>
+          &nbsp;
+      </a>-->
+    </div >
+  </div >
+  <div class="row text-center" >
+    <div class="col" ></div >
+    <div class="col" id="topic" >
+      <h2 class="text-center" >
 
+        Service Type Management
 
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <!--if not empty list-->
-                                        <div class="container-fluid" id="serviceTypeListTable"
-                                             data-th-if="${not #lists.isEmpty(serviceTypes)}">
-                                            <table class="table table-hover table-striped" id="myTable">
-                                                <thead class="thead-inverse">
-                                                <tr>
-                                                    <th>S No</th>
-                                                    <th> Name</th>
-                                                    <th>Interview Parameter</th>
-                                                    <th>Modify</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr data-th-each="serviceType, rowCount : ${serviceTypes}" scope="row">
-                                                    <th data-th-text="${rowCount.count}"></th>
-                                                    <th data-th-text="${serviceType.name}"></th>
-                                                    <th>
-                                                        <ol>
-                                                            <li data-th-each="serviceTypeParameter : ${serviceType.serviceTypeParameters}"
-                                                                data-th-text="${serviceTypeParameter.name}"></li>
-                                                        </ol>
-                                                    </th>
-
-
-                                                    <th>
-                                                        <a id="serviceTypeView" class="btn btn-success btn-sm" th:href="${'/serviceType/' + serviceType.id}" ><i
-                                                            class="fa fa-folder-open"></i>&nbsp;View</a>
-                                                        <a class="btn btn-primary btn-sm" id="serviceTypeEdit"
-                                                           data-th-href="${'/serviceType/edit/' + serviceType.id}"><i
-                                                                class="fa fa-edit"></i>&nbsp;Edit</a>
-                                                    </th>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!--if empty list-->
-                                        <div class="row" id="serviceTypeNotList" data-th-if="${ #lists.isEmpty(serviceTypes)}">
-                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                <button type="button" class="close" data-dismiss="alert"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <h3 class="text-center text-danger">
-                                                    <strong>There is no serviceType upto know please add serviceType to the
-                                                        system
-                                                        using add serviceType button.
-                                                    </strong>
-                                                </h3>
-                                            </div>
-                                        </div>
-                                        <!--Show saved serviceType-->
-                                        <div class="row" data-th-if="${serviceTypeDetail!=null}">
-                                            <div class="col-sm-12">
-                                                <div class="alert alert-success alert-dismissible fade show"
-                                                     role="alert">
-                                                    <button type="button" class="close" data-dismiss="alert"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    <div class="container">
-                                                        <div data-th-replace="~{serviceType/serviceType-detail :: serviceTypeDetail}"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <script>
-                                                /*active boostrap alert - start*/
-                                                $(".alert").alert();
-                                                /*active boostrap alert - end*/
-                                            </script>
-                                        </div>
+      </h2 >
+    </div >
+    <div class="col" ></div >
+  </div >
+</div >
+<div class="container-fluid" >
+  <!--if not empty list-->
+  <div class="container-fluid" id="serviceTypeListTable"
+       data-th-if="${not #lists.isEmpty(serviceTypes)}" >
+    <table class="table table-hover table-striped" id="myTable" >
+      <thead class="thead-light" >
+      <tr >
+        <th >S No</th >
+        <th > Name</th >
+        <th >Interview Parameter</th >
+        <th >Modify</th >
+      </tr >
+      </thead >
+      <tbody >
+      <tr data-th-each="serviceType, rowCount : ${serviceTypes}" scope="row" >
+        <th data-th-text="${rowCount.count}" ></th >
+        <th data-th-text="${serviceType.name}" ></th >
+        <th >
+          <ol >
+            <li data-th-each="serviceTypeParameter : ${serviceType.serviceTypeParameters}"
+                data-th-text="${serviceTypeParameter.name}" ></li >
+          </ol >
+        </th >
 
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div><!-- content-wrapper end -->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer><!-- footer Section -->
-</div><!-- wrapper end -->
-<script th:replace="~{fragments/script :: scriptFragment}"></script><!-- script Fragment -->
-</body>
-</html>
+        <th >
+          <a id="serviceTypeView" class="btn btn-success btn-sm" data-th-href="${'/serviceType/' + serviceType.id}" ><i
+                class="fa fa-folder-open" ></i >&nbsp;View</a >
+          <a class="btn btn-primary btn-sm" id="serviceTypeEdit"
+             data-th-href="${'/serviceType/edit/' + serviceType.id}" ><i
+                class="fa fa-edit" ></i >&nbsp;Edit</a >
+        </th >
+      </tr >
+      </tbody >
+    </table >
+  </div >
+  <!--if empty list-->
+  <div class="row" id="serviceTypeNotList" data-th-if="${ #lists.isEmpty(serviceTypes)}" >
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+      <button type="button" class="close" data-dismiss="alert"
+              aria-label="Close" >
+        <span aria-hidden="true" >&times;</span >
+      </button >
+      <h3 class="text-center text-danger" >
+        <strong >There is no serviceType upto know please add serviceType to the
+                 system
+                 using add serviceType button.
+        </strong >
+      </h3 >
+    </div >
+  </div >
+
+  <!--Show saved serviceType-->
+  <div class="row" data-th-if="${serviceTypeDetail!=null}" >
+    <div class="col-sm-12" >
+      <div class="alert alert-success alert-dismissible fade show"
+           role="alert" >
+        <button type="button" class="close" data-dismiss="alert"
+                aria-label="Close" >
+          <span aria-hidden="true" >&times;</span >
+        </button >
+        <div class="container" >
+          <div data-th-replace="~{serviceType/serviceType-detail :: serviceTypeDetail}" ></div >
+        </div >
+      </div >
+    </div >
+  </div >
+
+
+</div >
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div ><!-- footer Section -->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div ><!-- script Fragment -->
+<script >
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script >
+</body >
+</html >

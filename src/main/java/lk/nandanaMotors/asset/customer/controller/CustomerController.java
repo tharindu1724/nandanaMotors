@@ -1,10 +1,11 @@
 package lk.nandanaMotors.asset.customer.controller;
 
 
-import lk.nandanaMotors.asset.commonAsset.model.Enum.Title;
+
+import lk.nandanaMotors.asset.common_asset.model.Enum.LiveDead;
+import lk.nandanaMotors.asset.common_asset.model.Enum.Title;
 import lk.nandanaMotors.asset.customer.entity.Customer;
 import lk.nandanaMotors.asset.customer.service.CustomerService;
-import lk.nandanaMotors.util.interfaces.AbstractController;
 import lk.nandanaMotors.util.service.EmailService;
 import lk.nandanaMotors.util.service.MakeAutoGenerateNumberService;
 import lk.nandanaMotors.util.service.TwilioMessageService;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/customer")
@@ -42,7 +45,10 @@ public class CustomerController  {
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("customers", customerService.findAll());
+        model.addAttribute("customers", customerService.findAll()
+            .stream()
+            .filter(x -> LiveDead.ACTIVE.equals(x.getLiveDead()))
+            .collect(Collectors.toList()));
         return "customer/customer";
     }
 

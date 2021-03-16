@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <link data-th-href="@{/css/customerCss.css}" media="all" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8" >
+  <title >payment</title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<!--heading Area-->
+<div class="container-fluid" >
+  <div class="row text-center formManagement border-info" >
+    <!--New Customer Button-->
+    <div class="col text-left" >
+      <a href="/home" id="btnHome" class="btn" tabindex="" >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <i class="fas fa-home" style="font-size: 20px" ></i >&nbsp;&nbsp;
+                                                             Home
+      </a >
+    </div >
+    <!--List Name-->
+    <!--<div class="col">
+        <h2 class="text-white text-center">
+            <strong>
+                Customer List
+            </strong>
+        </h2>
+    </div>-->
+    <!--Home Button-->
+    <div class="col text-right" >
+
+      <a class="btn" href="/payment/add" id="btnAdd" tabindex="1" >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <i class="fas fa-plus" style="font-size: 20px" ></i >&nbsp;&nbsp;
+                                                             Add New
+      </a >
+    </div >
+  </div >
+  <div class="row text-center" >
+    <div class="col" >
+
+    </div >
+    <div class="col" id="topic" >
+      <h2 class="text-center" >
+
+        Report
+
+      </h2 >
+    </div >
+    <div class="col" ></div >
+  </div >
+</div >
+<!--Custom search -->
+<div class="container-fluid" >
+  <div class="row" >
+    <!--Custom job done search-->
+    <button type="button" class="btn btn-info mb-5 btn-block text-capitalize" data-toggle="collapse"
+            data-target="#dataTargetCollapse"
+            aria-expanded="false" aria-controls="dataTargetCollapse"
+    > Custom Payment Search
+    </button >
+    <div class="collapse mx-auto" id="dataTargetCollapse" >
+      <h4 class="text-info" ><b > Custom Search</b ></h4 >
+      <form class="form-inline" data-th-action="${report}" data-th-method="POST" >
+        <div class="col-4" >
+          <label for="startDate" >FROM :
+            <input class="form-control" id="startDate" name="startDate" type="date" /></label >
+        </div >
+        <div class="col-4" >
+          <label for="endDate" >TO :
+            <input class="form-control" id="endDate" name="endDate" type="date" /></label >
+        </div >
+        <div class="col-4" >
+          <button class="btn btn-success" id="btnSummaryFind" type="submit" ><span
+                class="glyphicon glyphicon-search" ></span >&nbsp;Search
+          </button >
+        </div >
+      </form >
+    </div >
+  </div >
+</div >
+<!--payment List not paid-->
+<div class="container-fluid text-center" >
+  <!--allNotPaidServiceTypeAndCounts-->
+  <div class="container" data-th-if="${not #lists.isEmpty(paidServiceTypeAndCounts)}" >
+    <div class="container text-center" >
+      <h3 >Paid Service Type And Vehicle Count </h3 >
+    </div >
+    <table class="table table-striped table-inverse table-responsive" >
+      <thead class="thead-inverse" >
+      <tr >
+        <th >Index</th >
+        <th >Vehicle Model Name</th >
+        <th >Service Count</th >
+      </tr >
+      </thead >
+      <tbody >
+      <tr data-th-each="paidServiceTypeAndCount, index : ${paidServiceTypeAndCounts}" >
+        <td data-th-text="${index.count}" ></td >
+        <td data-th-text="${paidServiceTypeAndCount.name}" ></td >
+        <td data-th-text="${paidServiceTypeAndCount.count}" ></td >
+      </tr >
+      </tbody >
+    </table >
+  </div >
+  <!--paymentTypeCountAndTotalAmounts-->
+  <div class="container" data-th-if="${not #lists.isEmpty(paymentTypeCountAndTotalAmounts)}" >
+    <div class="container text-center" >
+      <h3 >Paid Payments </h3 >
+    </div >
+    <table class="table table-striped table-inverse table-responsive" >
+      <thead class="thead-inverse" >
+      <tr >
+        <th >Index</th >
+        <th >Payment Method</th >
+        <th >Payment Count</th >
+        <th >Amount</th >
+        <th >Discount Amount</th >
+        <th >Total Amount</th >
+      </tr >
+      </thead >
+      <tbody >
+      <tr data-th-each="paymentTypeCountAndTotalAmount, index : ${paymentTypeCountAndTotalAmounts}" >
+        <td data-th-text="${index.count}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.name}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.count}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.amount}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.discountAmount}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.totalAmount}" ></td >
+      </tr >
+      </tbody >
+    </table >
+  </div >
+</div >
+<div class="container-fluid text-center" >
+  <!--allNotPaidServiceTypeAndCounts-->
+  <div class="container" data-th-if="${not #lists.isEmpty(allNotPaidServiceTypeAndCounts)}" >
+    <div class="container text-center" >
+      <h3 >Not Paid Service Type And Vehicle Count </h3 >
+    </div >
+    <table class="table table-striped table-inverse table-responsive" >
+      <thead class="thead-inverse" >
+      <tr >
+        <th >Index</th >
+        <th >Vehicle Model Name</th >
+        <th >Service Count</th >
+      </tr >
+      </thead >
+      <tbody >
+      <tr data-th-each="paidServiceTypeAndCount, index : ${allNotPaidServiceTypeAndCounts}" >
+        <td data-th-text="${index.count}" ></td >
+        <td data-th-text="${paidServiceTypeAndCount.name}" ></td >
+        <td data-th-text="${paidServiceTypeAndCount.count}" ></td >
+      </tr >
+      </tbody >
+    </table >
+  </div >
+  <!--allNotPaidTypeCountAndTotalAmounts-->
+  <div class="container" data-th-if="${not #lists.isEmpty(allNotPaidTypeCountAndTotalAmounts)}" >
+    <div class="container text-center" >
+      <h3 >Not Paid Payments </h3 >
+    </div >
+    <table class="table table-striped table-inverse table-responsive" >
+      <thead class="thead-inverse" >
+      <tr >
+        <th >Index</th >
+        <th >Payment Method Name</th >
+        <th >Payment Count</th >
+        <th >Amount</th >
+        <th >Discount Amount</th >
+        <th >Total Amount</th >
+      </tr >
+      </thead >
+      <tbody >
+      <tr data-th-each="paymentTypeCountAndTotalAmount, index : ${allNotPaidTypeCountAndTotalAmounts}" >
+        <td data-th-text="${index.count}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.name}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.count}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.amount}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.discountAmount}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.totalAmount}" ></td >
+      </tr >
+      </tbody >
+    </table >
+  </div >
+</div >
+<div class="container-fluid text-center" >
+  <!--allCancelPaidServiceTypeAndCounts-->
+  <div class="container" data-th-if="${not #lists.isEmpty(allCancelPaidServiceTypeAndCounts)}" >
+    <div class="container text-center" >
+      <h3 >Cancel Service Type And Vehicle Count </h3 >
+    </div >
+    <table class="table table-striped table-inverse table-responsive" >
+      <thead class="thead-inverse" >
+      <tr >
+        <th >Index</th >
+        <th >Vehicle Model Name</th >
+        <th >Service Count</th >
+      </tr >
+      </thead >
+      <tbody >
+      <tr data-th-each="paidServiceTypeAndCount, index : ${allCancelPaidServiceTypeAndCounts}" >
+        <td data-th-text="${index.count}" ></td >
+        <td data-th-text="${paidServiceTypeAndCount.name}" ></td >
+        <td data-th-text="${paidServiceTypeAndCount.count}" ></td >
+      </tr >
+      </tbody >
+    </table >
+  </div >
+  <!--allCancelTypeCountAndTotalAmounts-->
+  <div class="container" data-th-if="${not #lists.isEmpty(allCancelTypeCountAndTotalAmounts)}" >
+    <div class="container text-center" >
+      <h3 >Cancel Payments </h3 >
+    </div >
+    <table class="table table-striped table-inverse table-responsive" >
+      <thead class="thead-inverse" >
+      <tr >
+        <th >Index</th >
+        <th >Payment Method Name</th >
+        <th >Payment Count</th >
+        <th >Amount</th >
+        <th >Discount Amount</th >
+        <th >Total Amount</th >
+      </tr >
+      </thead >
+      <tbody >
+      <tr data-th-each="paymentTypeCountAndTotalAmount, index : ${allCancelTypeCountAndTotalAmounts}" >
+        <td data-th-text="${index.count}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.name}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.count}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.amount}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.discountAmount}" ></td >
+        <td data-th-text="${paymentTypeCountAndTotalAmount.totalAmount}" ></td >
+      </tr >
+      </tbody >
+    </table >
+  </div >
+</div >
+<div class="container-fluid text-center" >
+  <!--accordingToUserAllDetails-->
+  <div class="container" data-th-if="${not #lists.isEmpty(accordingToUserAllDetails)}" >
+    <div class="container-fluid" data-th-each="accordingToUserAllDetail : ${accordingToUserAllDetails}">
+      <div class="container text-center" >
+        <h3 >Employee Name : <span data-th-text="${accordingToUserAllDetail.employeeName}"></span></h3 >
+      </div >
+      <!--payment List not paid-->
+      <div class="container-fluid text-center" >
+        <!--allNotPaidServiceTypeAndCounts-->
+        <div class="container" data-th-if="${not #lists.isEmpty(accordingToUserAllDetail.paidServiceTypeAndCounts)}" >
+          <div class="container text-center" >
+            <h3 >Paid Service Type And Vehicle Count </h3 >
+          </div >
+          <table class="table table-striped table-inverse table-responsive" >
+            <thead class="thead-inverse" >
+            <tr >
+              <th >Index</th >
+              <th >Vehicle Model Name</th >
+              <th >Service Count</th >
+            </tr >
+            </thead >
+            <tbody >
+            <tr data-th-each="paidServiceTypeAndCount, index : ${accordingToUserAllDetail.paidServiceTypeAndCounts}" >
+              <td data-th-text="${index.count}" ></td >
+              <td data-th-text="${paidServiceTypeAndCount.name}" ></td >
+              <td data-th-text="${paidServiceTypeAndCount.count}" ></td >
+            </tr >
+            </tbody >
+          </table >
+        </div >
+        <!--paymentTypeCountAndTotalAmounts-->
+        <div class="container" data-th-if="${not #lists.isEmpty(accordingToUserAllDetail.paymentTypeCountAndTotalAmounts)}" >
+          <div class="container text-center" >
+            <h3 >Paid Payments </h3 >
+          </div >
+          <table class="table table-striped table-inverse table-responsive" >
+            <thead class="thead-inverse" >
+            <tr >
+              <th >Index</th >
+              <th >Payment Method</th >
+              <th >Payment Count</th >
+              <th >Amount</th >
+              <th >Discount Amount</th >
+              <th >Total Amount</th >
+            </tr >
+            </thead >
+            <tbody >
+            <tr data-th-each="paymentTypeCountAndTotalAmount, index : ${accordingToUserAllDetail.paymentTypeCountAndTotalAmounts}" >
+              <td data-th-text="${index.count}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.name}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.count}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.amount}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.discountAmount}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.totalAmount}" ></td >
+            </tr >
+            </tbody >
+          </table >
+        </div >
+      </div >
+      <div class="container-fluid text-center" >
+        <!--allNotPaidServiceTypeAndCounts-->
+        <div class="container" data-th-if="${not #lists.isEmpty(accordingToUserAllDetail.allNotPaidServiceTypeAndCounts)}" >
+          <div class="container text-center" >
+            <h3 >Not Paid Service Type And Vehicle Count </h3 >
+          </div >
+          <table class="table table-striped table-inverse table-responsive" >
+            <thead class="thead-inverse" >
+            <tr >
+              <th >Index</th >
+              <th >Vehicle Model Name</th >
+              <th >Service Count</th >
+            </tr >
+            </thead >
+            <tbody >
+            <tr data-th-each="paidServiceTypeAndCount, index : ${accordingToUserAllDetail.allNotPaidServiceTypeAndCounts}" >
+              <td data-th-text="${index.count}" ></td >
+              <td data-th-text="${paidServiceTypeAndCount.name}" ></td >
+              <td data-th-text="${paidServiceTypeAndCount.count}" ></td >
+            </tr >
+            </tbody >
+          </table >
+        </div >
+        <!--allNotPaidTypeCountAndTotalAmounts-->
+        <div class="container" data-th-if="${not #lists.isEmpty(accordingToUserAllDetail.allNotPaidTypeCountAndTotalAmounts)}" >
+          <div class="container text-center" >
+            <h3 >Not Paid Payments </h3 >
+          </div >
+          <table class="table table-striped table-inverse table-responsive" >
+            <thead class="thead-inverse" >
+            <tr >
+              <th >Index</th >
+              <th >Payment Method Name</th >
+              <th >Payment Count</th >
+              <th >Amount</th >
+              <th >Discount Amount</th >
+              <th >Total Amount</th >
+            </tr >
+            </thead >
+            <tbody >
+            <tr data-th-each="paymentTypeCountAndTotalAmount, index : ${accordingToUserAllDetail.allNotPaidTypeCountAndTotalAmounts}" >
+              <td data-th-text="${index.count}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.name}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.count}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.amount}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.discountAmount}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.totalAmount}" ></td >
+            </tr >
+            </tbody >
+          </table >
+        </div >
+      </div >
+      <div class="container-fluid text-center" >
+        <!--allCancelPaidServiceTypeAndCounts-->
+        <div class="container" data-th-if="${not #lists.isEmpty(accordingToUserAllDetail.allCancelPaidServiceTypeAndCounts)}" >
+          <div class="container text-center" >
+            <h3 >Cancel Service Type And Vehicle Count </h3 >
+          </div >
+          <table class="table table-striped table-inverse table-responsive" >
+            <thead class="thead-inverse" >
+            <tr >
+              <th >Index</th >
+              <th >Vehicle Model Name</th >
+              <th >Service Count</th >
+            </tr >
+            </thead >
+            <tbody >
+            <tr data-th-each="paidServiceTypeAndCount, index : ${accordingToUserAllDetail.allCancelPaidServiceTypeAndCounts}" >
+              <td data-th-text="${index.count}" ></td >
+              <td data-th-text="${paidServiceTypeAndCount.name}" ></td >
+              <td data-th-text="${paidServiceTypeAndCount.count}" ></td >
+            </tr >
+            </tbody >
+          </table >
+        </div >
+        <!--allCancelTypeCountAndTotalAmounts-->
+        <div class="container" data-th-if="${not #lists.isEmpty(accordingToUserAllDetail.allCancelTypeCountAndTotalAmounts)}" >
+          <div class="container text-center" >
+            <h3 >Cancel Payments </h3 >
+          </div >
+          <table class="table table-striped table-inverse table-responsive" >
+            <thead class="thead-inverse" >
+            <tr >
+              <th >Index</th >
+              <th >Payment Method Name</th >
+              <th >Payment Count</th >
+              <th >Amount</th >
+              <th >Discount Amount</th >
+              <th >Total Amount</th >
+            </tr >
+            </thead >
+            <tbody >
+            <tr data-th-each="paymentTypeCountAndTotalAmount, index : ${accordingToUserAllDetail.allCancelTypeCountAndTotalAmounts}" >
+              <td data-th-text="${index.count}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.name}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.count}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.amount}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.discountAmount}" ></td >
+              <td data-th-text="${paymentTypeCountAndTotalAmount.totalAmount}" ></td >
+            </tr >
+            </tbody >
+          </table >
+        </div >
+      </div >
+    </div>
+  </div >
+</div >
+
+
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+</body >
+</html >

@@ -1,10 +1,11 @@
 package lk.nandanaMotors.asset.employee.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.nandanaMotors.asset.commonAsset.model.Enum.CivilStatus;
-import lk.nandanaMotors.asset.commonAsset.model.Enum.Gender;
-import lk.nandanaMotors.asset.commonAsset.model.Enum.Title;
-import lk.nandanaMotors.asset.commonAsset.model.FileInfo;
+import lk.nandanaMotors.asset.common_asset.model.Enum.CivilStatus;
+import lk.nandanaMotors.asset.common_asset.model.Enum.Gender;
+import lk.nandanaMotors.asset.common_asset.model.Enum.LiveDead;
+import lk.nandanaMotors.asset.common_asset.model.Enum.Title;
+import lk.nandanaMotors.asset.common_asset.model.FileInfo;
 import lk.nandanaMotors.asset.employee.entity.enums.Designation;
 import lk.nandanaMotors.asset.employee.entity.enums.EmployeeStatus;
 import lk.nandanaMotors.util.audit.AuditEntity;
@@ -70,15 +71,18 @@ public class Employee extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private EmployeeStatus employeeStatus;
 
+    @Enumerated(EnumType.STRING)
+    private LiveDead liveDead;
+
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfBirth;
 
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     private LocalDate dateOfAssignment;
 
+
     @Transient
     private MultipartFile file;
-
 
     @Transient
     private FileInfo fileInfo;

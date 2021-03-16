@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head data-th-replace="~{fragments/header :: headerFragment}">
+    <link  data-th-href="@{/css/addCustomerCss.css}" media="all" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
     <title>addCustomer</title>
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--Heading Area-->
-<div class="container-fluid bg-dark form-Border">
+<div class="container-fluid form-Border" id="topicBack">
     <div class="row text-center formManagement border-info">
         <!--ViewList Button-->
-        <div class="col">
-            <a href="/customer" class="btn btn-primary" tabindex="1">
-                <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;View List
+        <div class="col text-left">
+            <a href="/customer" class="btn"  id="btnView" tabindex="1">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <i class="fa fa-list" style="font-size: 20px"></i>&nbsp;&nbsp;
+                View List
             </a>
         </div>
         <!--Form Name-->
-        <div class="col">
+        <div class="col" id="topic">
             <h2 class="text-light text-center">
                 <strong>
                     <span data-th-text="${addStatus==true?'Add New Customer':'Update Customer Details'}"></span>
@@ -24,15 +30,23 @@
             </h2>
         </div>
         <!--Home Button-->
-        <div class="col">
-            <a class="btn btn-primary" href="/home" tabindex="2">
-                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;Home
+        <div class="col text-right">
+            <a class="btn" id="btnHome" href="/home" tabindex="2">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp;&nbsp;
+                Home
             </a>
         </div>
     </div>
 </div>
 <!--Form Content-->
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid formBorder text-center">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col" id="formBack">
     <div class="col-sm-12 flex-column ">
         <form id="form" class="form-horizontal" data-th-action="${addStatus==true?'/customer/save':'/customer/update'}"
               data-th-object="${customer}" method="POST" >
@@ -55,7 +69,7 @@
             </div>
             <div class="row">
                 <!--Left Side-->
-                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                <div class="form-group col-md-12 col-sm-12 text-left flex-column">
                     <!--Id-->
                     <div id="idStatus" data-th-if="${addStatus==false}" class="form-row text-right">
                         <div class="col-md-4">
@@ -73,47 +87,31 @@
                     </div>
                     <!--Name-->
                     <div class="form-row text-right">
-                        <div class="col-md-4">
                             <label class="control-label" for="name">Name :</label>
-                        </div>
-                        <div class="col-md-8">
                             <input id="name" data-th-field="*{name}" class="form-control" tabindex="4" type="text" required/>
                             <span id="nameError" data-th-errors="*{name}"
                                   data-th-if="${#fields.hasErrors('name')}" class="error">Error Name</span>
-                        </div>
                     </div>
                     <!--Mobile Number-->
                     <div class="form-row text-right">
-                        <div class="col-md-4">
                             <label class="control-label" for="mobile">Mobile :</label>
-                        </div>
-                        <div class="col-md-8">
                             <input id="mobile" data-th-field="*{mobile}" class="form-control mobile" tabindex="6" type="text" minlength="9" maxlength="10" required/>
                             <span class="error" data-th-errors="*{mobile}"
                                   data-th-if="${#fields.hasErrors('mobile')}" id="mobileError">Error Mobile Number</span>
-                        </div>
                     </div>
                     <!--Email-->
                     <div class="form-row text-right">
-                        <div class="col-md-4">
                             <label class="control-label" for="email">Email :</label>
-                        </div>
-                        <div class="col-md-8">
                             <input id="email" data-th-field="*{email}" class="form-control" tabindex="6" type="email"/>
                             <span class="error" data-th-errors="*{email}"
                                   data-th-if="${#fields.hasErrors('email')}" id="emailError">Error Mobile Number</span>
-                        </div>
                     </div>
                     <!--Address-->
                     <div class="form-row text-right">
-                        <div class="col-md-4">
                             <label class="control-label" for="address">Address :</label>
-                        </div>
-                        <div class="col-md-8">
                             <textarea id="address" data-th-field="*{address}" class="form-control" tabindex="7" rows="3" style="font-size: medium"></textarea>
                             <span class="error" data-th-errors="*{address}"
                                   data-th-if="${#fields.hasErrors('address')}" id="addressError">Error Address</span>
-                        </div>
                     </div>
                     <!--Created by and created at-->
                     <div id="updateStatus" data-th-if="${addStatus==false}">
@@ -161,12 +159,15 @@
                 </div>
             </div>
         </form>
+        </div>
     </div>
+        <div class="col"></div>
+        </div>
 </div>
 <!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
 </body>
 </html>

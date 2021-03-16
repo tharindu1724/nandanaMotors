@@ -1,12 +1,15 @@
 package lk.nandanaMotors.asset.vehicle.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.nandanaMotors.asset.common_asset.model.Enum.LiveDead;
 import lk.nandanaMotors.asset.customer.entity.Customer;
+import lk.nandanaMotors.asset.service_type_parameter_vehicle.entity.ServiceTypeParameterVehicle;
 import lk.nandanaMotors.asset.vehicle.entity.Enum.VehicleModel;
 import lk.nandanaMotors.util.audit.AuditEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,8 +20,10 @@ import javax.persistence.*;
 @JsonFilter("Vehicle")
 public class Vehicle extends AuditEntity {
 
+    private String  code;
+
     @Column(unique = true)
-    private String number; //wp NA 09238
+    private String number;
 
     @Column(unique = true, nullable = false)
     private String registrationNumber;// nn09089
@@ -34,8 +39,15 @@ public class Vehicle extends AuditEntity {
     private String gearNumber;
 
     @Enumerated(EnumType.STRING)
+    private LiveDead liveDead;
+
+    @Enumerated(EnumType.STRING)
     private VehicleModel vehicleModel;//van car or ...
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
+
+    @OneToMany(mappedBy = "vehicle")
+    private List< ServiceTypeParameterVehicle > serviceTypeParameterVehicles;
+
 }

@@ -1,44 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
+<head  data-th-replace="~{fragments/header :: headerFragment}">
+    <link  data-th-href="@{/css/customerCss.css}" media="all" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
     <title>customer</title>
 </head>
 <body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--heading Area-->
 <div class="container-fluid  form-Border">
     <div class="row text-center formManagement border-info">
         <!--New Customer Button-->
-        <div class="col">
-            <a class="btn btn-success" href="/customer/add" tabindex="1">
-                <i class="fas fa-plus" style="font-size: 20px"></i>&nbsp;&nbsp;New
+        <div class="col text-left">
+            <a href="/home" id="btnHome" class="btn" tabindex="">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <i class="fas fa-home" style="font-size: 20px"></i>&nbsp;&nbsp;
+                Home
             </a>
         </div>
         <!--List Name-->
-        <div class="col">
+        <!--<div class="col">
             <h2 class="text-white text-center">
                 <strong>
                     Customer List
                 </strong>
             </h2>
-        </div>
+        </div>-->
         <!--Home Button-->
-        <div class="col">
-            <a href="/home" id="searchShow" class="btn btn-primary" tabindex="2">
-                <!--<i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;-->
-                <i class="fas fa-home" style="font-size: 20px"></i>&nbsp;&nbsp;Home
+        <div class="col text-right">
+
+            <a class="btn" href="/customer/add" id="btnAdd" tabindex="1" >
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <i class="fas fa-plus" style="font-size: 20px"></i>&nbsp;&nbsp;
+                Add New
             </a>
         </div>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+
+        </div>
+        <div class="col" id="topic">
+            <h2 class="text-center">
+
+               Customer List
+
+            </h2>
+        </div>
+        <div class="col"></div>
     </div>
 </div>
 <!--Customers List-->
 <div class="container-fluid bg-primary text-center">
     <!--Table view-->
     <div class="col">
-        <div class="col" id="customerListPresent" th:if="${not #lists.isEmpty(customers)}">
-            <table class="table table-hover table-striped" id="myTable">
-                <thead>
+        <div class="col" id="customerListPresent"  data-th-if="${not #lists.isEmpty(customers)}">
+            <table class="table table-borderless table-hover table-striped" id="myTable" >                <thead>
                 <tr>
                     <th> Index</th>
                     <th> Name</th>
@@ -49,31 +72,31 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="customer, rowCount : ${customers}">
-                    <th th:text="${rowCount.count}"></th>
-                    <th th:text="${customer.name}"></th>
-                    <th th:text="${customer.code}"></th>
-                    <th th:text="${customer.mobile}"></th>
-                    <th th:text="${customer.address}"></th>
-                    <th>
-                        <a id="customerView" th:href="${'/customer/' + customer.id}" class="btn btn-primary btn-sm"><i
+                <tr  data-th-each="customer, rowCount : ${customers}">
+                    <td  data-th-text="${rowCount.count}"></td>
+                    <td  data-th-text="${customer.name}"></td>
+                    <td  data-th-text="${customer.code}"></td>
+                    <td  data-th-text="${customer.mobile}"></td>
+                    <td  data-th-text="${customer.address}"></td>
+                    <td>
+                        <a id="customerView"  data-th-href="${'/customer/' + customer.id}" class="btn btn-primary btn-sm"><i
                                 class="fa fa-folder-open" style="font-size: 15px"></i>&nbsp;View</a>
-                        <a id="customerEdit" th:href="${'/customer/edit/' + customer.id}"
+                        <a id="customerEdit"  data-th-href="${'/customer/edit/' + customer.id}"
                            class="btn btn-success btn-sm"><i class="fa fa-edit"
                                                              style="font-size: 15px"></i>&nbsp;Edit</a>
-                        <a id="customerRemove" th:href="${'/customer/delete/' + customer.id}"
+                        <a id="customerRemove"  data-th-href="${'/customer/delete/' + customer.id}"
                            class="btn btn-danger btn-sm">
-                            <!--th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" --> <i
+                            <!-- data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" --> <i
                                 class="fa fa-trash" style="font-size: 15px"></i>
                             Delete</a>
-                    </th>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <!--Error-->
-    <div class="row" th:if="${ #lists.isEmpty(customers)}">
+    <div class="row"  data-th-if="${ #lists.isEmpty(customers)}">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -86,34 +109,27 @@
                 </h3>
             </div>
         </div>
-        <script>
-            /*active boostrap alert - start*/
-            $(".alert").alert();
-            /*active boostrap alert - end*/
-        </script>
     </div>
     <!--Save customer-->
-    <div class="row" th:if="${customerDetail != null}">
+    <div class="row"  data-th-if="${customerDetail != null}">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <!--save customer include-->
-                <div th:replace="~{customer/customer-detail :: customerDetailsFragment}"></div>
+                <div  data-th-replace="~{customer/customer-detail :: customerDetailsFragment}"></div>
             </div>
         </div>
-        <script>
-            /*active boostrap alert - start*/
-            $(".alert").alert();
-            /*active boostrap alert - end*/
-        </script>
     </div>
 </div>
 <!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<div  data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+<div  data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
+<script>
+    $(".alert").alert();
+</script>
 </body>
 </html>

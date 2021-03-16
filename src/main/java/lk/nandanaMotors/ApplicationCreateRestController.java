@@ -1,17 +1,16 @@
 package lk.nandanaMotors;
 
-import lk.nandanaMotors.asset.commonAsset.model.Enum.BloodGroup;
-import lk.nandanaMotors.asset.commonAsset.model.Enum.CivilStatus;
-import lk.nandanaMotors.asset.commonAsset.model.Enum.Gender;
-import lk.nandanaMotors.asset.commonAsset.model.Enum.Title;
+import lk.nandanaMotors.asset.common_asset.model.Enum.CivilStatus;
+import lk.nandanaMotors.asset.common_asset.model.Enum.Gender;
+import lk.nandanaMotors.asset.common_asset.model.Enum.Title;
 import lk.nandanaMotors.asset.employee.entity.Employee;
 import lk.nandanaMotors.asset.employee.entity.enums.Designation;
 import lk.nandanaMotors.asset.employee.entity.enums.EmployeeStatus;
 import lk.nandanaMotors.asset.employee.service.EmployeeService;
-import lk.nandanaMotors.asset.userManagement.entity.Role;
-import lk.nandanaMotors.asset.userManagement.entity.User;
-import lk.nandanaMotors.asset.userManagement.service.RoleService;
-import lk.nandanaMotors.asset.userManagement.service.UserService;
+import lk.nandanaMotors.asset.role.entity.Role;
+import lk.nandanaMotors.asset.role.service.RoleService;
+import lk.nandanaMotors.asset.user.entity.User;
+import lk.nandanaMotors.asset.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,7 +51,7 @@ public class ApplicationCreateRestController {
         employee.setMobileOne("0750000000");
         employee.setTitle(Title.DR);
         employee.setGender(Gender.MALE);
-        employee.setDesignation(Designation.CA);
+        employee.setDesignation(Designation.CASHIER);
         employee.setCivilStatus(CivilStatus.UNMARRIED);
         employee.setEmployeeStatus(EmployeeStatus.WORKING);
         employee.setDateOfBirth(LocalDate.now().minusYears(18));

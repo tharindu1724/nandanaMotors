@@ -21,11 +21,19 @@ $(document).ready(function () {
     });
     /*//--------------- data table short using - data table plugin ------- start //*/
 
+    /*When edit employee if there is a nic number need to select relevant gender*/
+    if ($("#nic").val() !== null && $("#nic").val() !== undefined) {
+        $("input:radio[name=gender]").filter(`[value=${calculateGender($("#nic").val())}]`).prop('checked', true);
+    }
+
+
     /* Patient and employee Nic Validation - start*/
     $("#nic").bind('keyup', function () {
         let nic = $(this).val();
         $("#dateOfBirth").val(calculateDateOfBirth(nic));
-        $("#gender").val(calculateGender(nic));
+        //access our front-end gender*/
+        $("input:radio[name=gender]").filter(`[value=${calculateGender(nic)}]`).prop('checked', true);
+
     });
     /* Patient and employee Nic Validation - end*/
     //input type date can not be selected future date
@@ -406,52 +414,28 @@ $("#invoiceFindValue").bind("keyup", function () {
 });
 //custom invoice search page validation - end
 
-//search form date validation - start
-const milliSecondToDay = Date.parse(new Date());
-
-$("#startDate").bind("input", function () {
+$("#startDate, #endDate").bind("click", function () {
     let startDate = document.getElementById("startDate").value;
-
-//only start date has value
-    if (startDate.length !== 0) {
-        let milliSecondStartDate = Date.parse(startDate);
-        if (milliSecondToDay > milliSecondStartDate) {
-            backgroundColourChangeGood($(this));
-        } else {
-            backgroundColourChangeBad($(this));
-        }
-    } else {
-        backgroundColourChangeNothingToChange($(this));
-    }
-});
-
-$("#endDate").bind("input", function () {
     let endDate = document.getElementById("endDate").value;
 
-//only start date has value
     if (endDate.length !== 0) {
-        let milliSecondStartDate = Date.parse(endDate);
-        if (milliSecondToDay > milliSecondStartDate) {
+        $('#startDate').attr('max', $('#endDate').val());
+    }
+    if (startDate.length !== 0) {
+        $('#endDate').attr('min', $('#startDate').val());
+    }
+
+//only start date has value
+    if (startDate.length !== 0 && endDate.length !== 0) {
+        let milliSecondStartDate = Date.parse(startDate);
+        let milliSecondEndDate = Date.parse(endDate);
+        if (milliSecondEndDate > milliSecondStartDate) {
             backgroundColourChangeGood($(this));
         } else {
             backgroundColourChangeBad($(this));
         }
     } else {
         backgroundColourChangeNothingToChange($(this));
-    }
-});
-
-$('#endDate, #startDate').on('click', function () {
-    let endValue = $('#endDate').val();
-    let startValue = $('#startDate').val();
-    console.log(" end " + endValue + "  start " + startValue);
-    if (endValue !== null) {
-        $('#startDate').attr('max', $('#endDate').val());
-        console.log("1 end " + endValue + "  start " + startValue);
-    }
-    if (startValue !== null) {
-        $('#endDate').attr('min', $('#startDate').val());
-        console.log("2 end " + endValue + "  start " + startValue);
     }
 });
 
@@ -538,21 +522,6 @@ let deleteAllTableRow = function (tableName) {
         }
     }
 };
-
-/*jquery - ui function*/
-//$( "input" ).checkboxradio;
-
-$(function () {
-    $("#").resizable({
-        autoHide: true,
-        aspectRatio: true,
-        ghost: true,
-    });
-});
-
-//$( ".login" ).draggable();
-//$( "#dateOfBirth" ).datepicker;
-//$( document ).tooltip();
 
 
 //password validator user add

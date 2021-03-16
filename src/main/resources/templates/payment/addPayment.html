@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<link data-th-href="@{/css/addServiceTypeCss.css}" media="all" rel="stylesheet" type="text/css" />
+
+<div class="container-fluid  form-Border" id="topicBack" >
+  <div class="row text-left " >
+    <div class="col" >
+      <a class="btn" id="btnHome" href="/home" >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;
+                                                             Home
+      </a >
+    </div >
+    <div class="col" id="topic" >
+      <h4 class="text-light text-center" >
+        <strong >
+                    <span
+                          data-th-text="${addStatus==false?'New Service Type Add':'Update Service Type Details'}" ></span >
+        </strong >
+      </h4 >
+    </div >
+    <div class="col text-right" >
+      <a href="/payment" class="btn" id="btnView" >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <span ></span >
+        <i class="fa fa-list" ></i >&nbsp;
+                                    View List
+      </a >
+    </div >
+  </div >
+</div >
+
+<div id="accordianId" role="tablist" aria-multiselectable="true" >
+  <div class="card" >
+    <div class="card-header" role="tab" id="section1HeaderId" >
+      <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
+         aria-controls="section1ContentId" >
+        <h5 class="mb-0 container-fluid text-center" >
+          Customer Details
+        </h5 >
+      </a >
+    </div >
+    <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
+      <div class="card-body" >
+        <div data-th-replace="~{customer/customer-detail :: customerDetailsFragment}" ></div >
+      </div >
+    </div >
+  </div >
+  <div class="card" >
+    <div class="card-header" role="tab" id="section2HeaderId" >
+      <a data-toggle="collapse" data-parent="#accordianId" href="#section2ContentId" aria-expanded="true"
+         aria-controls="section2ContentId" >
+        <h5 class="mb-0 container-fluid text-center" >
+          Vehicle Details
+        </h5 >
+      </a >
+    </div >
+    <div id="section2ContentId" class="collapse in" role="tabpanel" aria-labelledby="section2HeaderId" >
+      <div class="card-body" >
+        <div data-th-replace="~{vehicle/vehicle-detail :: vehicleDetailsFragment}" ></div >
+      </div >
+    </div >
+  </div >
+</div >
+
+<div class="container-fluid bg-light " >
+  <div class="col-sm-12 flex-column " >
+    <form id="form" class="form-horizontal" data-th-action="${'/payment/add'}"
+          data-th-object="${payment}" method="POST" >
+      <input type="hidden" data-th-field="*{id}" >
+      <input type="hidden" data-th-field="*{vehicle}" >
+      <input type="hidden" data-th-field="*{customer}" >
+      <input type="hidden" data-th-field="*{liveDead}" >
+      <input type="hidden" data-th-field="*{code}" >
+      <input type="hidden" data-th-field="*{serviceType}" >
+      <input type="hidden" data-th-name="${'paymentStatus'}"  data-th-value="${'PAID'}">
+      <!--Amount-->
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label class="control-label" for="total" >Amount :</label >
+        </div >
+        <div class="col-md-8" >
+          <input id="total" data-th-field="*{amount}" class="form-control" tabindex="4"
+                 type="number" required readonly />
+          <span id="amountError" data-th-errors="*{amount}"
+                data-th-if="${#fields.hasErrors('amount')}" class="error" >Error Amount
+                            </span >
+        </div >
+      </div >
+      <!--Payment Section-->
+      <div class="form-group" >
+        <!--Payment method and total amount-->
+        <div class="form-row text-right" >
+          <!--payment method-->
+          <div class="col-md-6 " >
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label data-th-for="${paymentMethod}" >Payment Method:</label >
+              </div >
+              <div class="col-md-8 text-left" >
+                <div class="custom-control custom-checkbox custom-control-inline "
+                     data-th-each="paymentMethod,index : ${paymentMethods}" >
+                  <input class="custom-control-input" required
+                         data-th-name="${'paymentMethod'}"
+                         data-th-value="${paymentMethod}"
+                         data-th-id="${index.index}+${paymentMethod}" type="radio"
+                  />
+                  <label class="custom-control-label"
+                         data-th-for="${index.index}+${paymentMethod}"
+                         data-th-text="${paymentMethod.paymentMethod}" > radio
+                  </label >
+                </div >
+              </div >
+            </div >
+          </div >
+          <!--Discount-->
+          <div class="col-md-6 " >
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="discountRatio" >Discount Ratio :</label >
+              </div >
+              <div class="col-md-8" >
+                <select id="discountRatio" data-th-field="*{discountRatio}" class="form-control"
+                        tabindex="9"
+                        required >
+                  <option value="" >Please select</option >
+                  <option data-th-each="discountRatio : ${discountRatios}"
+                          data-th-text="${discountRatio.amount}"
+                          data-th-value="${discountRatio.id}" >
+                    Please select
+                  </option >
+                </select >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="form-row" >
+          <!--Total Amount-->
+          <div class="col-md-6 " >
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="totalAmount" >Total Amount :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="totalAmount" data-th-field="*{totalAmount}" class="form-control" tabindex="6"
+                       type="text"
+                       required readonly />
+                <span class="error" id="totalAmountError" data-th-errors="*{balance}"
+                      data-th-if="${#fields.hasErrors('totalAmount')}" ></span >
+              </div >
+            </div >
+          </div >
+          <!--Discount Amount-->
+          <div class="col-md-6 " >
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="discountAmount" >Discount Amount :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="discountAmount" data-th-field="*{discountAmount}" class="form-control" tabindex="6"
+                       type="text"
+                       required readonly />
+                <span class="error" id="nicError" data-th-errors="*{discountAmount}"
+                      data-th-if="${#fields.hasErrors('discountAmount')}" >Error
+                                                               Discount Amount</span >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--Amount tendered and balance  -->
+        <div class="form-row text-right" id="cashPaymentBlock" >
+          <!--Amount Tendered-->
+          <div class="col-md-6 " >
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="amountTendered" >Amount Tendered :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="amountTendered" data-th-field="*{amountTendered}"
+                       class="form-control"
+                       tabindex="6" type="text"
+                       required />
+                <span class="error" data-th-errors="*{amountTendered}"
+                      data-th-if="${#fields.hasErrors('amountTendered')}" ></span >
+              </div >
+            </div >
+          </div >
+          <!--Balance-->
+          <div class="col-md-6 " >
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="balance" >Balance :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="balance" data-th-field="*{balance}" class="form-control" tabindex="6"
+                       type="text"
+                       required readonly />
+                <span class="error" id="balanceError" data-th-errors="*{balance}"
+                      data-th-if="${#fields.hasErrors('balance')}" ></span >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!-- Card Payment -> Bank and card Number -->
+        <div class="form-row text-right" id="bankNameBlock" >
+          <!--Bank -->
+          <div class="col-md-6 " >
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="bankName" >Bank Name Tendered :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="bankName" data-th-field="*{bankName}"
+                       class="form-control"
+                       tabindex="6" type="text" />
+                <span class="error" data-th-errors="*{bankName}"
+                      data-th-if="${#fields.hasErrors('bankName')}" ></span >
+              </div >
+            </div >
+          </div >
+          <!--card number-->
+          <div class="col-md-6 " >
+            <div class="form-row text-right" >
+              <div class="col-md-4" >
+                <label class="control-label" for="cardNumber" >Card Number :</label >
+              </div >
+              <div class="col-md-8" >
+                <input id="cardNumber" data-th-field="*{cardNumber}" class="form-control" tabindex="6"
+                       type="text" />
+                <span class="error" data-th-errors="*{cardNumber}"
+                      data-th-if="${#fields.hasErrors('cardNumber')}" ></span >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+      <div class="form-row text-right" >
+        <div class="col-md-4" >
+          <label for="remarks" >Remarks :</label ></div >
+        <div class="col-md-8" >
+          <textarea id="remarks" class="form-control" data-th-field="*{remarks}" rows="2" ></textarea >
+        </div >
+      </div >
+      <!--Button-->
+      <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+        <button class="btn btn-success" type="submit" tabindex="21" >
+          <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp; &nbsp;<span id="submit"
+                                                                                  data-th-text="${'Save'}" ></span >
+        </button >
+        <button class="btn btn-warning ml-5" type="reset" tabindex="9" >
+          <i class="far fa-times-circle" style="font-size: 20px" ></i >&nbsp;&nbsp;Cancel
+        </button >
+      </div >
+    </form >
+  </div >
+</div >
+<!-- footer Section -->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!-- script Fragment -->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    $(document).ready(function () {
+        $("input[value='CASH']").prop('checked', true);
+        showHideContent();
+        $("input[value='NOT_PRINTED']").prop('checked', true);
+    });
+    $("input[name='paymentMethod']").bind('change', function () {
+        showHideContent();
+    });
+
+    function showHideContent() {
+        let paymentMethodValue = $("input[name='paymentMethod']:checked").val();
+        if (paymentMethodValue === 'CASH') {
+            $("#bankNameBlock").hide();
+            $("#cashPaymentBlock").show();
+            $("#amountTendered, #balance").prop('required', true);
+        } else {
+            $("#cashPaymentBlock").hide();
+            $("#bankNameBlock").show();
+            $("#bankName, #cardNumber").prop('required', true);
+        }
+    }
+
+    $('#discountRatio').bind('change', function () {
+        let total = $("#total").val();
+        if (total <= 0 || total === null) {
+            swal({
+                title: "Before select discount have to select item  ",
+                icon: "warning",
+            });
+        }
+        discountRatio();
+    });
+
+    function discountRatio() {
+        let discountRatio = parseFloat($("#discountRatio").find('option:selected').text());
+        let total = parseFloat($("#total").val());
+        let discountAmount = total * discountRatio / 100;
+        $("#totalAmount").val(total - discountAmount);
+        $("#discountAmount").val(discountAmount);
+    }
+
+    $("#amountTendered").bind('focusout', function () {
+        let tenderedAmount = $(this).val();
+        let totalAmount = $("#totalAmount").val();
+        if (tenderedAmount < totalAmount) {
+            swal({
+                title: "Hey why do you try to pay less money",
+                icon: "warning",
+            });
+            $("#amountTendered").val(totalAmount);
+        } else {
+            $("#balance").val(tenderedAmount - totalAmount);
+        }
+    });
+
+</script >
+</body >
+</html >
