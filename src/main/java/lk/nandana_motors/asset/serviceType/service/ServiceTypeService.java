@@ -12,6 +12,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ServiceTypeService implements AbstractService< ServiceType, Integer> {
@@ -22,7 +23,7 @@ public class ServiceTypeService implements AbstractService< ServiceType, Integer
     }
 
     public List<ServiceType> findAll() {
-        return serviceTypeDao.findAll();
+        return serviceTypeDao.findAll().stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList());
     }
 
     public ServiceType findById(Integer id) {

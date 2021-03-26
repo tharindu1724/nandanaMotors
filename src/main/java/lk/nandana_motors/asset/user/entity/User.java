@@ -13,7 +13,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -26,7 +25,6 @@ import java.util.List;
 public class User extends AuditEntity {
 
     @OneToOne
-    @NotNull
     private Employee employee;
 
     @Column(nullable = false,unique = true)
@@ -49,12 +47,5 @@ public class User extends AuditEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List< Role > roles;
-
-    /*@ManyToMany(fetch = FetchType.EAGER)
-    //@Fetch( FetchMode.SUBSELECT)
-    @JoinTable(name = "user_working_place",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "working_place_id"))
-    private Set< WorkingPlace > workingPlaces;*/
 
 }

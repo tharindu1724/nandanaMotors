@@ -8,7 +8,7 @@
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="container-fluid  form-Border" id="topicBack" >
+<div class="container-fluid    " id="topicBack" >
   <div class="row text-left " >
     <div class="col" >
       <a class="btn" id="btnHome" href="/home" >
@@ -21,7 +21,7 @@
       </a >
     </div >
     <div class="col" id="topic" >
-      <h4 class="text-light text-center" >
+         <h4 class="text-center" >
         <strong >
                     <span
                           data-th-text="${addStatus==false?'New Service Type Add':'Update Service Type Details'}" ></span >
@@ -42,7 +42,8 @@
 </div >
 
 <div class="container-fluid" >
-  <div data-th-if="${vehicleSearch}" ><!--Employee find-->
+  <div data-th-if="${vehicleSearch}" >
+    <!--Vehicle find-->
     <div class="container-fluid " id="employeeFindForm" data-th-if="${vehicleSearch}" >
       <div class="col-sm-12 flex-column " >
         <form id="form" method="POST" data-th-action="${'/inspection/searchAll'}" data-th-object="${vehicle}" >
@@ -93,9 +94,9 @@
       </div >
     </div >
 
-                                      <!--Employee not fount message-->
+                                      <!--Vehicle not fount message-->
     <div data-th-if="${employeeNotFoundShow==true}" >
-      <div id="employeeNotFoundShow" data-th-if="${not #lists.isEmpty(vehicles)}"
+      <div id="employeeNotFoundShow" data-th-if="${#lists.isEmpty(vehicles)}"
            class="alert alert-warning alert-dismissible fade show text-center" role="alert" >
         <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
           <span aria-hidden="true" >&times;</span >

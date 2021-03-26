@@ -10,6 +10,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VehicleService implements AbstractService< Vehicle, Integer> {
@@ -20,7 +21,7 @@ public class VehicleService implements AbstractService< Vehicle, Integer> {
     }
 
     public List<Vehicle> findAll() {
-        return vehicleDao.findAll();
+        return vehicleDao.findAll().stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList());
     }
 
     public Vehicle findById(Integer id) {

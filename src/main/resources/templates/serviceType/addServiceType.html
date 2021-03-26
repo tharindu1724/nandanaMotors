@@ -9,7 +9,7 @@
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 <link data-th-href="@{/css/addServiceTypeCss.css}" media="all" rel="stylesheet" type="text/css" />
 
-<div class="container-fluid  form-Border" id="topicBack" >
+<div class="container-fluid    " id="topicBack" >
   <div class="row text-left " >
     <div class="col" >
       <a class="btn" id="btnHome" href="/home" >
@@ -22,7 +22,7 @@
       </a >
     </div >
     <div class="col" id="topic" >
-      <h4 class="text-light text-center" >
+      <h4 class="text-center" >
         <strong >
                     <span
                           data-th-text="${addStatus==false?'New Service Type Add':'Update Service Type Details'}" ></span >
@@ -58,6 +58,7 @@
                 <div class="col-sm-8" >
                   <input type="text" class="form-control" data-th-field="*{id}"
                          id="id" readonly >
+                  <input type="text" data-th-field="*{liveDead}" hidden >
                 </div >
               </div >
               <!--Interview name-->
@@ -65,12 +66,14 @@
                 <label data-th-for="${'name'}" class="col-sm-4 col-form-label " >
                   Service Name </label >
                 <div class="col-sm-8" >
-                  <input type="text" class="form-control" data-th-field="*{name}"
+                  <input id="name" type="text" class="form-control"     data-th-if="${addStatus==false}"                    required >
+                  <input type="text" class="form-control" data-th-if="${addStatus==true}" data-th-field="*{name}"
                          required >
-                  <p class="text-danger" data-th-if="${#fields.hasErrors('name')}"
-                     data-th-errors="*{name}" >Error Name</p >
+                  <input hidden id="nameField" type="text" class="form-control" data-th-if="${addStatus==false}" data-th-field="*{name}"
+                         required >
                 </div >
               </div >
+
               <!--vehicle model list-->
               <div class="form-row text-right" >
                 <label class="col-sm-4 col-form-label " for="vehicleModel" >Vehicle Type
@@ -79,7 +82,7 @@
                   <select id="vehicleModel" data-th-field="*{vehicleModel}"
                           class="form-control"
                           tabindex="3" required >
-                    <option value="">Please select</option >
+                    <option value="" >Please select</option >
                     <option
                           data-th-each="vehicleModel : ${vehicleModels}"
                           data-th-text="${vehicleModel.vehicleModel}"
@@ -90,7 +93,7 @@
               <div class="form-row text-right" >
                 <div class="col-md-4" >
                   <label class="control-label" for="serviceTypeParameters" >Service Type Name
-                                                            :</label >
+                                                                            :</label >
                 </div >
                 <div class="col-md-8" >
                   <select id="serviceTypeParameters" data-th-field="*{serviceTypeParameters}"
@@ -104,7 +107,7 @@
                 <label data-th-for="${'price'}" class="col-sm-2 col-form-label " >
                   Price </label >
                 <div class="col-sm-10" >
-                  <input type="text" class="form-control"
+                  <input type="number" class="form-control"
                          data-th-field="*{price}"
                          required >
                   <p class="text-danger"
@@ -146,7 +149,21 @@
                 });
             });
         }
+        nameBind();
     });
+
+    $("#name").keyup(function () {
+        nameBind();
+    });
+
+    function nameBind() {
+        let name = $("#name").val();
+        let vehicleModel = $("#vehicleModel").val();
+        if (name.length !==0 && vehicleModel.length !==0){
+            let nameFiled = `${vehicleModel}-${name}`
+            $("#nameField").val(nameFiled);
+        }
+    }
 </script >
 </body >
 </html >

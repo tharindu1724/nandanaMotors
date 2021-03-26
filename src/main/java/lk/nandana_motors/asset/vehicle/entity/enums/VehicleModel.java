@@ -1,4 +1,4 @@
-package lk.nandana_motors.asset.vehicle.entity.Enum;
+package lk.nandana_motors.asset.vehicle.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

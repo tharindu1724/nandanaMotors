@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  >
 <head  data-th-fragment="headerFragment">
     <title  data-th-if="${headerTitle==null}"  data-th-text="${'Sampath Autocare'}">Spring boot - Thymeleaf</title>
     <title  data-th-if="${headerTitle!=null}"  data-th-text="${headerTitle}">Spring boot - Thymeleaf</title>
@@ -10,14 +10,12 @@
     <!-- Bootstrap core CSS Downloaded file add-->
     <link  data-th-href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css} " media="all" rel="stylesheet" type="text/css"/>
 
-    <!--Pdf js -->
-    <link  data-th-href="@{/webjars/pdf-js/2.3.200/web/viewer.css}" media="all" rel="stylesheet" type="text/css">
-
-    <!--Chart js-->
+      <!--Chart js-->
     <link  data-th-href="@{/webjars/chart.js/2.9.3/dist/Chart.min.css}" media="all" rel="stylesheet" type="text/css">
 
     <!--table pagination-->
     <link  data-th-href="@{/css/dataTables.bootstrap.min.css}" media="all" rel="stylesheet" type="text/css"/>
+
     <!-- Custom styles for this template -->
     <!--<link  data-th-href="@{/css/employeeCss.css}" media="all" rel="stylesheet" type="text/css"/>-->
     <!--<link  data-th-href="@{/css/customerCss.css}" media="all" rel="stylesheet" type="text/css"/>-->
@@ -29,8 +27,7 @@
     <!--<link  data-th-href="@{/css/addEmployeeCss.css}" media="all" rel="stylesheet" type="text/css"/>-->
     <!--<link  data-th-href="@{/css/addVehicleCss.css}" media="all" rel="stylesheet" type="text/css"/>-->
     <!--<link  data-th-href="@{/css/addRoleCss.css}" media="all" rel="stylesheet" type="text/css"/>-->
-    <link  data-th-href="@{/css/addServiceTypeCss.css}" media="all" rel="stylesheet" type="text/css"/>
-
+   <!-- <link  data-th-href="@{/css/addServiceTypeCss.css}" media="all" rel="stylesheet" type="text/css"/>-->
 
     <!-- fontawesome css -->
     <link  data-th-href="@{/webjars/font-awesome/5.11.2/css/fontawesome.min.css} " media="all" rel="stylesheet" type="text/css"/>

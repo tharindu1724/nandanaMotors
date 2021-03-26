@@ -15,12 +15,17 @@ import lk.nandana_motors.asset.vehicle.service.VehicleService;
 import lk.nandana_motors.util.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -62,41 +67,59 @@ public class VehicleServiceStationProcessController {
 
   private String common(Model model, ServiceTypeParameterVehicleStatus serviceTypeParameterVehicleStatus,
                         LocalDate fromDate, LocalDate toDate) {
-
-    LocalDateTime form = dateTimeAgeService.dateTimeToLocalDateStartInDay(fromDate);
-    LocalDateTime to = dateTimeAgeService.dateTimeToLocalDateEndInDay(toDate);
-    Set< Vehicle > vehicles = new LinkedHashSet<>();
-
-    serviceTypeParameterVehicleService.findByCreatedAtIsBetween(form, to)
-        .stream()
-        .filter(x -> x.getServiceTypeParameterVehicleStatus().equals(serviceTypeParameterVehicleStatus))
-        .collect(Collectors.toList())
-        .forEach(x -> vehicles.add(x.getVehicle()));
-
-    if ( ServiceTypeParameterVehicleStatus.DONE.equals(serviceTypeParameterVehicleStatus) ) {
-      List< Vehicle > vehiclesAllDone = new ArrayList<>();
-      vehicles.forEach(x -> {
-        long count = serviceTypeParameterVehicleService.findByCreatedAtIsBetweenAndVehicle(form, to, x)
-            .stream()
-            .filter(y -> y.getServiceTypeParameterVehicleStatus().equals(ServiceTypeParameterVehicleStatus.CHK) || y.getServiceTypeParameterVehicleStatus().equals(ServiceTypeParameterVehicleStatus.PEND))
-            .count();
-        if ( count == 0 ) {
-          vehiclesAllDone.add(x);
-        }
-      });
-
-      model.addAttribute("vehicles", vehiclesAllDone);
-    } else {
-      model.addAttribute("vehicles", new ArrayList<>(vehicles));
+    List< Vehicle > vehicles = new ArrayList<>();
+    System.out.println(" i am yakooo date " + Period.between(fromDate, toDate).getDays());
+    for ( int i = 0; i <= Period.between(fromDate, toDate).getDays(); i++ ) {
+      System.out.println(" i am here");
+      LocalDateTime form = dateTimeAgeService.dateTimeToLocalDateStartInDay(fromDate.plusDays(i));
+      LocalDateTime to = dateTimeAgeService.dateTimeToLocalDateEndInDay(fromDate.plusDays(i));
+      serviceTypeParameterVehicleService.findByCreatedAtIsBetween(form, to)
+          .stream()
+          .filter(x -> x.getServiceTypeParameterVehicleStatus().equals(serviceTypeParameterVehicleStatus))
+          .collect(Collectors.toList())
+          .forEach(x -> {
+            Vehicle vehicle = x.getVehicle();
+            vehicle.setCreatedAt(form);
+            vehicle.setUpdatedAt(to);
+            vehicles.add(vehicle);
+          });
     }
 
+    if ( ServiceTypeParameterVehicleStatus.DONE.equals(serviceTypeParameterVehicleStatus) ) {
+      for ( int k = 0; k < Period.between(fromDate, toDate).getDays(); k++ ) {
+
+        LocalDateTime form = dateTimeAgeService.dateTimeToLocalDateStartInDay(fromDate.plusDays(k));
+        LocalDateTime to = dateTimeAgeService.dateTimeToLocalDateEndInDay(fromDate.plusDays(k));
+        List< Vehicle > vehiclesAllDone = new ArrayList<>();
+        vehicles.forEach(x -> {
+          long count = serviceTypeParameterVehicleService.findByCreatedAtIsBetweenAndVehicle(form, to, x)
+              .stream()
+              .filter(y -> y.getServiceTypeParameterVehicleStatus().equals(ServiceTypeParameterVehicleStatus.CHK) || y.getServiceTypeParameterVehicleStatus().equals(ServiceTypeParameterVehicleStatus.PEND))
+              .count();
+          if ( count == 0 ) {
+            x.setCreatedAt(form);
+            x.setUpdatedAt(to);
+            vehiclesAllDone.add(x);
+          }
+        });
+        model.addAttribute("vehicles", vehiclesAllDone.stream().distinct().collect(Collectors.toList()));
+        return "vehicleServiceStation/vehicleServiceStation";
+      }
+
+    }
+    model.addAttribute("vehicles", vehicles.stream().distinct().collect(Collectors.toList()));
     return "vehicleServiceStation/vehicleServiceStation";
+
+
   }
 
   @GetMapping( "/done" )
   public String getServiceTypeParameterVehicleStatusDone(Model model) {
     model.addAttribute("addStatus", false);
     model.addAttribute("addStatusPayment", true);
+    model.addAttribute("serviceTypeParameterVehicleStatus", ServiceTypeParameterVehicleStatus.DONE);
+    model.addAttribute("fromDate", LocalDate.now());
+    model.addAttribute("toDate", LocalDate.now());
     return common(model, ServiceTypeParameterVehicleStatus.DONE, LocalDate.now(), LocalDate.now());
   }
 
@@ -104,6 +127,9 @@ public class VehicleServiceStationProcessController {
   public String getServiceTypeParameterVehicleStatusDoneSearch(@ModelAttribute TwoDate twoDate, Model model) {
     model.addAttribute("addStatus", false);
     model.addAttribute("addStatusPayment", true);
+    model.addAttribute("serviceTypeParameterVehicleStatus", ServiceTypeParameterVehicleStatus.DONE);
+    model.addAttribute("fromDate", twoDate.getStartDate());
+    model.addAttribute("toDate", twoDate.getEndDate());
     return common(model, ServiceTypeParameterVehicleStatus.DONE, twoDate.getStartDate(), twoDate.getEndDate());
   }
 
@@ -113,12 +139,12 @@ public class VehicleServiceStationProcessController {
     return common(model, ServiceTypeParameterVehicleStatus.PEND, LocalDate.now(), LocalDate.now());
   }
 
-  @GetMapping( "/vehicle/{id}" )
-  public String finishedServiceParameter(@PathVariable( "id" ) Integer id, Model model) {
-    LocalDate localDate = LocalDate.now();
-    LocalDateTime form = dateTimeAgeService.dateTimeToLocalDateStartInDay(localDate);
-    LocalDateTime to = dateTimeAgeService.dateTimeToLocalDateEndInDay(localDate);
-    Vehicle vehicle = vehicleService.findById(id);
+  @PostMapping( "/vehicle" )
+  public String finishedServiceParameter(@ModelAttribute Vehicle vehicleF, Model model) {
+    LocalDateTime form = dateTimeAgeService.dateTimeToLocalDateStartInDay(vehicleF.getForm());
+    LocalDateTime to = dateTimeAgeService.dateTimeToLocalDateEndInDay(vehicleF.getTo());
+
+    Vehicle vehicle = vehicleService.findById(vehicleF.getId());
     vehicle.setServiceTypeParameterVehicles(serviceTypeParameterVehicleService
                                                 .findByCreatedAtIsBetweenAndVehicle(form, to, vehicle)
                                                 .stream()
@@ -141,12 +167,11 @@ public class VehicleServiceStationProcessController {
     Vehicle vehicleDB = vehicleService.findById(vehicle.getId());
     vehicle.getServiceTypeParameterVehicles().forEach(serviceTypeParameterVehicleService::persist);
 
-    LocalDate localDate = LocalDate.now();
-    LocalDateTime form = dateTimeAgeService.dateTimeToLocalDateStartInDay(localDate);
-    LocalDateTime to = dateTimeAgeService.dateTimeToLocalDateEndInDay(localDate);
 
     List< ServiceTypeParameterVehicle > serviceTypeParameterVehicles = serviceTypeParameterVehicleService
-        .findByCreatedAtIsBetweenAndVehicle(form, to, vehicle);
+        .findByCreatedAtIsBetweenAndVehicle(dateTimeAgeService.dateTimeToLocalDateStartInDay(LocalDate.now()),
+                                            dateTimeAgeService.dateTimeToLocalDateEndInDay(LocalDate.now()), vehicle);
+
     int allParameterSize = serviceTypeParameterVehicles.size();
     List< ServiceTypeParameterVehicle > jobDoneSize = serviceTypeParameterVehicles
         .stream()
@@ -162,43 +187,52 @@ public class VehicleServiceStationProcessController {
             x.setServiceTypeParameterVehicleStatus(ServiceTypeParameterVehicleStatus.PEND);
             serviceTypeParameterVehicleService.persist(x);
           });
-    } else {
-      HashSet< ServiceType > hashSet = new HashSet<>();
+    }
+
+    if ( allParameterSize == jobDoneSize.size() ) {
+      ArrayList< ServiceType > arrayList = new ArrayList<>();
 
       for ( ServiceTypeParameterVehicle serviceTypeParameterVehicle : jobDoneSize ) {
-        ServiceTypeParameterVehicle serviceTypeParameterVehicle1 =
-            serviceTypeParameterVehicleService.findById(serviceTypeParameterVehicle.getId());
-        ServiceType serviceType = serviceTypeService.findById(serviceTypeParameterVehicle1.getId());
-        hashSet.add(serviceType);
+        ServiceType serviceType = serviceTypeService.findById(serviceTypeParameterVehicle.getServiceType().getId());
+        arrayList.add(serviceType);
       }
-      List< BigDecimal > totalAmounts = new LinkedList<>();
-      hashSet.forEach(x -> totalAmounts.add(x.getPrice()));
-
-      // sum using stream
-      BigDecimal totalAmount = totalAmounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
-      System.out.println("Sum (Stream) = " + totalAmount);
 
 
-      Payment payment = new Payment();
-      payment.setVehicle(vehicleDB);
-      payment.setCustomer(vehicleDB.getCustomer());
-      payment.setAmount(totalAmount);
-      payment.setServiceType(hashSet.iterator().next());
-      payment.setPaymentMethod(PaymentMethod.CASH);
-      payment.setPaymentStatus(PaymentStatus.NOTPAID);
+      for ( ServiceType serviceType : arrayList.stream().distinct().collect(Collectors.toList()) ) {
 
-      Payment lastPayment = paymentService.lastPayment();
-      if ( lastPayment == null ) {
-        payment.setCode("SAP" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
-      } else {
-        String previousCode = lastPayment.getCode().substring(3);
-        payment.setCode("SAP" + makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
+        Payment payment = new Payment();
+        payment.setVehicle(vehicleDB);
+        payment.setAmount(serviceType.getPrice());
+        payment.setTotalAmount(BigDecimal.ZERO);
+        payment.setDiscountAmount(BigDecimal.ZERO);
+        payment.setAmountTendered(BigDecimal.ZERO);
+        payment.setBalance(BigDecimal.ZERO);
+        payment.setCustomer(vehicleDB.getCustomer());
+        payment.setServiceType(serviceType);
+        payment.setPaymentMethod(PaymentMethod.CASH);
+        payment.setPaymentStatus(PaymentStatus.NOTPAID);
+
+        Payment lastPayment = paymentService.lastPayment();
+
+        if ( lastPayment == null ) {
+          payment.setCode("SAP" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+        } else {
+          String previousCode = lastPayment.getCode().substring(3);
+          payment.setCode("SAP" + makeAutoGenerateNumberService.numberAutoGen(previousCode).toString());
+        }
+        Payment paymentSave = paymentService.persist(payment);
+        if ( paymentSave.getVehicle().getCustomer().getEmail() != null ) {
+          String message = "Your Vehicle's Service is completed.\n" +
+              "Invoice Value \t\t\t\t (Rs.) "+paymentSave.getAmount()+"\n" +
+              "\n\n" +
+              "\t\t Thank you and come again :)\n" +
+              "Sampath Auto care\n" +
+              "All ways care your vehicle";
+          emailService.sendEmail(paymentSave.getVehicle().getCustomer().getEmail(),"Payment Information",message);
+        }
+        //twilioMessageService.sendSMS();
       }
-      paymentService.persist(payment);
-      //todo-> need to send email and message to customer
-      String message = "Your Vehicle's Service is completed";
-      //emailService.sendEmail();
-      //twilioMessageService.sendSMS();
+
     }
 
     return "redirect:/vehicleServiceStationProcess";
@@ -216,6 +250,22 @@ public class VehicleServiceStationProcessController {
     model.addAttribute("addStatus", false);
     model.addAttribute("addStatusPayment", true);
     return common(model, ServiceTypeParameterVehicleStatus.PAID, twoDate.getStartDate(), twoDate.getEndDate());
+  }
+
+
+  @PostMapping( "/printView" )
+  public String serviceDetailsPrint(@ModelAttribute Vehicle vehicleF, Model model) {
+    LocalDateTime form = dateTimeAgeService.dateTimeToLocalDateStartInDay(vehicleF.getForm());
+    LocalDateTime to = dateTimeAgeService.dateTimeToLocalDateEndInDay(vehicleF.getTo());
+
+    Vehicle vehicle = vehicleService.findById(vehicleF.getId());
+    vehicle.setServiceTypeParameterVehicles(serviceTypeParameterVehicleService
+                                                .findByCreatedAtIsBetweenAndVehicle(form, to, vehicle));
+
+    model.addAttribute("vehicleDetail", vehicle);
+    model.addAttribute("vehicle", vehicle);
+
+    return "vehicleServiceStation/vehicleServiceStation-detail";
   }
 
 

@@ -3,6 +3,7 @@ package lk.nandana_motors.asset.discount_ratio.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.nandana_motors.asset.common_asset.model.Enum.LiveDead;
+import lk.nandana_motors.asset.discount_ratio.entity.enums.DiscountRatioStatus;
 import lk.nandana_motors.asset.payment.entity.Payment;
 import lk.nandana_motors.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,9 @@ public class DiscountRatio extends AuditEntity {
 
     @Enumerated( EnumType.STRING)
     private LiveDead liveDead;
+
+    @Enumerated( EnumType.STRING)
+    private DiscountRatioStatus discountRatioStatus;
 
     @OneToMany( mappedBy = "discountRatio" )
     private List< Payment > payments;

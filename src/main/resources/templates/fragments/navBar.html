@@ -1,110 +1,117 @@
 <!DOCTYPE html>
 <html lang="en" >
-<head>
-    <title></title>
-</head>
+<head >
+  <title ></title >
+</head >
+<!--todo need to security config-->
+<body >
+<nav class="navbar navbar-expand-sm " style="background-color:#ffe32e;"
+     data-th-fragment="navBarFragment" >
+  <a class="navbar-brand" data-th-href="@{'/home'}" ><i class="fa fa-home" style="font-size: 24px" ></i ></a >
 
-<body>
+  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false" aria-label="Toggle navigation" ></button >
+  <div class="collapse navbar-collapse" id="collapsibleNavId" >
+    <ul class="navbar-nav mr-auto mt-2 ml-3 mt-lg-0" >
+      <li class="nav-itemBatch dropdown ml-3 pl-4 pr-4 active" >
+        <a class="nav-link text-dark dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false" > <i class="fa fa-user" ></i > General</a >
+        <div class="dropdown-menu" aria-labelledby="dropdownId" >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/employee'}"
+             class="nav-link text-dark" > Employee Management </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/user'}"
+             class="nav-link text-dark" > User Management </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN' ,'ROLE_MANAGER')" data-th-href="@{'/role'}"
+             class="nav-link text-dark" > Role Management </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/serviceType'}"
+             class="nav-link text-dark" > Service Type Management </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')"
+             data-th-href="@{'/serviceTypeParameter'}" class="nav-link text-dark" > Service Type Parameter
+                                                                                    Management </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER')" data-th-href="@{'/payment'}"
+             class="nav-link text-dark" > Payment Management </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER', 'ROLE_TECH')" data-th-href="@{'/discountRatio'}"
+             class="nav-link text-dark" > Discount Management </a >
+          <a data-sec-authorize="hasAnyAuthority( 'ROLE_IN_OFFICER' ,'ROLE_MANAGER')" data-th-href="@{'/customer'}"
+             class="nav-link text-dark" > Customer Management </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_IN_OFFICER' ,'ROLE_MANAGER')"
+             data-th-href="@{'/vehicle'}" class="nav-link text-dark" > Vehicle Management </a >
+        </div >
+      </li >
 
-<nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgba(85,14,204,0.49);height:60px;"
-     data-th-fragment="navBarFragment">
-    <a class="navbar-brand" href="#">
+      <li class="nav-itemBatch dropdown ml-3 pl-4 pr-4 active" >
+        <a class="nav-link text-dark dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false" > <i class="fa fa-bell" ></i > Transaction</a >
+        <div class="dropdown-menu" aria-labelledby="dropdownId" >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/employee/add'}"
+             class="nav-link text-dark" > New Employee </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/user/add'}"
+             class="nav-link text-dark" > New User </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN' ,'ROLE_MANAGER')" data-th-href="@{'/role/add'}"
+             class="nav-link text-dark" > New Role </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/serviceType/add'}"
+             class="nav-link text-dark" > New Service Type</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')"
+             data-th-href="@{'/serviceTypeParameter/add'}" class="nav-link text-dark" > New Service Type Parameter </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER', 'ROLE_TECH')" data-th-href="@{'/discountRatio/add'}"
+             class="nav-link text-dark" > New Discount </a >
+          <a data-sec-authorize="hasAnyAuthority( 'ROLE_IN_OFFICER' ,'ROLE_MANAGER')" data-th-href="@{'/customer/add'}"
+             class="nav-link text-dark" > New Customer </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_IN_OFFICER' ,'ROLE_MANAGER')"
+             data-th-href="@{'/vehicle/add'}" class="nav-link text-dark" > New Vehicle </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_IN_OFFICER' ,'ROLE_MANAGER')" data-th-href="@{'/inspection'}"
+             class="nav-link text-dark" > Vehicle Inspection </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_TECH')"
+             data-th-href="@{'/vehicleServiceStationProcess'}" class="nav-link text-dark" > Vehicle Service In
+                                                                                            Process </a >
+        </div >
+      </li >
 
-        <img data-th-src="${'../img/logo.png'}" style="width:50px;height:50px;" id="logo" class="animated-spin">
+      <li class="nav-itemBatch dropdown ml-3 pl-4 pr-4 active" >
+        <a class="nav-link text-dark dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false" > <i class="fa fa-book-open" ></i > Report</a >
+        <div class="dropdown-menu" aria-labelledby="dropdownId" >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER')" data-th-href="@{'/report'}" class="nav-link text-dark" >All Summary Report</a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER')" data-th-href="@{'/report/cashier'}"
+             class="nav-link text-dark" > Cashier Report</a >
+        </div >
+      </li >
+    </ul >
+  </div >
+  <!--login /logout /profile /password-change link according to sec confi-->
+  <div >
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-end" >
+      <li class="nav-item dropdown" data-sec-authorize="isAuthenticated()" >
+        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false" >
+          <i class="fas fa-user-tie fa-lg" ></i >&nbsp;&nbsp;
+          <span data-th-text="${#authentication.name}" ></span >
+          <span class="caret" ></span >
+        </a >
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown1" >
+          <a class="dropdown-item dropdown-item btn btn-group-sm" href="/profile" >
+            <i class="fas fa-user-cog" ></i > &nbsp;Profile
+          </a >
+          <a class="dropdown-item dropdown-item btn btn-group-sm" href="/passwordChange" >
+            <i class="fas fa-key " ></i >&nbsp;Change Password</a >
+        </div >
+      </li >
+      <li class="nav-item dropdown " data-sec-authorize="isAuthenticated()" >
+        <a href="/logout" class="nav-link text-dark" > <i class="fas fa-sign-out-alt" ></i >&nbsp;&nbsp; Log
+                                                                                            out</a >
+      </li >
+      <li class="nav-item dropdown " data-sec-authorize="!isAuthenticated()" >
+        <a href="/login" class="nav-link text-dark" ><i class="fas fa-sign-in-alt" ></i >&nbsp;&nbsp;Login</a >
+      </li >
+    </ul >
+  </div >
 
-    </a>
-    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId"
-            aria-expanded="false" aria-label="Toggle navigation"></button>
-
-</nav>
-
-<nav class="navbar navbar-expand-sm navbar-dark " style="background-color:rgba(27,5,75,0.91);"
-     data-th-fragment="navBarFragment">
-    <a class="navbar-brand" href="#"><i class="fa fa-home" style="font-size: 18px"></i></a>
-
-
-    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId"
-            aria-expanded="false" aria-label="Toggle navigation"></button>
-    <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-itemBatch dropdown active">
-                <a class="nav-link text-dark dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false"> <i class="fa fa-user"></i> General</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a data-th-href="@{'/employee'}" class="nav-link text-dark"> Employee Management </a>
-                    <a data-th-href="@{'/user'}" class="nav-link text-dark"> User Management </a>
-                    <a data-th-href="@{'/role'}" class="nav-link text-dark"> Role Management </a>
-                    <a data-th-href="@{'/serviceType'}" class="nav-link text-dark"> Service Type Management </a>
-                    <a data-th-href="@{'/serviceTypeParameter'}" class="nav-link text-dark"> Service Type Parameter Management </a>
-                    <a data-th-href="@{'/payment'}" class="nav-link text-dark"> Payment Management </a>
-                    <a data-th-href="@{'/invoice'}" class="nav-link text-dark"> Invoice Management </a>
-                    <a data-th-href="@{'/discountRatio'}" class="nav-link text-dark"> Discount Management </a>
-                    <a data-th-href="@{'/customer'}" class="nav-link text-dark"> Customer Management </a>
-
-                </div>
-            </li>
-
-            <li class="nav-itemBatch dropdown active">
-                <a class="nav-link text-dark dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false"> <i class="fa fa-bell"></i> Transaction</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a data-th-href="@{'/employee/add'}" class="nav-link text-dark"> New Employee </a>
-                    <a data-th-href="@{'/user/add'}" class="nav-link text-dark"> New User </a>
-                    <a data-th-href="@{'/role/add'}" class="nav-link text-dark"> New Role </a>
-                    <a data-th-href="@{'/serviceType/add'}" class="nav-link text-dark"> New Service Type</a>
-                    <a data-th-href="@{'/serviceTypeParameter/add'}" class="nav-link text-dark"> New Service Type Parameter </a>
-                    <a data-th-href="@{'/invoice/add'}" class="nav-link text-dark"> New Invoice </a>
-                    <a data-th-href="@{'/discountRatio/add'}" class="nav-link text-dark"> New Discount </a>
-                    <a data-th-href="@{'/customer/add'}" class="nav-link text-dark"> New Customer </a>
-
-
-                </div>
-            </li>
-
-            <li class="nav-itemBatch dropdown active">
-                <a class="nav-link text-dark dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false"> <i class="fa fa-book-open"></i> Report</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a data-th-href="@{''}" class="nav-link text-dark"> k</a>
-                    <a data-th-href="@{''}" class="nav-link text-dark"> h</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <!--login /logout /profile /password-change link according to sec confi-->
-    <div>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-end">
-            <li class="nav-item dropdown" data-sec-authorize="isAuthenticated()">
-                <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                   data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user-tie fa-lg"></i>&nbsp;&nbsp;
-                    <span data-th-text="${#authentication.name}"></span>
-                    <span class="caret"></span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                    <a class="dropdown-item dropdown-item btn btn-group-sm" href="/profile">
-                        <i class="fas fa-user-cog"></i> &nbsp;Profile
-                    </a>
-                    <a class="dropdown-item dropdown-item btn btn-group-sm" href="/passwordChange">
-                        <i class="fas fa-key "></i>&nbsp;Change Password</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown " data-sec-authorize="isAuthenticated()">
-                <a href="/logout" class="nav-link text-dark"> <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp; Log
-                                                                                       out</a>
-            </li>
-            <li class="nav-item dropdown " data-sec-authorize="!isAuthenticated()">
-                <a href="/login" class="nav-link text-dark"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Login</a>
-            </li>
-        </ul>
-    </div>
-
-</nav>
+</nav >
 
 
-</body>
-</html>
+</body >
+</html >
 

@@ -1,13 +1,13 @@
 package lk.nandana_motors.asset.vehicle.controller;
 
-
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lk.nandana_motors.asset.common_asset.model.Enum.LiveDead;
 import lk.nandana_motors.asset.customer.service.CustomerService;
-import lk.nandana_motors.asset.vehicle.entity.Enum.VehicleModel;
 import lk.nandana_motors.asset.vehicle.entity.Vehicle;
+import lk.nandana_motors.asset.vehicle.entity.enums.GearType;
+import lk.nandana_motors.asset.vehicle.entity.enums.VehicleModel;
 import lk.nandana_motors.asset.vehicle.service.VehicleService;
 import lk.nandana_motors.util.interfaces.AbstractController;
 import lk.nandana_motors.util.service.MakeAutoGenerateNumberService;
@@ -56,6 +56,7 @@ public class VehicleController implements AbstractController< Vehicle, Integer >
     model.addAttribute("customers", customerService.findAll());
     model.addAttribute("vehicleModels", VehicleModel.values());
     model.addAttribute("addStatus", true);
+    model.addAttribute("gearTypes", GearType.values());
     model.addAttribute("vehicle", vehicleService.findById(id));
     return "vehicle/addVehicle";
   }
@@ -68,6 +69,7 @@ public class VehicleController implements AbstractController< Vehicle, Integer >
       model.addAttribute("vehicleModels", VehicleModel.values());
       model.addAttribute("addStatus", false);
       model.addAttribute("vehicle", vehicle);
+      model.addAttribute("gearTypes", GearType.values());
       return "vehicle/addVehicle";
     }
     vehicle.setNumber(vehicle.getNumber().toUpperCase());
@@ -102,6 +104,7 @@ public class VehicleController implements AbstractController< Vehicle, Integer >
     model.addAttribute("vehicleModels", VehicleModel.values());
     model.addAttribute("addStatus", false);
     model.addAttribute("vehicle", new Vehicle());
+    model.addAttribute("gearTypes", GearType.values());
     return "vehicle/addVehicle";
   }
 

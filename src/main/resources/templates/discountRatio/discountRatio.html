@@ -8,8 +8,8 @@
 <body >
 <nav  data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="container-fluid bg-secondary form-Border" >
-  <div class="row text-center formManagement border-info" >
+<div class="container-fluid  " >
+  <div class="row text-center   " >
     <div class="col" >
       <a class="btn btn-success" href="/discountRatio/add" ><i class="fa fa-user-plus" ></i >
         &nbsp; New Discount Ratio</a >
@@ -43,12 +43,13 @@
           <th > Modify</th >
         </tr >
         </thead >
+
         <tbody >
         <tr  data-th-each="discountRatio, rowCount : ${discountRatios}" >
           <th  data-th-text="${rowCount.count}" ></th >
           <th  data-th-text="${discountRatio.name}" ></th >
           <th  data-th-text="${discountRatio.amount}" ></th >
-          <th  data-th-text="${discountRatio.liveDead.liveDeath}" ></th >
+          <th  data-th-text="${discountRatio.discountRatioStatus.discountRatioStatus}" ></th >
           <th >
             <a id="discountRatioEdit"  data-th-href="${'/discountRatio/edit/' + discountRatio.id}"
                class="btn btn-primary btn-sm" ><i class="fa fa-edit" ></i >&nbsp;Edit</a >

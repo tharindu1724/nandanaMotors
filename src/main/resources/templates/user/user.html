@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  >
 <head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
@@ -7,8 +7,8 @@
 <body>
 <nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="container-fluid form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid   ">
+    <div class="row text-center   ">
         <div class="col text-left">
             <a href="/home" id="btnHome" class="btn">
                 <span></span>
@@ -41,7 +41,7 @@
         <div class="col"></div>
     </div>
 </div>
-<div class="container-fluid formBorder">
+<div class="container-fluid    ">
     <div class="col-sm-12 flex-column ">
         <div class="row" id="userListTable"  data-th-if="${not #lists.isEmpty(users)}">
             <div class="col-sm-12">
@@ -60,10 +60,12 @@
                         <th  data-th-text="${rowCount.count}"></th>
                         <th  data-th-text="${user.username}"></th>
                         <th  data-th-text="${user.enabled==true?'Active':'Blocked'}"></th>
-                        <th th:text="${{user.createdAt}}"></th>
-                        <th><a class="btn btn-success btn-sm" id="userView"><i
-                                class="fa fa-folder-open"  data-th-href="${'/user/' + user.id}"></i>&nbsp;View</a>
-                            <a class="btn btn-primary btn-sm" id="userEdit"  data-th-href="${'/user/edit/' + user.id}"><i
+                        <th data-th-text="${{user.createdAt}}"></th>
+                        <th>
+                            <a class="btn btn-success btn-sm" data-th-href="${'/user/' + user.id}" ><i
+                                class="fa fa-folder-open"  ></i>&nbsp;View</a>
+
+                            <a class="btn btn-primary btn-sm" data-th-href="${'/user/edit/' + user.id}"><i
                                     class="fa fa-edit"></i>&nbsp;Edit</a>
                             <a class="btn btn-danger btn-sm" id="userRemove"  data-th-href="${'/user/remove/' + user.id}"
                                 data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"

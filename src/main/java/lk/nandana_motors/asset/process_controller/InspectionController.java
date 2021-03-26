@@ -68,6 +68,7 @@ public class InspectionController {
           .toString());
       return "inspection/inspectionForm";
     }
+
     model.addAttribute("vehicleSearch", true);
     model.addAttribute("vehicle", new Vehicle());
     model.addAttribute("vehicles", vehicles);

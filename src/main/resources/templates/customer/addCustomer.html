@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  >
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <link  data-th-href="@{/css/addCustomerCss.css}" media="all" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
@@ -8,8 +8,8 @@
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--Heading Area-->
-<div class="container-fluid form-Border" id="topicBack">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid   " id="topicBack">
+    <div class="row text-center   ">
         <!--ViewList Button-->
         <div class="col text-left">
             <a href="/customer" class="btn"  id="btnView" tabindex="1">
@@ -43,7 +43,7 @@
     </div>
 </div>
 <!--Form Content-->
-<div class="container-fluid formBorder text-center">
+<div class="container-fluid     text-center">
     <div class="row">
         <div class="col"></div>
         <div class="col" id="formBack">
@@ -52,18 +52,6 @@
               data-th-object="${customer}" method="POST" >
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6 text-left flex-column">
-                    <!--<div class="col-md-3 col-sm-3"></div>
-                    <div class="col-md-3 col-sm-3 text-left ">
-                        <label class="control-label" >Customer Type :</label>
-                    </div>
-                    <div class="col-md-3 col-sm-3 ">
-                        <input id="internal"  type="radio"/>
-                        <label class="control-label" for="internal">Internal</label>
-                    </div>
-                    <div class="col-md-3 col-sm-3 ">
-                        <input id="external"  type="radio"/>
-                        <label class="control-label" for="external">External</label>
-                    </div>-->
                 </div>
                 <div class="col-md-6 col-sm-6"></div>
             </div>
@@ -77,6 +65,7 @@
                         </div>
                         <div class="col-md-8">
                             <input id="id" data-th-field="*{id}" class="form-control" type="text" readonly/>
+                            <input type="text" data-th-field="*{liveDead}" hidden >
                         </div>
                         <div class="col-md-4">
                             <label class="control-label" for="code">Customer Code :</label>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @CacheConfig( cacheNames = "payment" )
@@ -24,7 +25,7 @@ public class PaymentService implements AbstractService< Payment, Integer > {
 
 
   public List< Payment > findAll() {
-    return paymentDao.findAll();
+    return paymentDao.findAll().stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList());
   }
 
   public Payment findById(Integer id) {
@@ -60,5 +61,9 @@ public class PaymentService implements AbstractService< Payment, Integer > {
 
   public List< Payment > findByCreatedAtIsBetween(LocalDateTime form, LocalDateTime to) {
     return paymentDao.findByCreatedAtIsBetween(form, to);
+  }
+
+  public List<Payment> findByCreatedAtIsBetweenAndUpdatedBy(LocalDateTime startDateTime, LocalDateTime endDateTime, String username) {
+  return paymentDao.findByCreatedAtIsBetweenAndUpdatedBy(startDateTime,endDateTime,username);
   }
 }

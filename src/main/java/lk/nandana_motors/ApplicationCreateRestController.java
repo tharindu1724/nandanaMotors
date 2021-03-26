@@ -2,6 +2,7 @@ package lk.nandana_motors;
 
 import lk.nandana_motors.asset.common_asset.model.Enum.CivilStatus;
 import lk.nandana_motors.asset.common_asset.model.Enum.Gender;
+import lk.nandana_motors.asset.common_asset.model.Enum.LiveDead;
 import lk.nandana_motors.asset.common_asset.model.Enum.Title;
 import lk.nandana_motors.asset.employee.entity.Employee;
 import lk.nandana_motors.asset.employee.entity.enums.Designation;
@@ -36,13 +37,12 @@ public class ApplicationCreateRestController {
     @GetMapping( "/select/user" )
     public String saveUser() {
         //roles list start
-        String[] roles = {"ADMIN"};
+        String[] roles = {"ADMIN","IN_OFFICER","MANAGER","TECH","CASHIER"};
         for ( String s : roles ) {
             Role role = new Role();
             role.setRoleName(s);
             roleService.persist(role);
         }
-
 //Employee
         Employee employee = new Employee();
         employee.setName("Admin User");
@@ -51,6 +51,7 @@ public class ApplicationCreateRestController {
         employee.setMobileOne("0750000000");
         employee.setTitle(Title.DR);
         employee.setGender(Gender.MALE);
+        employee.setLiveDead(LiveDead.STOP);
         employee.setDesignation(Designation.CASHIER);
         employee.setCivilStatus(CivilStatus.UNMARRIED);
         employee.setEmployeeStatus(EmployeeStatus.WORKING);

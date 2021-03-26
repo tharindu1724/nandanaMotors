@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  >
 <head  data-th-replace="~{fragments/header :: headerFragment}">
     <link  data-th-href="@{/css/roleCss.css}" media="all" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
@@ -8,8 +8,8 @@
 <body>
 <nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="container-fluid form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid   ">
+    <div class="row text-center   ">
         <div class="col text-left">
             <a href="/home" id="btnHome" class="btn">
                 <span></span>
@@ -42,7 +42,7 @@
         <div class="col"></div>
     </div>
 </div>
-<div class="container-fluid formBorder">
+<div class="container-fluid    ">
     <div class="offset-2 col-8 col-sm-8 col-md-8" id="roleListPresent"  data-th-if="${not #lists.isEmpty(roles)}">
         <div class="table-responsive">
             <table class="table table-borderless table-hover table-striped" id="myTable" >

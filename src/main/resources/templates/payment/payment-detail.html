@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="container-fluid  " >
+  <div class="row text-center" >
+    <div class="col" >
+      <a class="btn btn-primary" href="/home" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp; Home
+      </a >
+    </div >
+    <div class="col" >
+      <h4 class="text-center" >
+        <strong >
+          <span data-th-text="${paymentDetail.code +' Detail'}" ></span >
+        </strong >
+      </h4 >
+    </div >
+    <div class="col" >
+      <a href="/payment" class="btn btn-primary" >
+        <i class="fa fa-list" ></i >&nbsp; View List
+      </a >
+    </div >
+  </div >
+</div >
+
+<div class="container-fluid" id="printContent" >
+  <div class="form-group " >
+    <div class="col text-center font-weight-bold" >
+      <h3 >Sampath Autocare</h3 >
+      <p >Thunmulla Junction</p >
+      <p >Kadana</p >
+      <p >Tp: +94121212123123</p >
+      <p >Email: asdad@gamil.com</p ></div >
+  </div >
+  <div class="form-group" >
+    <div class="form-row" >
+      <div class="container" >
+        <div class="col" >
+          <table class="table table-hover table-striped" >
+            <thead >
+            <tr >
+              <th >Index</th >
+              <th >Name</th >
+              <th >Service Section</th >
+            </tr >
+            </thead >
+            <tbody >
+            <tr data-th-each="serviceTypeParameter, index : ${paymentDetail.serviceType.serviceTypeParameters}" >
+              <td data-th-text="${index.count}" ></td >
+              <td data-th-text="${serviceTypeParameter.name}" ></td >
+              <td data-th-text="${serviceTypeParameter.serviceSection.serviceSection}" ></td >
+            </tr >
+            </tbody >
+          </table >
+        </div >
+      </div >
+    </div >
+  </div >
+  <hr >
+  <!--Payment Section-->
+  <div class="form-group" >
+    <!--Payment Code and Date"-->
+    <div class="form-row text-right" >
+      <!--payment code-->
+      <div class="col-md-6 " >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label data-th-for="${'code'}" >Payment Code:</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${paymentDetail.code}" ></p >
+          </div >
+        </div >
+      </div >
+      <!--payment date-->
+      <div class="col-md-6 " >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="updatedAt" >Paid Date Time :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="updatedAt"
+               data-th-text="${{paymentDetail.updatedAt}}" ></p >
+          </div >
+        </div >
+      </div >
+    </div >
+    <!--Payment method and total amount-->
+    <div class="form-row text-right" >
+      <!--payment method-->
+      <div class="col-md-6 " >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label data-th-for="${'paymentMethod'}" >Payment Method:</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${paymentDetail.paymentMethod.paymentMethod}" ></p >
+          </div >
+        </div >
+      </div >
+      <!--Discount-->
+      <div class="col-md-6 " >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="discountRatio" >Discount Ratio :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="discountRatio"
+               data-th-text="${paymentDetail.discountRatio.name}+${' '}+${paymentDetail.discountRatio.amount}" ></p >
+          </div >
+        </div >
+      </div >
+    </div >
+    <div class="form-row text-right" >
+      <!--Total Amount-->
+      <div class="col-md-6 " >
+        <div class="form-row " >
+          <div class="col-md-4" >
+            <label class="control-label" for="totalAmount" >Total Amount :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="totalAmount" data-th-text="${paymentDetail.totalAmount}" ></p >
+          </div >
+        </div >
+      </div >
+      <!--Discount Amount-->
+      <div class="col-md-6 " >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="discountAmount" >Discount Amount :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="discountAmount" data-th-text="${paymentDetail.discountAmount}" ></p >
+          </div >
+        </div >
+      </div >
+    </div >
+    <!--Amount tendered and balance  -->
+    <div class="form-row text-right" id="cashPaymentBlock" >
+      <!--Amount Tendered-->
+      <div class="col-md-6 " >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="amountTendered" >Amount Tendered :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="amountTendered" data-th-text="${paymentDetail.amountTendered}" ></p >
+          </div >
+        </div >
+      </div >
+      <!--Balance-->
+      <div class="col-md-6 " >
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="balance" >Balance :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="balance" data-th-text="${paymentDetail.balance}" ></p >
+          </div >
+        </div >
+      </div >
+    </div >
+    <!-- Card Payment -> Bank and card Number -->
+    <div class="form-row text-right" id="bankNameBlock" >
+      <!--Bank -->
+      <div class="col-md-6 " data-th-if="${not #strings.isEmpty(paymentDetail.bankName)}">
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="bankName" >Bank Name :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="bankName" data-th-text="${paymentDetail.bankName}" ></p >
+          </div >
+        </div >
+      </div >
+      <!--card number-->
+      <div class="col-md-6 " data-th-if="${not #strings.isEmpty(paymentDetail.cardNumber)}">
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="cardNumber" >Card Number :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="cardNumber" data-th-text="${paymentDetail.cardNumber}" ></p >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+  <hr >
+  <!--customer -->
+  <div class="form-group" >
+    <!--Customers-->
+    <div class="row" >
+      <!--Left Side-->
+      <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+        <!--Code-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="departmentIdNumber" >Customer Code :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="departmentIdNumber" data-th-text="${customerDetail.code}" class="display_detail" ></p ></div >
+        </div >
+        <!--Name-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="name" >Name :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="name" data-th-text="${customerDetail.name}"
+               class="display_detail" ></p >
+          </div >
+        </div >
+      </div >
+      <!--Right Side-->
+      <div class="form-group col-md-6 col-sm-6 text-right flex-column" >
+        <!--Mobile-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="mobile" >Mobile No :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="mobile" data-th-text="${customerDetail.mobile}" class="display_detail" ></p >
+          </div >
+        </div >
+        <!--Email-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" for="email" >Email :</label >
+          </div >
+          <div class="col-md-8" >
+            <p id="email" data-th-text="${customerDetail.email}" class="display_detail" ></p >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+  <hr >
+  <!--vehicle -->
+  <div class="form-group" >
+    <!--Customers-->
+    <div class="row" >
+      <!--Left Side-->
+      <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+        <!--rmb register number-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Registration Number :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.number}" class="display_detail" ></p >
+          </div >
+        </div >
+        <!--system register number-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >System Registration Number :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.registrationNumber}" class="display_detail" ></p >
+          </div >
+        </div >
+      </div >
+      <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+        <!--vehicle model-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Vehicle Model :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.vehicleModel.vehicleModel}" class="display_detail" ></p >
+          </div >
+        </div >
+        <!--customer name-->
+        <div class="form-row text-right" >
+          <div class="col-md-4" >
+            <label class="control-label" >Customer Name :</label >
+          </div >
+          <div class="col-md-8" >
+            <p data-th-text="${vehicleDetail.customer.name}" class="display_detail" ></p >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+  <hr >
+  <!--remarks and invoice print or not-->
+  <div class="form-group" >
+    <!--Remarks-->
+    <div class="form-row text-right" >
+      <div class="col-md-4" >
+        <label for="remarks" >Remarks :</label >
+      </div >
+      <div class="col-md-8" >
+        <p id="remarks" class="form-control" data-th-text="${paymentDetail.remarks}" ></p >
+      </div >
+    </div >
+  </div >
+</div >
+<!--Button-->
+<div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+  <!--print Button-->
+  <button type="button" class="btn btn-info" id="printButton" >
+    <i class="fas fa-print" style="font-size: 20px" ></i >&nbsp;&nbsp;Print
+  </button >
+  <!--Back Button-->
+  <a class="btn btn-dark" tabindex="10" href="/payment" >
+    <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+  </a >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    $("#printButton").click(function () {
+        printContent('printContent');
+    });
+</script >
+</body >
+</html >

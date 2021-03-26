@@ -9,7 +9,7 @@ import lk.nandana_motors.asset.serviceType.entity.ServiceType;
 import lk.nandana_motors.asset.serviceType.service.ServiceTypeService;
 import lk.nandana_motors.asset.service_type_parameter.controller.ServiceTypeParameterController;
 import lk.nandana_motors.asset.service_type_parameter.service.ServiceTypeParameterService;
-import lk.nandana_motors.asset.vehicle.entity.Enum.VehicleModel;
+import lk.nandana_motors.asset.vehicle.entity.enums.VehicleModel;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,7 +76,7 @@ public class ServiceTypeController {
     @PostMapping(value = {"/save", "/update"})
     public String persist(@Valid @ModelAttribute ServiceType serviceType, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) throws Exception {
         if (bindingResult.hasErrors()) {
-            return commonThing(model, true, serviceType);
+            return commonThing(model, false, serviceType);
         }
         redirectAttributes.addFlashAttribute("serviceTypeDetail", serviceTypeService.persist(serviceType));
         return "redirect:/serviceType";

@@ -46,5 +46,6 @@ public abstract class AuditEntity {
     @LastModifiedDate
     @Basic( optional = false )
     @Column( nullable = false )
+
     private LocalDateTime updatedAt;
 }

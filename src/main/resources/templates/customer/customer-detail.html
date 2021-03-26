@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  >
 <head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>customer-detail</title>
@@ -8,8 +8,8 @@
 <nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <!--heading Area-->
-<div class="container-fluid bg-dark form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid bg-dark   ">
+    <div class="row text-center   ">
         <!--ViewList Button-->
         <div class="col">
             <a href="/customer" class="btn btn-primary" tabindex="1">
@@ -32,6 +32,7 @@
         </div>
     </div>
 </div>
+
 <!--details-->
 <div  data-th-fragment="customerDetailsFragment" class="container-fluid">
     <div class="col-sm-12 flex-column ">
@@ -129,7 +130,7 @@
                         <label class="control-label" for="updatedAt">Updated At :</label>
                     </div>
                     <div class="col-md-8">
-                        <p id="updatedAt" th:text="${{customerDetail.updatedAt}}" class="display_detail"></p>
+                        <p id="updatedAt" data-th-text="${#temporals.format(customerDetail.updatedAt, 'dd-MM-yyyy HH:mm')}" class="display_detail"></p>
                     </div>
                 </div>
             </div>
@@ -144,6 +145,7 @@
         </button>
     </a>
 </div>
+
 <!--footer include-->
 <div  data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->

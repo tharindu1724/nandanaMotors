@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en"   >
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <link data-th-href="@{/css/customerCss.css}" media="all" rel="stylesheet" type="text/css" />
   <meta charset="UTF-8" >
@@ -8,8 +8,8 @@
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 <!--heading Area-->
-<div class="container-fluid  form-Border" >
-  <div class="row text-center formManagement border-info" >
+<div class="container-fluid    " >
+  <div class="row text-center   " >
     <!--New Customer Button-->
     <div class="col text-left" >
       <a href="/home" id="btnHome" class="btn" tabindex="" >
@@ -131,8 +131,9 @@
           <td data-th-text="${payment.amount}" ></td >
           <td data-th-text="${payment.paymentStatus.paymentStatus}" ></td >
           <td >
-            <a id="customerView" data-th-href="${'/payment/' + payment.id}" class="btn btn-primary btn-sm" ><i
-                  class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View</a >
+            <a data-th-if="${#strings.equals(payment.paymentStatus, 'PAID')}" data-th-href="${'/payment/' + payment.id}" class="btn btn-primary btn-sm" ><i
+                  class="fa fa-folder-open" style="font-size: 15px" ></i >&nbsp;View/Print</a >
+
             <a  data-th-if="${#strings.equals(payment.paymentStatus, 'NOTPAID')}" data-th-href="${'/payment/pay/' + payment.id}"
                class="btn btn-success btn-sm" ><i class="fa fa-edit"
                                                   style="font-size: 15px" ></i >&nbsp;Pay</a >

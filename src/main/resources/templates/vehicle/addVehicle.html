@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  >
 <head  data-th-replace="~{fragments/header :: headerFragment}">
     <link  data-th-href="@{/css/addVehicleCss.css}" media="all" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
 <nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 <!--Heading Area-->
 <div class="container-fluid form-boder" id="topicBack">
-    <div class="row text-center formManagement border-info">
+    <div class="row text-center   ">
         <!--ViewList Button-->
         <div class="col text-left">
             <a href="/customer" class="btn"  id="btnView" tabindex="1">
@@ -63,6 +63,7 @@
                            required style="text-transform:uppercase" >
                     <p class="text-danger" data-th-if="${#fields.hasErrors('registrationNumber')}"
                        data-th-errors="*{registrationNumber}">Error Name</p>
+                    <input type="text" data-th-field="*{liveDead}" hidden >
                 </div>
             </div>
             <!--customer-->
@@ -115,15 +116,27 @@
                     <p class="text-danger" data-th-if="${#fields.hasErrors('manufacturedYear')}"
                        data-th-errors="*{manufacturedYear}">Error Name</p>
             </div>
-            <!--gear year-->
-            <div class="form-group row">
-                <label data-th-for="${'gearNumber'}" class="col-sm-4 col-form-label ">
-                  Gear Type </label>
-                    <input type="text" class="form-control" data-th-field="*{gearNumber}"
-                           required>
-                    <p class="text-danger" data-th-if="${#fields.hasErrors('gearNumber')}"
-                       data-th-errors="*{gearNumber}">Error Name</p>
-            </div>
+            <!--gear type-->
+            <div class="form-row text-right" >
+                <div class="col-md-4" >
+                    <label class="control-label" for="gender" >Gear Type :</label >
+                </div >
+                <div class="col-md-8" >
+                    <div class="custom-control custom-checkbox custom-control-inline "
+                         data-th-each="gearType,index : ${gearTypes}">
+                        <input class="custom-control-input gender" required
+                               data-th-name="${'gearType'}"
+                               data-th-value="${gearType}"
+                               data-th-id="${index.index}+${gearType}" type="radio"
+                               data-th-checked="${gearType==gearType}"/>
+                        <label class="custom-control-label"
+                               data-th-for="${index.index}+${gearType}"
+                               data-th-text="${gearType.gearType}"> radio
+                        </label>
+                    </div>
+                </div >
+            </div >
+
             <!--vehicle model list-->
             <div class="form-row">
                 <label class="col-sm-4 col-form-label " for="vehicleModel">Vehicle Type

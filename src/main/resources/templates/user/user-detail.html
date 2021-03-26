@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  >
 <head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
@@ -8,8 +8,8 @@
 <nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <!--Page header -->
-<div class="container-fluid bg-secondary form-Border">
-    <div class="row text-center formManagement border-info">
+<div class="container-fluid  ">
+    <div class="row text-center   ">
         <div class="col">
             <a class="btn btn-primary" href="/home">
                 <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
@@ -30,7 +30,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid">
     <div class="row">
         <!--Left Side-->
         <div class="form-group col-md-6 col-sm-6 text-left flex-column">
@@ -71,7 +71,7 @@
                     <label class="control-label">Created Date :</label>
                 </div>
                 <div class="col-md-8">
-                    <strong><span id="createDate" th:text="${{userDetail.createdAt}}"></span></strong>
+                    <strong><span id="createDate" data-th-text="${{userDetail.createdAt}}"></span></strong>
                 </div>
             </div>
             <div class="form-row">
@@ -100,8 +100,8 @@
 </div>
 
 <!--footer include-->
-<footer id="footer" class="page-footer"></footer>
+<div  data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script id="script"></script>
+<div  data-th-replace="~{fragments/script :: scriptFragment}"></div>
 </body>
 </html>

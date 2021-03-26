@@ -50,14 +50,7 @@ public class UserController {
         model.addAttribute("employeeDetailShow", true);
         model.addAttribute("employeeNotFoundShow", false);
         model.addAttribute("roleList", roleService.findAll());
-        /*model.addAttribute("districtUrl", MvcUriComponentsBuilder
-                .fromMethodName(WorkingPlaceRestController.class, "getDistrict", "")
-                .build()
-                .toString());
-        model.addAttribute("stationUrl", MvcUriComponentsBuilder
-                .fromMethodName(WorkingPlaceRestController.class, "getStation", "")
-                .build()
-                .toString());*/
+
         return "user/addUser";
     }
 
@@ -132,11 +125,7 @@ public class UserController {
         Designation designation = employee.getDesignation();
 
         // userService.persist(user);
-        if ( employee.getEmployeeStatus().equals(EmployeeStatus.WORKING) ) {
-            user.setEnabled(true);
-        } else {
-            user.setEnabled(false);
-        }
+        user.setEnabled(employee.getEmployeeStatus().equals(EmployeeStatus.WORKING));
         user.setRoles(user.getRoles());
         user.setEnabled(true);
         userService.persist(user);
@@ -147,7 +136,7 @@ public class UserController {
     @GetMapping( value = "/remove/{id}" )
     public String removeUser(@PathVariable Integer id) {
         // user can not be deleted
-        //userService.delete(id);
+        userService.delete(id);
         return "redirect:/user";
     }
 

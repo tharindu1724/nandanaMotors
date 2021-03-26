@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
   <title >Thymeleaf Springboot </title >
 </head >
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
-<div class="container-fluid bg-secondary form-Border" >
-  <div class="row text-center formManagement border-info" >
+<div class="container-fluid  " >
+  <div class="row text-center   " >
     <div class="col" >
       <a class="btn btn-primary" href="/home" >
         <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp; Home
       </a >
     </div >
     <div class="col" >
-      <h4 class="text-light text-center" >
+         <h4 class="text-center" >
         <strong >
           <span data-th-text="${vehicleDetail.number}" ></span >
         </strong >
@@ -33,73 +33,75 @@
     <div class="row" >
       <!--Left Side-->
       <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+        <!--rmb register number-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
-            <label class="control-label" for="id" >ID :</label >
-          </div >
-          <div class="col-md-8" >
-            <p id="id" data-th-text="${vehicleDetail.id}" class="display_detail" ></p >
-          </div >
-        </div >
-        <div class="form-row text-right" >
-          <div class="col-md-4" >
-            <label class="control-label" >Pay Role No :</label >
+            <label class="control-label" >Registration Number :</label >
           </div >
           <div class="col-md-8" >
             <p data-th-text="${vehicleDetail.number}" class="display_detail" ></p >
           </div >
         </div >
+        <!--system register number-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
-            <label class="control-label" >Pay Role No :</label >
+            <label class="control-label" >System Registration Number :</label >
           </div >
           <div class="col-md-8" >
             <p data-th-text="${vehicleDetail.registrationNumber}" class="display_detail" ></p >
           </div >
         </div >
+        <!--engine number-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
-            <label class="control-label" >Pay Role No :</label >
+            <label class="control-label" >Engine Number :</label >
           </div >
           <div class="col-md-8" >
             <p data-th-text="${vehicleDetail.engineNumber}" class="display_detail" ></p >
           </div >
         </div >
+        <!--chassi number-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
-            <label class="control-label" >Pay Role No :</label >
+            <label class="control-label" >Chassis number :</label >
           </div >
           <div class="col-md-8" >
             <p data-th-text="${vehicleDetail.chassisNumber}" class="display_detail" ></p >
           </div >
         </div >
+      </div >
+      <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+        <!--manufacture year-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
-            <label class="control-label" >Pay Role No :</label >
+            <label class="control-label" >Manufactured year :</label >
           </div >
           <div class="col-md-8" >
             <p data-th-text="${vehicleDetail.manufacturedYear}" class="display_detail" ></p >
           </div >
         </div >
+        <!--gear type-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
-            <label class="control-label" >Pay Role No :</label >
+            <label class="control-label" >Gear Type :</label >
           </div >
           <div class="col-md-8" >
-            <p data-th-text="${vehicleDetail.gearNumber}" class="display_detail" ></p >
+            <p data-th-text="${vehicleDetail.gearType.gearType}" class="display_detail" ></p >
           </div >
         </div >
+        <!--vehicle model-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
-            <label class="control-label" >Pay Role No :</label >
+            <label class="control-label" >Vehicle Model :</label >
           </div >
           <div class="col-md-8" >
             <p data-th-text="${vehicleDetail.vehicleModel.vehicleModel}" class="display_detail" ></p >
           </div >
         </div >
+        <!--customer name-->
         <div class="form-row text-right" >
           <div class="col-md-4" >
-            <label class="control-label" >Pay Role No :</label >
+            <label class="control-label" >Customer Name :</label >
           </div >
           <div class="col-md-8" >
             <p data-th-text="${vehicleDetail.customer.name}" class="display_detail" ></p >
@@ -110,9 +112,32 @@
   </div >
 </div >
 <!--vehicle service history-->
-<div class="container-fluid">
-
-</div>
+<div class="container-fluid" >
+  <div class="container" >
+    <div class="col" >
+      <table class="table table-hover table-striped" id="myTable" >
+        <thead >
+        <tr >
+          <th >Index</th >
+          <th >Date</th >
+          <th >Meter Value (km)</th >
+          <th >Service Attribute Name</th >
+          <th >Service Section</th >
+        </tr >
+        </thead >
+        <tbody >
+        <tr data-th-each="serviceTypeParameterVehicle, index : ${vehicleDetail.serviceTypeParameterVehicles}" >
+          <td data-th-text="${index.count}" ></td >
+          <td data-th-text="${{serviceTypeParameterVehicle.updatedAt}}" ></td >
+          <td data-th-text="${serviceTypeParameterVehicle.meterValue}" ></td >
+          <td data-th-text="${serviceTypeParameterVehicle.serviceTypeParameter.name}" ></td >
+          <td data-th-text="${serviceTypeParameterVehicle.serviceTypeParameter.serviceSection.serviceSection}" ></td >
+        </tr >
+        </tbody >
+      </table >
+    </div >
+  </div >
+</div >
 <!--footer include-->
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script include-->

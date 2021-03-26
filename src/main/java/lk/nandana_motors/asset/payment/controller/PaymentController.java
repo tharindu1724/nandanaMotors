@@ -4,6 +4,7 @@ import lk.nandana_motors.asset.common_asset.model.Enum.LiveDead;
 import lk.nandana_motors.asset.common_asset.model.TwoDate;
 import lk.nandana_motors.asset.customer.entity.Customer;
 import lk.nandana_motors.asset.customer.service.CustomerService;
+import lk.nandana_motors.asset.discount_ratio.entity.enums.DiscountRatioStatus;
 import lk.nandana_motors.asset.discount_ratio.service.DiscountRatioService;
 import lk.nandana_motors.asset.payment.entity.Payment;
 import lk.nandana_motors.asset.payment.entity.enums.PaymentMethod;
@@ -37,7 +38,8 @@ public class PaymentController {
 
   public PaymentController(PaymentService paymentService, CustomerService customerService,
                            VehicleService vehicleService, DateTimeAgeService dateTimeAgeService,
-                           EmailService emailService, TwilioMessageService twilioMessageService, DiscountRatioService discountRatioService,
+                           EmailService emailService, TwilioMessageService twilioMessageService,
+                           DiscountRatioService discountRatioService,
                            ServiceTypeParameterVehicleService serviceTypeParameterVehicleService) {
     this.paymentService = paymentService;
     this.customerService = customerService;
@@ -109,7 +111,7 @@ public class PaymentController {
   }
 
   @PostMapping( "/cancelCustom" )
-  public String cancelPaymentCustome(@ModelAttribute TwoDate twoDate, Model model) {
+  public String cancelPaymentCustom(@ModelAttribute TwoDate twoDate, Model model) {
     model.addAttribute("action", "/payment/cancelCustom");
     LocalDateTime form = dateTimeAgeService.dateTimeToLocalDateStartInDay(twoDate.getStartDate());
     LocalDateTime to = dateTimeAgeService.dateTimeToLocalDateEndInDay(twoDate.getEndDate());
@@ -133,7 +135,9 @@ public class PaymentController {
   public String pay(@PathVariable( "id" ) Integer id, Model model) {
     Payment payment = paymentService.findById(id);
     model.addAttribute("paymentMethods", PaymentMethod.values());
-    model.addAttribute("discountRatios", discountRatioService.findAll());
+    model.addAttribute("discountRatios", discountRatioService.findAll().stream()
+        .filter(x -> x.getDiscountRatioStatus().equals(DiscountRatioStatus.ACTIVE) && x.getLiveDead().equals(LiveDead.ACTIVE))
+        .collect(Collectors.toList()));
     model.addAttribute("payment", payment);
     model.addAttribute("customerDetail", customerService.findById(payment.getCustomer().getId()));
     model.addAttribute("vehicleDetail", vehicleService.findById(payment.getVehicle().getId()));
@@ -147,14 +151,20 @@ public class PaymentController {
     }
     Payment paymentDb = paymentService.persist(payment);
     Customer customer = customerService.findById(paymentDb.getCustomer().getId());
-//todo email and message
-    if (customer.getEmail() != null){
-      String message = "Thanks for our payment";
-      //emailService.sendEmail();
+
+    if ( customer.getEmail() != null ) {
+      String message = "YThanks for our payment.\n" +
+          "Invoice Value \t\t\t\t (Rs.) "+paymentDb.getAmount()+"\n" +
+          "Invoice Number \t\t\t\t (Rs.) "+paymentDb.getCode()+"\n" +
+          "\n\n" +
+          "\t\t Thank you and come again :)\n" +
+          "Sampath Auto care\n" +
+          "All ways care your vehicle";
+      emailService.sendEmail(customer.getEmail(),"Payment Confirmation",message);
     }
-    if (customer.getMobile() != null){
+    if ( customer.getMobile() != null ) {
       String message = "Thanks for our payment";
-     // twilioMessageService.sendSMS();
+      // twilioMessageService.sendSMS();
     }
 
 
@@ -167,7 +177,16 @@ public class PaymentController {
           serviceTypeParameterVehicleService.persist(x);
         });
 
-    return "redirect:/payment/notPaid";
+    return "redirect:/payment/"+paymentDb.getId();
+  }
+
+  @GetMapping( "/{id}" )
+  public String paymentDetail(@PathVariable( "id" ) Integer id, Model model) {
+    Payment payment = paymentService.findById(id);
+    model.addAttribute("paymentDetail", payment);
+    model.addAttribute("customerDetail", payment.getCustomer());
+    model.addAttribute("vehicleDetail", payment.getVehicle());
+    return "payment/payment-detail";
   }
 
 }

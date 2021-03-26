@@ -5,7 +5,7 @@ import lk.nandana_motors.asset.common_asset.model.Enum.LiveDead;
 import lk.nandana_motors.asset.serviceType.entity.ServiceType;
 import lk.nandana_motors.asset.service_type_parameter.entity.enums.ServiceSection;
 import lk.nandana_motors.asset.service_type_parameter_vehicle.entity.ServiceTypeParameterVehicle;
-import lk.nandana_motors.asset.vehicle.entity.Enum.VehicleModel;
+import lk.nandana_motors.asset.vehicle.entity.enums.VehicleModel;
 import lk.nandana_motors.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

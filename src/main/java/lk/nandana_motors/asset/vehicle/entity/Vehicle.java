@@ -4,11 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.nandana_motors.asset.common_asset.model.Enum.LiveDead;
 import lk.nandana_motors.asset.customer.entity.Customer;
 import lk.nandana_motors.asset.service_type_parameter_vehicle.entity.ServiceTypeParameterVehicle;
-import lk.nandana_motors.asset.vehicle.entity.Enum.VehicleModel;
+import lk.nandana_motors.asset.vehicle.entity.enums.GearType;
+import lk.nandana_motors.asset.vehicle.entity.enums.VehicleModel;
 import lk.nandana_motors.util.audit.AuditEntity;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -36,7 +39,8 @@ public class Vehicle extends AuditEntity {
 
     private String manufacturedYear;
 
-    private String gearNumber;
+    @Enumerated(EnumType.STRING)
+    private GearType gearType;
 
     @Enumerated(EnumType.STRING)
     private LiveDead liveDead;
@@ -49,5 +53,9 @@ public class Vehicle extends AuditEntity {
 
     @OneToMany(mappedBy = "vehicle")
     private List< ServiceTypeParameterVehicle > serviceTypeParameterVehicles;
+
+    @Transient
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
+    private LocalDate to, form;
 
 }
