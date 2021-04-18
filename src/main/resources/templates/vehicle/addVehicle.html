@@ -1,110 +1,122 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
+<html lang="en"  >
+<head  data-th-replace="~{fragments/header :: headerFragment}">
+    <link  data-th-href="@{/css/addVehicleCss.css}" media="all" rel="stylesheet" type="text/css"/>
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<link data-th-href="@{/css/combo-box-search.css}" media="all" rel="stylesheet" type="text/css" />
+<nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<!--Heading Area-->
+<div class="container-fluid form-border" id="topicBack">
+    <div class="row    ">
+        <!--home Button-->
+        <div class="col text-left">
 
-<div class="container-fluid bg-dark">
+                <a class="btn" id="btnHome" href="/home" tabindex="2">
+                <i class="fa fa-home" style="font-size: 20px"></i>&nbsp;&nbsp;
+                <b>Home</b>
+            </a>
+        </div>
+        <!--Form Name-->
+        <div class="col" id="topic">
+            <h2 class=" text-center">
+                <strong><b><u>
+                    <span data-th-text="${addStatus==false?'Add New Vehicle':'Update Vehicle Details'}"></span>
+               </u> </b> </strong>
+            </h2>
+        </div>
+        <!--viewlist Button-->
+        <div class="col text-right">
+            <a href="/vehicle" class="btn"  id="btnView" tabindex="1">
+
+                <i class="fa fa-eye" style="font-size: 20px"></i> &nbsp;&nbsp;
+                <b>View List</b>
+            </a>
+        </div>
+    </div>
+</div>
+<!--Form Content-->
+<div class="container" id="formBack">
+
+<div class="card">
     <form data-th-action="${addStatus==false?'/vehicle/save' :'/vehicle/update'}"
           method="post" data-th-object="${vehicle}"
-          class="mt-3">
-        <div class="offset-3 col-6">
+          class="mt-12">
+        <div class="col" id="form">
             <!--/* id this comment not visualize */-->
             <!--Id-->
             <input type="text" data-th-if="${addStatus==true}" class="form-control" data-th-field="*{id}"
                    id="id" hidden>
             <!--vehicle id need to hide but need to show when update-->
             <!--Registration number need to show-->
-            <div class="form-group row" data-th-if="${addStatus==true}">
+            <div class="form-group" data-th-if="${addStatus==true}">
                 <label data-th-for="${'name'}" class="col-sm-4 col-form-label ">
-                    Lab Test Name </label>
+                    Vehicle Registration Number </label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" data-th-field="*{registrationNumber}"
-                           required>
+                           required style="text-transform:uppercase" >
                     <p class="text-danger" data-th-if="${#fields.hasErrors('registrationNumber')}"
                        data-th-errors="*{registrationNumber}">Error Name</p>
+                    <input type="text" data-th-field="*{liveDead}" hidden >
                 </div>
             </div>
             <!--customer-->
-            <div class="form-row text-right">
-                <label class="col-sm-4 col-form-label " for="customer">Customer
+            <div class="form-group">
+                <label class="col-sm- 4" for="customer">Customer
                                                                            :</label>
-                <div class="col-md-8">
                     <select id="customer" data-th-field="*{customer}"
                             class="form-control"
                             tabindex="3" required >
-                        <option value="" disabled>Please select</option>
+                        <option value="" >Please select</option>
                         <option
                                 data-th-each="customer : ${customers}"
                                 data-th-text="${customer.name}"
                                 data-th-value="${customer.id}"></option>
                     </select>
-                </div>
             </div>
             <!--vehicle number-->
-            <div class="form-group row">
-                <label data-th-for="${'number'}" class="col-sm-4 col-form-label ">
-                    Lab Test Name </label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" data-th-field="*{number}"
+            <div class="form-group ">
+                <label data-th-for="${'number'}" class="col-sm-3 col-form-label ">
+                    Register Number :</label>
+                    <input type="text" class="form-control" data-th-field="*{number}" placeholder="XN0996" style="text-transform:uppercase"
                            required>
                     <p class="text-danger" data-th-if="${#fields.hasErrors('number')}"
                        data-th-errors="*{number}">Error Name</p>
-                </div>
             </div>
             <!--engine number-->
-            <div class="form-group row">
+            <div class="form-group ">
                 <label data-th-for="${'engineNumber'}" class="col-sm-4 col-form-label ">
-                    Lab Test Name </label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" data-th-field="*{engineNumber}"
+                    Engine Number :</label>
+                    <input type="text" class="form-control" data-th-field="*{engineNumber}" style="text-transform:uppercase"
                            required>
                     <p class="text-danger" data-th-if="${#fields.hasErrors('engineNumber')}"
                        data-th-errors="*{engineNumber}">Error Name</p>
-                </div>
             </div>
             <!--chassis number-->
-            <div class="form-group row">
+            <div class="form-group ">
                 <label data-th-for="${'chassisNumber'}" class="col-sm-4 col-form-label ">
-                    Lab Test Name </label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" data-th-field="*{chassisNumber}"
+                    Chassis Number :</label>
+                    <input type="text" class="form-control" data-th-field="*{chassisNumber}" style="text-transform:uppercase"
                            required>
                     <p class="text-danger" data-th-if="${#fields.hasErrors('chassisNumber')}"
                        data-th-errors="*{chassisNumber}">Error Name</p>
-                </div>
             </div>
             <!--manufacture year-->
-            <div class="form-group row">
+            <div class="form-group ">
                 <label data-th-for="${'manufacturedYear'}" class="col-sm-4 col-form-label ">
-                    Lab Test Name </label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" data-th-field="*{manufacturedYear}"
+                    Manufactured Year : </label>
+                    <input type="text" class="form-control" maxlength="4" data-th-field="*{manufacturedYear}" style="text-transform:uppercase"
                            required>
                     <p class="text-danger" data-th-if="${#fields.hasErrors('manufacturedYear')}"
                        data-th-errors="*{manufacturedYear}">Error Name</p>
-                </div>
-            </div>
-            <!--gear year-->
-            <div class="form-group row">
-                <label data-th-for="${'gearNumber'}" class="col-sm-4 col-form-label ">
-                    Lab Test Name </label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" data-th-field="*{gearNumber}"
-                           required>
-                    <p class="text-danger" data-th-if="${#fields.hasErrors('gearNumber')}"
-                       data-th-errors="*{gearNumber}">Error Name</p>
-                </div>
             </div>
 
             <!--vehicle model list-->
-            <div class="form-row text-right">
+            <div class="form-group ">
                 <label class="col-sm-4 col-form-label " for="vehicleModel">Vehicle Type
                                                                     :</label>
-                <div class="col-md-8">
                     <select id="vehicleModel" data-th-field="*{vehicleModel}"
                             class="form-control"
                             tabindex="3" required >
@@ -114,25 +126,63 @@
                                 data-th-text="${vehicleModel.vehicleModel}"
                                 data-th-value="${vehicleModel}"></option>
                     </select>
-                </div>
             </div>
 
-            <div class="form-group ">
-                <div class="offset-sm-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">
+            <!--gear type-->
+            <div class="form- group " >
+                <div class="col-md-4" >
+                    <label class="control-label" for="gender" >Gear Type :</label >
+                </div >
+                <div class="col-md-8" >
+                    <div class="custom-control custom-checkbox custom-control-inline "
+                         data-th-each="gearType,index : ${gearTypes}">
+                        <input class="custom-control-input gender" required
+                               data-th-name="${'gearType'}"
+                               data-th-value="${gearType}"
+                               data-th-id="${index.index}+${gearType}" type="radio"
+                               data-th-checked="${gearType==gearType}"/>
+                        <label class="custom-control-label"
+                               data-th-for="${index.index}+${gearType}"
+                               data-th-text="${gearType.gearType}"> radio
+                        </label>
+                    </div>
+                </div >
+            </div >
+            <br>
+
+            <div class="form-group" id="formButton">
+                <div class=" form-group text-center ">
+                    <!--Back Button-->
+                    <a class="btn btn-light "  tabindex="10" href="/vehicle">
+                        <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
+                    </a>
+                    <!--Save Button-->
+                    <button type="submit" class="btn btn-success ">
                         <i data-th-class="${addStatus==false?'fa fa-save mr-1':'fa fa-thumbs-up mr-1'}"></i>
                         <span
-                                data-th-text="${addStatus==false?'Save' : 'Update'}"></span>
+                              data-th-text="${addStatus==false?'Save' : 'Update'}"></span>
+                    </button>
+                    <!--Cancel Button-->
+                    <button class="btn btn-dark" type="reset" tabindex="9">
+                        <i class="fa fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Reset
                     </button>
                 </div>
             </div>
+
+        </div>
     </form>
+</div>
 </div>
 
 <!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<div  data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
-
+<div  data-th-replace="~{fragments/script :: scriptFragment}"></div>
+<script data-th-src="@{/js/combo-box-search.js}" ></script >
+<script >
+    $("#customer").select2({
+        data: $(this).val()
+    });
+</script >
 </body>
 </html>

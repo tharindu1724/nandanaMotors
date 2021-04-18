@@ -1,44 +1,119 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body>
+<html lang="en" >
+<head >
+  <title ></title >
+</head >
+<!--todo need to security config-->
+<body >
+<nav class="navbar navbar-expand-sm " style="background-color:darkgoldenrod;"
+     data-th-fragment="navBarFragment" >
+  <img src="../img/loo.png" style="width: 60px" >
+  <p1><b>Nandana Motors</b></p1>
+
+  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false" aria-label="Toggle navigation" ></button >
+  <div class="collapse navbar-collapse" id="collapsibleNavId" >
+    <ul class="navbar-nav mr-auto mt-2 ml-3 mt-lg-0" >
+      <li class="nav-itemBatch dropdown ml-3 pl-4 pr-4 active" >
+        <a class="nav-link text-dark dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false" > <i class="fa fa-user" ></i ><b> General</b></a >
+        <div class="dropdown-menu" aria-labelledby="dropdownId" >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/employee'}"
+             class="nav-link text-dark" > <b>Employee Management </b></a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/user'}"
+             class="nav-link text-dark" > <b>User Management</b> </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN' ,'ROLE_MANAGER')" data-th-href="@{'/role'}"
+             class="nav-link text-dark" > <b>Role Management </b></a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_TECH')" data-th-href="@{'/serviceType'}"
+             class="nav-link text-dark" > <b>Service Type Management </b></a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_TECH')"
+             data-th-href="@{'/serviceTypeParameter'}" class="nav-link text-dark" > <b>Service Type Parameter
+            Management</b> </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER')" data-th-href="@{'/payment'}"
+             class="nav-link text-dark" ><b>Payment Management </b> </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER')" data-th-href="@{'/discountRatio'}"
+             class="nav-link text-dark" > <b>Discount Management</b> </a >
+          <a data-sec-authorize="hasAnyAuthority( 'ROLE_IN_OFFICER' ,'ROLE_MANAGER')" data-th-href="@{'/customer'}"
+             class="nav-link text-dark" > <b>Customer Management </b></a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_IN_OFFICER' ,'ROLE_MANAGER')"
+             data-th-href="@{'/vehicle'}" class="nav-link text-dark" ><b> Vehicle Management </b></a >
+        </div >
+      </li >
+
+      <li class="nav-itemBatch dropdown ml-3 pl-4 pr-4 active" >
+        <a class="nav-link text-dark dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false" > <i class="fa fa-bell" ></i > <b>Transaction </b></a >
+        <div class="dropdown-menu" aria-labelledby="dropdownId" >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/employee/add'}"
+             class="nav-link text-dark" ><b> New Employee</b> </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/user/add'}"
+             class="nav-link text-dark" > <b>New User</b> </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN' ,'ROLE_MANAGER')" data-th-href="@{'/role/add'}"
+             class="nav-link text-dark" > <b>New Role</b> </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" data-th-href="@{'/serviceType/add'}"
+             class="nav-link text-dark" > <b>New Service Type</b></a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')"
+             data-th-href="@{'/serviceTypeParameter/add'}" class="nav-link text-dark" > <b>New Service Type Parameter </b></a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER')" data-th-href="@{'/discountRatio/add'}"
+             class="nav-link text-dark" > <b>New Discount</b> </a >
+          <a data-sec-authorize="hasAnyAuthority( 'ROLE_IN_OFFICER' ,'ROLE_MANAGER')" data-th-href="@{'/customer/add'}"
+             class="nav-link text-dark" > <b>New Customer</b> </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_IN_OFFICER' ,'ROLE_MANAGER')"
+             data-th-href="@{'/vehicle/add'}" class="nav-link text-dark" > <b>New Vehicle </b></a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_IN_OFFICER' ,'ROLE_MANAGER')" data-th-href="@{'/inspection'}"
+             class="nav-link text-dark" > <b>Vehicle Inspection</b> </a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_TECH', 'ROLE_CASHIER')"
+             data-th-href="@{'/vehicleServiceStationProcess'}" class="nav-link text-dark" > <b>Vehicle Service In
+            Process </b></a >
+        </div >
+      </li >
+
+      <li class="nav-itemBatch dropdown ml-3 pl-4 pr-4 active" >
+        <a class="nav-link text-dark dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false" > <i class="fa fa-book-open" ></i ><b>Report</b> </a >
+        <div class="dropdown-menu" aria-labelledby="dropdownId" >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER')" data-th-href="@{'/report'}" class="nav-link text-dark" ><b>All Summary Report</b></a >
+          <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER')" data-th-href="@{'/report/cashier'}"
+             class="nav-link text-dark" ><b>Cashier Report</b> </a >
+        </div >
+      </li >
+    </ul >
+  </div >
+  <!--login /logout /profile /password-change link according to sec confi-->
+  <div >
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 justify-content-end" >
+      <li class="nav-item dropdown" data-sec-authorize="isAuthenticated()" >
+        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+           data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false" >
+          <i class="fas fa-user-tie fa-lg" ></i >&nbsp;&nbsp;
+          <span data-th-text="${#authentication.name}" ></span >
+          <span class="caret" ></span >
+        </a >
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown1" >
+          <a class="dropdown-item dropdown-item btn btn-group-sm" href="/profile" >
+            <i class="fas fa-user-cog" ></i ><b> &nbsp;Profile
+          </b>
+          </a >
+          <a class="dropdown-item dropdown-item btn btn-group-sm" href="/passwordChange" >
+            <i class="fas fa-key " ></i ><b>&nbsp;Change Password</b></a >
+        </div >
+      </li >
+      <li class="nav-item dropdown " data-sec-authorize="isAuthenticated()" >
+        <a href="/logout" class="nav-link text-dark" > <i class="fas fa-sign-out-alt" ></i ><b>&nbsp;&nbsp; Log
+          out</b></a >
+      </li >
+      <li class="nav-item dropdown " data-sec-authorize="!isAuthenticated()" >
+        <a href="/login" class="nav-link text-dark" ><i class="fas fa-sign-in-alt" ></i ><b>&nbsp;&nbsp;Login</b></a >
+      </li >
+    </ul >
+  </div >
+
+</nav >
 
 
-<nav class="navbar navbar-expand-sm navbar-dark " style="background-color: #2f7efd;" th:fragment="navBarFragment">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId"
-            aria-expanded="false" aria-label="Toggle navigation"></button>
-    <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" href="#">Action 1</a>
-                    <a class="dropdown-item" href="#">Action 2</a>
-                </div>
-            </li>
-        </ul>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-            </li>
-            <li class="nav-item active">
-            <a data-th-href="@{'/employee'}" class="nav-link"> Employee</a>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-
-
-</nav>
-</body>
-</html>
+</body >
+</html >
 

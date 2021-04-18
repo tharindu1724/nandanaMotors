@@ -1,0 +1,180 @@
+.image-container{
+    background-image: url('../img/sos.jpg');
+    background-size: cover;
+    height:100vh;
+}
+.form-container{
+
+    background-color:hsl(50,50%,50%);
+    display: flex;
+    justify-content:center;
+
+}
+.form-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh ;
+}
+
+.form-box h4{
+
+    font-weight: bold;
+    color: brown;
+
+}
+.form-box .form-input {
+    position: relative;
+
+}
+.form-box .form-input input
+{
+    width: 100%;
+    height:42px;
+    margin-bottom: 20px;
+    border:none;
+    border-radius:5px ;
+    outline: none;
+    background: white;
+    padding-left: 45px;
+
+}
+.form-box .form-input span{
+
+
+    left: 15px;
+    top: 4px;
+    padding-left: 25px;
+    color: red;
+}
+
+.form-box .form-input input::placeholder{
+    padding-left: 0px;
+}
+.form-box .form-input input:focus,
+.form-box .form-input input:valid{
+    border-bottom:2px solid violet;
+}
+.form-box input[type="checkbox"]:not(:checked) + label:before{
+    background:transparent;
+    border: 2px solid #fff;
+    width:15px;
+    height: 15px;
+}
+.form-box .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
+
+    background-color: tomato;
+    border:0px
+
+
+}
+.forgot-link, .register-link ,.login-link{
+    color:red;
+    font-weight:bold ;
+
+}
+.forgot-link:hover, .register-link:hover ,.login-link:hover{
+    color: #292525;
+
+}
+.form-box button[type="submit"]{
+
+    border:none;
+    cursor:pointer;
+    width: 150px;
+    height: 40px;
+    border-right:5px;
+    background-color: green;
+    color: #000;
+    font-weight: bold;
+    transition: 0.5s;
+
+}
+
+.form-box button[type="submit"]:hover{
+    box-shadow: 0px 9px 10px -2px rgba(0,0,0.55);
+    -webkit-box-shadow: 0px 9px 10px -2px rgba(0,0,0.55);
+    -moz-box-shadow: 0px 9px 10px -2px rgba(0,0,0.55);
+
+}
+.form-box .btn-social{
+    color:#fff;
+    border:0px;
+    display:inline-block;
+    margin:0px;
+    margin-right: 10px;
+    font-weight: bold;
+    margin-bottom:10px ;
+}
+.form-box .btn-facebook{
+    background:#4866a8 ;
+}
+.form-box .btn-google{
+    background:#da3f34 ;
+}
+.form-box .btn-twitter{
+    background:#33ccff;
+}
+.form-box .btn-facebook:hover{
+    background: #3d5785;
+    color: #fff;
+
+}
+.form-box .btn-google:hover{
+    background: #bf3b31;
+    color: #fff;}
+
+.form-box .btn-twitter:hover{
+    background: #2eb7e5;
+    color: #fff;}
+
+#navHd{
+    background-color:red;
+    opacity: 0.7;
+
+}
+.carousel-item{
+    height: 100vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    background-size:cover;
+    opacity: 0.8;
+
+}
+.carousel-caption{
+    bottom: 220px;
+
+}
+.carousel-caption h5{
+    font-size: 45px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 25px;
+    font-family: "Times New Roman";
+}
+.carousel-caption p{
+    width: 60px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.9;
+    font-family: poppins;
+
+}
+.carousel-caption a{
+    text-transform: uppercase;
+    background: red;
+    padding: 10px 30px;
+    display: inline-block;
+    color: #00FFFF;
+    margin-top: 15px;
+}
+
+
+
+
+
+
+
+
+

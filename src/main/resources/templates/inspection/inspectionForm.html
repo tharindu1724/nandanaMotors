@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="container-fluid    " id="topicBack" >
+  <div class="row text-left " >
+    <div class="col" >
+      <a class="btn" id="btnHome" href="/home" >
+
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;
+        <b> Home</b>
+      </a >
+    </div >
+
+    <div class="col" id="topic" >
+         <h4 class="text-center" >
+        <strong ><b><u>
+                    <span
+                          data-th-text="${addStatus==false?'New Service Type Add':'Update Service Type Details'}" ></span >
+        </u></b> </strong >
+      </h4 >
+    </div >
+    <div class="col text-right" >
+      <a href="/vehicleServiceStationProcess" class="btn" id="btnView">
+        <i class="fa fa-eye" ></i ><b>&nbsp;
+        View List</b>
+      </a >
+    </div >
+  </div >
+</div >
+<br>
+
+<div class="container-fluid" >
+  <div class="card">
+  <div data-th-if="${vehicleSearch}" >
+    <!--Vehicle find-->
+    <div class="container-fluid " id="employeeFindForm" data-th-if="${vehicleSearch}" >
+      <div class="col-sm-12 flex-column " >
+        <form id="form" method="POST" data-th-action="${'/inspection/searchAll'}" data-th-object="${vehicle}" >
+          <div class="form-row" >
+            <div class="col-5 flex-column" >
+              <div class="form-group" >
+                <div class="col-4" >
+                  <label class="control-label" for="selectParameter" >Parameter :</label >
+                </div >
+                <div class="col-8" >
+                  <select id="selectParameter" class="form-control" tabindex="1" required >
+                    <option value="" >Please select</option >
+                    <option value="number" >Vehicle Number</option >
+                    <option value="engineNumber" >Engine Number</option >
+                    <option value="chassisNumber" >Chassis Number</option >
+                  </select >
+                </div >
+              </div >
+            </div >
+            <div class="col-4 flex-column" >
+              <div class="form-group" >
+                <div class="col-5" >
+                  <label class="control-label" for="valueEmployee" >Value :</label >
+                </div >
+                <div class="col-7" >
+                  <input id="valueEmployee" tabindex="2" class="form-control" type="text" minlength="3"
+                         required
+                         autofocus />
+                </div >
+              </div >
+            </div >
+            <div class="col-3 flex-column" >
+              <div class="form-group" >
+                <div class="" >
+                  <div class="col-2" >
+                    <label class="control-label" ></label >
+                  </div >
+                  <div class="col-10 text-left" id="btnSearchEmployee" >
+                    <button class="btn btn-success" tabindex="3" type="submit" >
+                      <i class="fa fa-search " style="font-size: 20px" ></i >&nbsp; &nbsp;Search
+                    </button >
+                  </div >
+                </div >
+              </div >
+            </div >
+          </div >
+        </form >
+      </div >
+    </div>
+    </div >
+
+                                      <!--Vehicle not fount message-->
+    <div data-th-if="${employeeNotFoundShow==true}" >
+      <div id="employeeNotFoundShow" data-th-if="${#lists.isEmpty(vehicles)}"
+           class="alert alert-warning alert-dismissible fade show text-center" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+          <span aria-hidden="true" >&times;</span >
+        </button >
+        <strong ><span id="employeeNotFound" data-th-text="${employeeNotFound}" ></span ></strong >
+      </div >
+
+    </div >
+                                      <!--All vehicle-->
+    <div data-th-if="${not #lists.isEmpty(vehicles)}" >
+      <div class="offset-2 col-8 col-sm-8 col-md-8" id="roleListPresent" data-th-if="${not #lists.isEmpty(vehicles)}" >
+        <div class="table-responsive" >
+          <table class="table table-striped table-condensed" >
+            <thead >
+            <tr >
+              <th > Index</th >
+              <th > Number</th >
+              <th > Owner name</th >
+              <th > Manufacture Year</th >
+              <th > Modify</th >
+            </tr >
+            </thead >
+            <tbody >
+            <tr data-th-each="vehicle, rowCount : ${vehicles}" >
+              <th data-th-text="${rowCount.count}" ></th >
+              <th data-th-text="${vehicle.number}" ></th >
+              <th data-th-text="${vehicle.customer.name}" ></th >
+              <th data-th-text="${vehicle.manufacturedYear}" ></th >
+              <th >
+                <a data-th-href="${'/inspection/select/' + vehicle.id}"
+                   class="btn btn-primary btn-sm mr-2 p-2" >Select
+                </a ></th >
+            </tr >
+            </tbody >
+          </table >
+        </div >
+      </div >
+    </div >
+  </div >
+  <!--inspection area-->
+  <div class="container" data-th-if="${!vehicleSearch}" >
+    <div class="form-row" >
+      <div class="container" >
+        <div id="accordianId" role="tablist" aria-multiselectable="true" >
+          <div class="card" >
+            <div class="card-header" role="tab" id="section1HeaderId" >
+              <h5 class="mb-0" >
+                <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
+                   aria-controls="section1ContentId" >
+                  Customer Details
+                </a >
+              </h5 >
+            </div >
+            <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
+              <div class="card-body" >
+                <div data-th-replace="~{customer/customer-detail :: customerDetailsFragment}" ></div >
+              </div >
+            </div >
+          </div >
+          <div class="card" >
+            <div class="card-header" role="tab" id="section2HeaderId" >
+              <h5 class="mb-0" >
+                <a data-toggle="collapse" data-parent="#accordianId" href="#section2ContentId" aria-expanded="true"
+                   aria-controls="section2ContentId" >
+                  Vehicle Details
+                </a >
+              </h5 >
+            </div >
+            <div id="section2ContentId" class="collapse in" role="tabpanel" aria-labelledby="section2HeaderId" >
+              <div class="card-body" >
+                <div data-th-replace="~{vehicle/vehicle-detail :: vehicleDetailsFragment}" ></div >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+    <div class="form-row" >
+      <form data-th-action="${addStatus==true?'/inspection/save' :'/inspection/update'}"
+            method="post" data-th-object="${serviceTypeParameterVehicle}"
+            class="mt-3" >
+        <div class="container" >
+          <!--/* id this comment not visualize */-->
+          <!--Id-->
+          <div class="form-group " data-th-if="${addStatus==false}" >
+            <label for="id" class="col-form-label " > Id </label >
+            <input type="text" class="form-control" data-th-field="*{id}"
+                   id="id" readonly >
+          </div >
+          <input type="hidden" data-th-value="${vehicleDetail.id}" data-th-name="${'vehicle'}">
+          <!--meter value -->
+          <div class="form-group text-right" >
+            <div class="form-inline" >
+              <label class="control-label" >Meter Value
+                                            :
+                <input type="number" class="form-control" data-th-field="*{meterValue}" required/>
+              </label >
+            </div >
+          </div >
+          <!--Service type -->
+          <div class="form-group text-right" >
+            <div class="form-inline" >
+              <label class="control-label" >Service Type Name
+                                            :
+                <input type="checkbox" class="form-control ml-1 mr-1 serviceType"
+                       data-th-each="serviceType : ${serviceTypes}"
+                       data-th-text="${serviceType.name +' Price: '+serviceType.price }"
+                       data-th-value="${serviceType.id}"
+                       data-th-field="*{serviceTypes}"
+                />
+              </label >
+            </div >
+          </div >
+          <!--selected parameter list-->
+          <div class="form-group" >
+            <ul id="selectedParameter" class="list-group" ></ul >
+          </div >
+          <!--button-->
+          <div class="form-group " >
+            <div class="offset-sm-2 col-sm-10" >
+              <button type="submit" class="btn btn-primary" >
+                <i data-th-class="${addStatus==true?'fa fa-save mr-1':'fa fa-thumbs-up mr-1'}" ></i >
+                <span
+                      data-th-text="${addStatus==true?'Save' : 'Update'}" ></span >
+              </button >
+            </div >
+          </div >
+        </div >
+      </form >
+    </div >
+  </div >
+  <input type="hidden" data-th-value="${serviceParameterUrl}" id="serviceParameterUrl" >
+</div >
+<!-- footer Section -->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!-- script Fragment -->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script data-th-if="${!vehicleSearch}" >
+    $('.serviceType').on("change", function () {
+        let finalUrl = $("#serviceParameterUrl").val();
+        let checks = $("input[type='checkbox']:checked"); // returns object of checkeds.
+        $('#selectedParameter').empty();
+        for (let i = 0; i < checks.length; i++) {
+            $.ajax({
+                type: 'GET',
+                url: finalUrl + $(checks[i]).val(),
+                success: function (resp) {
+                    showParameter(resp)
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+        }
+    });
+
+    function showParameter(resp) {
+        let html = '';
+        for (let i = 0; i < resp.length; i++) {
+            html += `<li class="list-group-item"> ${resp[i].name}</li>`
+        }
+        $("#selectedParameter").append(html);
+    }
+
+</script >
+<script data-th-if="${employeeNotFoundShow==true}" >
+    $(".alert").alert();
+</script >
+
+
+</body >
+</html >

@@ -1,0 +1,25 @@
+
+
+
+body {
+
+    background-image: url('../img/lightyellow.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#btnHome{
+
+
+}
+#myTable {
+    background-color: darkslategrey;
+
+
+border-radius: 20px;
+}
+.card {
+    background-color: darkgoldenrod;
+}
+table{
+    background-color: darkslategrey;
+}
