@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  >
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
@@ -8,30 +8,35 @@
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <!--heading Area-->
-<div class="container-fluid  form-Border">
-    <div class="row text-center formManagement border-info">
-        <div class="col">
-            <a class="btn btn-outline-info" href="/home">&nbsp; Back To Home
+<div class="container-fluid    ">
+    <div class="row    ">
+        <div class="col text-left">
+            <a href="/home" id="btnHome" class="btn">
+                <i class="fa fa-home" style="font-size: 20px"></i>&nbsp;&nbsp;
+                <b> &nbsp;Home&nbsp;</b>
             </a>
         </div>
 
+
         <div class="col">
-            <a href="/employee" class="btn btn-info">View Employees
+            <h4 class="text-center">
+                <strong><b><u>
+                    <p data-th-text="${employeeDetail.title.title} +${' '} +${employeeDetail.name}"></p>
+                </u></b> </strong>
+            </h4>
+        </div>
+        <div class="col text-right">
+            <a href="/employee" class="btn "><b>View Employees</b>
+                <i class="fa fa-eye" style="font-size: 20px"></i>&nbsp;&nbsp;
+
             </a>
         </div>
     </div>
-    <div>
-        <div class="col">
-            <h4 class="text-info text-center">
-                <strong>
-                    <p data-th-text="${employeeDetail.title.title} +${' '} +${employeeDetail.name}"></p>
-                </strong>
-            </h4>
-        </div>
-    </div>
+
 </div>
 <!--details-->
-<div data-th-fragment="employeeDetailsFragment" class="container-fluid formBorder">
+<div data-th-fragment="employeeDetailsFragment" class="container-fluid    ">
+    <div class="card">
     <div class="col-sm-12 flex-column text-dark">
         <div class="row">
             <!--Left Side-->
@@ -211,6 +216,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+
 
             <!--images-->
             <div class="form-group col-md-12 col-sm-12 text-left flex-column ">
@@ -225,7 +232,7 @@
                                     <div class="card text-center">
                                         <div class="card-body">
                                             <img id="img" class="rounded"
-                                                 style="height: 150px; widdata-th- 150px; border-radius: 10px"
+                                                 style="height: 200px; width: 300px; border-radius: 10px"
                                                  alt="Employee images" data-th-src="${file.url}"/>
                                         </div>
                                         <div class="card-footer bg-secondary text-light text-center">
@@ -244,9 +251,10 @@
         </div>
 
     </div>
+    <br>
     <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
         <a href="/employee">
-            <button class="btn btn-outline-secondary" type="button" tabindex="10">
+            <button class="btn btn-light" type="button" tabindex="10">
                 <i class="fa fa-arrow-circle-left " style="font-size: 20px"></i>&nbsp; &nbsp;Back
             </button>
         </a>
@@ -254,10 +262,9 @@
     <br/>
 </div>
 
-<!--footer include-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div  data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
 </body>
 </html>

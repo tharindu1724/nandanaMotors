@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="container-fluid  " >
+  <div class="row text-center" >
+    <div class="col" >
+      <a class="btn btn-primary" href="/home" >
+        <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp; Home
+      </a >
+    </div >
+    <div class="col" >
+      <h4 class="text-center" >
+        <strong >
+          Daily Cash Flow Report
+        </strong >
+      </h4 >
+      <p>[[${message}]]</p>
+    </div >
+    <div class="col" >
+
+    </div >
+  </div >
+</div >
+
+<div class="container-fluid" id="printContent" >
+  <!--Invoice-->
+  <div class="container-fluid" >
+    <div class="container" >
+      <h3 >All Invoice </h3 >
+    </div >
+    <div class="offset-2 col-8 col-sm-8 col-md-8" >
+      <div class="container-fluid" >
+        <p >
+          Invoice Count <span data-th-text="${invoiceTotalCount}" ></span >
+          Total Amount <span data-th-text="${invoiceCardAmount+invoiceCashAmount}" ></span >
+        </p >
+      </div >
+    </div >
+    <div class="offset-2 col-8 col-sm-8 col-md-8" >
+      <div class="container-fluid" >
+        <p >
+          Invoice Card Payment Count <span data-th-text="${invoiceCardCount}" ></span >
+          Invoice Card Amount (Rs). <span data-th-text="${invoiceCardAmount}" ></span >
+        </p >
+      </div >
+    </div >
+    <div class="offset-2 col-8 col-sm-8 col-md-8" >
+      <div class="container-fluid" >
+        <p >
+          Invoice Cash Payment Count <span data-th-text="${invoiceCashCount}" ></span >
+          Invoice Cash Amount (Rs). <span data-th-text="${invoiceCashAmount}" ></span >
+        </p >
+      </div >
+    </div >
+    <div class="offset-2 col-8 col-sm-8 col-md-8" >
+      <div class="container-fluid" >
+        <p >
+          Have to hand over (Rs). <span data-th-text="${invoiceCashAmount}" ></span >
+        </p >
+      </div >
+    </div >
+  </div >
+</div >
+<!--Button-->
+<div class="form-group col-md-12 col-sm-12 text-center flex-column " >
+  <!--print Button-->
+  <button type="button" class="btn btn-info" id="printButton" >
+    <i class="fas fa-print" style="font-size: 20px" ></i >&nbsp;&nbsp;Print
+  </button >
+  <!--Back Button-->
+  <a class="btn btn-dark" tabindex="10" href="/home" >
+    <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp;&nbsp;Back
+  </a >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    $("#printButton").click(function () {
+        printContent('printContent');
+    });
+</script >
+</body >
+</html >

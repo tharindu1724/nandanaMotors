@@ -1,11 +1,11 @@
 .image-container{
-    background-image: url('../img/mec.jpg');
+    background-image: url('../img/sos.jpg');
     background-size: cover;
     height:100vh;
 }
 .form-container{
 
-    background-color:rgb(248, 248, 171);
+    background-color:hsl(50,50%,50%);
     display: flex;
     justify-content:center;
 
@@ -41,7 +41,7 @@
 }
 .form-box .form-input span{
 
-    position:
+
     left: 15px;
     top: 4px;
     padding-left: 25px;
@@ -128,7 +128,7 @@
     background: #2eb7e5;
     color: #fff;}
 
-#navhd{
+#navHd{
     background-color:red;
     opacity: 0.7;
 

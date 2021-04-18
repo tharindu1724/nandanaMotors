@@ -1,47 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
+<html lang="en"  >
+<head  data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav  data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <!--heading Area-->
-<div class="container-fluid  form-Border" id="form">
-    <div class="row text-center formManagement border-info">
-        <div class="col">
-            <a href="/home" id="btnHome" class="btn btn-outline-info">
-                &nbsp;Back To Home&nbsp;
+<div class="container-fluid    ">
+    <div class="row text-center   ">
+        <div class="col text-left">
+            <a href="/home" id="btnHome" class="btn">
+                <i class="fa fa-home" style="font-size: 20px"></i>&nbsp;&nbsp;
+                <b> &nbsp;Home&nbsp;</b>
+            </a>
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                <h4 class=" text-center">
+                    <strong>
+                        <u><b>Employee Management</b></u>
+                    </strong>
+                </h4>
+            </div>
+        </div>
+
+        <div class="col text-right">
+
+            <a class="btn " href="/employee/add" id="btnAdd" tabindex="1" >
+
+                <i class="fa fa-plus-circle" style="font-size: 20px"></i>&nbsp;&nbsp;
+                <b>Add New Employee</b>
             </a>
         </div>
 
-        <div class="col">
-            <a class="btn btn-info" href="/employee/add"><i class="fa fa-plus"></i>
-                &nbsp;Add New</a>
-        </div>
+    </div>
 
-    </div>
-    <div class="row text-center">
-        <div class="col">
-            <h4 class="text-info text-center">
-                <strong>
-                    Employee Management
-                </strong>
-            </h4>
-        </div>
-    </div>
-</div>
-<div class="container-fluid formBorder text-center">
+</div><br>
+<div class="container-fluid     text-center">
+
     <div class="col">
-        <div class="col" id="employeeListPresent" th:if="${not #lists.isEmpty(employees)}">
+        <div class="col" id="employeeListPresent"  data-th-if="${not #lists.isEmpty(employees)}">
             <table class="table table-hover table-striped" id="myTable">
-                <thead>
+                <thead class="thead-light">
                 <tr>
                     <th> Index</th>
                     <th> Image</th>
                     <th> Employee Id</th>
-                    <th> Name</th>
+                    <th> Calling Name</th>
                     <th> Mobile</th>
                     <th> Designation</th>
                     <th> Status</th>
@@ -49,8 +56,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="employee, rowCount : ${employees}">
-                    <th th:text="${rowCount.count}"></th>
+                <tr  data-th-each="employee, rowCount : ${employees}">
+                    <th  data-th-text="${rowCount.count}"></th>
                     <th>
                         <div class="image" data-th-if="${employee.fileInfo !=null}" >
                             <img id="img" class="rounded"
@@ -59,24 +66,25 @@
                                  data-th-src="${employee.fileInfo.url}" />
                         </div >
                     </th>
-                    <th th:text="${employee.code}"></th>
-                    <th th:text="${employee.callingName}"></th>
-                    <th th:text="${employee.mobileOne}"></th>
-                    <th th:text="${employee.designation.designation}"></th>
-                    <th th:text="${employee.employeeStatus.employeeStatus}"></th>
+                    <th  data-th-text="${employee.code}"></th>
+                    <th  data-th-text="${employee.callingName}"></th>
+                    <th  data-th-text="${employee.mobileOne}"></th>
+                    <th  data-th-text="${employee.designation.designation}"></th>
+                    <th  data-th-text="${employee.employeeStatus.employeeStatus}"></th>
                     <th>
-                        <a id="employeeView" th:href="${'/employee/' + employee.id}" class="btn btn-outline-secondary btn-sm">&nbsp;View</a>
-                        <a id="employeeEdit" th:href="${'/employee/edit/' + employee.id}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
-                        <a id="employeeRemove" th:href="${'/employee/remove/' + employee.id}"
-                           th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+                        <a id="employeeView"  data-th-href="${'/employee/' + employee.id}" class="btn btn-primary btn-sm">&nbsp;View</a>
+                        <a id="employeeEdit"  data-th-href="${'/employee/edit/' + employee.id}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                        <a id="employeeRemove"  data-th-href="${'/employee/remove/' + employee.id}"
+                            data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
                             Delete</a>
                     </th>
                 </tr>
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="row" th:if="${ #lists.isEmpty(employees)}">
+        </div>
+
+    <div class="row"  data-th-if="${ #lists.isEmpty(employees)}">
         <div class="col-sm-12">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -96,10 +104,9 @@
         </script>
     </div>
 </div>
-<!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<div   data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+<div  data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
 </body>
 </html>

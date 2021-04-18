@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+
+  <div class="container-fluid " >
+    <div class="row  " >
+      <div class="col" >
+        <a class="btn" id="btnHome" href="/home" >
+
+          <i class="fa fa-home" style="font-size: 20px" ></i > &nbsp;
+          <b> Home</b>
+        </a >
+      </div >
+      <div class="col" >
+           <h4 class="text-center" >
+          <strong ><b><u>
+                    <span
+                          data-th-text="${addStatus==true?'New Discount Ratio Add':'Update Discount Ratio Details'}" ></span >
+          </u></b></strong >
+        </h4 >
+      </div >
+      <div class="col text-right" >
+        <a class="btn " href="/discountRatio" >
+          <i class="fa fa-eye" ></i ><b>&nbsp; View List</b>
+        </a >
+      </div >
+    </div >
+  </div >
+<br>
+
+<!--Form Content - start -->
+<div class="container-fluid">
+  <div class="card">
+<div class="col-sm-12 flex-column " >
+  <form data-th-action="${addStatus==true?'/discountRatio/save':'/discountRatio/update'}"
+        data-th-object="${discountRatio}"
+        method="POST" >
+
+    <!--Left Side-->
+    <div class="form-group col-md-6 col-sm-6 text-left flex-column" >
+      <input data-th-field="*{id}" data-th-if="${addStatus==false}" hidden type="text" />
+      <input type="text" data-th-if="${addStatus==false}" data-th-field="*{liveDead}" hidden >
+      <!--Name-->
+      <div class="form-group" >
+        <div class="col-md-4" >
+          <label class="control-label" for="name" >Name :</label >
+        </div >
+        <div class="col-md-8" >
+          <input class="form-control" data-th-field="*{name}" id="name" required tabindex="4"
+                 type="text" />
+          <span class="error" data-th-errors="*{name}"
+                data-th-if="${#fields.hasErrors('name')}" id="nameError" >Error Name</span >
+        </div >
+      </div >
+
+      <!--amount-->
+      <div class="form-group" >
+        <div class="col-md-4" >
+          <label class="control-label" for="name" >Amount (%):</label >
+        </div >
+        <div class="col-md-8" >
+          <input class="form-control" data-th-field="*{amount}" id="amount" required tabindex="4"
+                 type="number" min="0" max="100"/>
+          <span class="error" data-th-errors="*{amount}"
+                data-th-if="${#fields.hasErrors('amount')}" >Error Name</span >
+        </div >
+      </div >
+      <!--Discount Ratio status-->
+      <div class="form-group" data-th-if="${addStatus==false}" >
+        <div class="col-md-4" >
+          <label class="control-label" for="discountRatioStatus" >Discount Ratio Status :</label >
+        </div >
+        <div class="col-md-8" >
+          <select id="discountRatioStatus" data-th-field="*{discountRatioStatus}" class="form-control" tabindex="7"
+                  required >
+            <option value="" >Please select</option >
+            <option data-th-each="discountRatioStatus : ${discountRatioStatuses}"
+                    data-th-text="${discountRatioStatus.discountRatioStatus}"
+                    data-th-value="${discountRatioStatus}" ></option >
+          </select >
+        </div >
+      </div >
+
+    </div >
+
+    <!--Button-->
+
+    <div class="form-group" id="formButton">
+      <div class=" form-group text-center col-sm-10">
+        <!--Back Button-->
+        <a class="btn btn-light"  tabindex="10" href="/discountRatio">
+          <i class="fas fa-arrow-circle-left" style="font-size: 20px"></i>&nbsp;&nbsp;Back
+        </a>
+        <!--Save Button-->
+        <button type="submit" class="btn btn-success">
+          <i data-th-class="${addStatus==true?'fa fa-save mr-1':'fa fa-thumbs-up mr-1'}"></i>
+          <span
+                data-th-text="${addStatus==true?'Save' : 'Update'}"></span>
+        </button>
+        <!--Cancel Button-->
+        <button class="btn btn-dark " type="reset" tabindex="9">
+          <i class="far fa-times-circle" style="font-size: 20px"></i>&nbsp;&nbsp;Cancel
+        </button>
+      </div>
+    </div>
+    <div class="form-row" >
+      <label data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '"
+             id="errorLabel" >Errors: </label >
+      <ul >
+        <li class="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+            id="error" ></li >
+      </ul >
+    </div >
+  </form >
+</div>
+  </div>
+</div >
+
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+</body >
+</html >
