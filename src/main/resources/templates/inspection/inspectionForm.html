@@ -196,15 +196,17 @@
           <!--Service type -->
           <div class="form-group text-right" >
             <div class="form-inline" >
-              <label class="control-label" >Service Type Name
-                                            :
-                <input type="checkbox" class="form-control ml-1 mr-1 serviceType"
-                       data-th-each="serviceType : ${serviceTypes}"
-                       data-th-text="${serviceType.name +' Price: '+serviceType.price }"
+              <label class="control-label" > Service Type Name  :</label>
+              <div class="form-inline" data-th-each="serviceType : ${serviceTypes}">
+                <label class="control-label" data-th-text="${serviceType.name +' Price: '+serviceType.price }" data-th-for="${serviceType.id}"> Service Type Name :</label>
+                &nbsp;  <input type="checkbox" class="form-control ml-1 mr-1 serviceType"
+
                        data-th-value="${serviceType.id}"
-                       data-th-field="*{serviceTypes}"
-                />
-              </label >
+                       data-th-name="${'serviceTypes'}"
+                         data-th-id="${serviceType.id}"/>
+              </div>
+
+
             </div >
           </div >
           <!--selected parameter list-->
